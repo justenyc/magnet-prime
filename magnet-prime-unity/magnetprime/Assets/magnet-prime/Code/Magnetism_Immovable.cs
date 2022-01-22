@@ -36,12 +36,12 @@ public class Magnetism_Immovable : MonoBehaviour
 
                 case 1:
                     Rigidbody tempRb = temp.GetComponent<Rigidbody>();
-                    tempRb.AddForce(targetDirection(temp.transform.position).normalized * magnetismStrength * myCharge.GetChargeStrength() / 10, ForceMode.Force);
+                    tempRb.AddForce(targetDirection(temp.transform.position).normalized * magnetismStrength * Mathf.Abs(myCharge.GetChargeStrength()) / 10, ForceMode.Force);
                     break;
 
                 case -1:
                     Rigidbody tempRbPull = temp.GetComponent<Rigidbody>();
-                    tempRbPull.AddForce(-targetDirection(temp.transform.position).normalized * magnetismStrength * myCharge.GetChargeStrength() / 10, ForceMode.Force);
+                    tempRbPull.AddForce(-targetDirection(temp.transform.position).normalized * magnetismStrength * Mathf.Abs(myCharge.GetChargeStrength()) / 10, ForceMode.Force);
                     break;
 
                 default:
