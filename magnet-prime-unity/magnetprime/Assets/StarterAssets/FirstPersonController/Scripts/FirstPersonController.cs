@@ -23,6 +23,10 @@ namespace StarterAssets
 		public float RotationSpeed = 1.0f;
 		[Tooltip("Acceleration and deceleration")]
 		public float SpeedChangeRate = 10.0f;
+		[Tooltip("How fast the player's gun fires")]
+		public float FireRate = 0.1f;
+		public float shootCD = 1;
+		public bool shootPressed = false;
 
 		[Space(10)]
 		[Tooltip("The height the player can jump")]
@@ -73,6 +77,11 @@ namespace StarterAssets
 
 		private const float _threshold = 0.01f;
 
+		public delegate void ShootDelegate(GameObject objectHit);
+		public event ShootDelegate InvokeShoot;
+
+		public bool lastShot = false;
+
 		private void Awake()
 		{
 			// get a reference to our main camera
@@ -90,6 +99,7 @@ namespace StarterAssets
 			// reset our timeouts on start
 			_jumpTimeoutDelta = JumpTimeout;
 			_fallTimeoutDelta = FallTimeout;
+			shootCD = FireRate;
 		}
 
 		private void Update()
@@ -97,6 +107,7 @@ namespace StarterAssets
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
+			Shoot();
 		}
 
 		private void LateUpdate()
@@ -242,6 +253,57 @@ namespace StarterAssets
 
 			// when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
 			Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
+		}
+
+		public void Shoot()
+        {
+			shootCD = Mathf.Clamp(shootCD - Time.deltaTime, 0, FireRate);
+
+			if (shootPressed && shootCD <= 0)
+			{
+				shootCD = FireRate;
+				RaycastHit hit;
+				if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity))
+				{
+					if (lastShot)
+					{
+						//Debug.Log("Positive Shoot");
+
+						if (InvokeShoot != null)
+							InvokeShoot(hit.transform.gameObject);
+					}
+					else
+					{
+						//Debug.Log("Negative Shoot");
+
+						if (InvokeShoot != null)
+							InvokeShoot(hit.transform.gameObject);
+					}
+				}
+				else
+				{
+					//Debug.Log("Did not Hit");
+
+					if (InvokeShoot != null)
+						InvokeShoot(null);
+				}
+			}
+			else
+            {
+
+            }
+		}
+
+		public void OnPositiveShoot(InputValue value)
+		{
+			lastShot = true;
+			shootPressed = value.isPressed;
+		}
+
+		public void OnNegativeShoot(InputValue value)
+		{
+			lastShot = false;
+			shootPressed = value.isPressed;
 		}
 	}
 }
