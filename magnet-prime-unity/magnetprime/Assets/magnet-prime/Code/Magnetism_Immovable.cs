@@ -6,6 +6,7 @@ using UnityEngine;
 public class Magnetism_Immovable : MonoBehaviour
 {
     public Charge myCharge;
+    public float magnetismStrength = 1;
     public List<Magnetism_Movable> movableObjectsWithCharge;
 
     private void Start()
@@ -35,12 +36,12 @@ public class Magnetism_Immovable : MonoBehaviour
 
                 case 1:
                     Rigidbody tempRb = temp.GetComponent<Rigidbody>();
-                    tempRb.AddForce(targetDirection(temp.transform.position) * 10, ForceMode.Force);
+                    tempRb.AddForce(targetDirection(temp.transform.position).normalized * magnetismStrength * myCharge.GetChargeStrength() / 10, ForceMode.Force);
                     break;
 
                 case -1:
                     Rigidbody tempRbPull = temp.GetComponent<Rigidbody>();
-                    tempRbPull.AddForce(-targetDirection(temp.transform.position) * 10, ForceMode.Force);
+                    tempRbPull.AddForce(-targetDirection(temp.transform.position).normalized * magnetismStrength * myCharge.GetChargeStrength() / 10, ForceMode.Force);
                     break;
 
                 default:
@@ -58,7 +59,6 @@ public class Magnetism_Immovable : MonoBehaviour
     {
         int myCurrentCharge = myCharge.GetCharge();
         int action = myCurrentCharge + otherCharge;
-        Debug.Log(action);
 
         if (myCurrentCharge != 0 && otherCharge != 0)
         {

@@ -5651,6 +5651,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myCharge: {fileID: 1545901282}
+  magnetismStrength: 10
   movableObjectsWithCharge: []
 --- !u!1 &1829460653
 GameObject:

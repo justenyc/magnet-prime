@@ -30,6 +30,11 @@ public class Charge : MonoBehaviour
         return charge;
     }
 
+    public int GetChargeStrength()
+    {
+        return chargeStrength;
+    }
+
     private void OnDestroy()
     {
         player.InvokeShoot -= ShootListener;
