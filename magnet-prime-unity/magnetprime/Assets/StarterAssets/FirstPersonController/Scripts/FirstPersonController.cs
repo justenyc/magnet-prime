@@ -311,15 +311,23 @@ namespace StarterAssets
 
 		public void OnGrab(InputValue value)
 		{
-			shootCD = FireRate;
-			RaycastHit hit;
-			if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity))
+			if (held == null)
 			{
-				Magnetism_Movable grabbed = hit.collider.GetComponent<Magnetism_Movable>();
-				if(grabbed != null)
-                {
-					held = grabbed.gameObject;
-                }
+				RaycastHit hit;
+				if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity))
+				{
+					Magnetism_Movable grabbed = hit.collider.GetComponent<Magnetism_Movable>();
+					if (grabbed != null)
+					{
+						held = grabbed.gameObject;
+						held.GetComponent<Rigidbody>().useGravity = false;
+					}
+				}
+			}
+			else
+            {
+				held.GetComponent<Rigidbody>().useGravity = true;
+				held = null;
 			}
 		}
 
@@ -327,7 +335,7 @@ namespace StarterAssets
         {
 			if (held != null)
             {
-				held.transform.position = Camera.main.transform.forward;
+				held.transform.position = Camera.main.transform.forward * 2 + Camera.main.transform.position;
             }
         }
 	}
