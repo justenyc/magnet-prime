@@ -22,7 +22,7 @@ public class Magnetism_Immovable : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         for (int ii = 0; ii < movableObjectsWithCharge.Count; ii++)
         {

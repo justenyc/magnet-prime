@@ -52,6 +52,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press(behavior=2)"
+                },
+                {
+                    "name": "Grab",
+                    "type": "Button",
+                    "id": "3e411b63-edb5-487d-a1ce-7a8465d02b16",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=2)"
                 }
             ],
             "bindings": [
@@ -250,6 +258,17 @@
                     "processors": "",
                     "groups": "KeyboardMouse",
                     "action": "NegativeShoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "67b2dfc5-45e9-4b80-b458-91c20a59bdb3",
+                    "path": "<Keyboard>/#(G)",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "Grab",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

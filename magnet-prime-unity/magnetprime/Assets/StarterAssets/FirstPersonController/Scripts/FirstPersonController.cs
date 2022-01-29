@@ -27,6 +27,7 @@ namespace StarterAssets
 		public float FireRate = 0.1f;
 		public float shootCD = 1;
 		public bool shootPressed = false;
+		public GameObject held;
 
 		[Space(10)]
 		[Tooltip("The height the player can jump")]
@@ -108,6 +109,8 @@ namespace StarterAssets
 			GroundedCheck();
 			Move();
 			Shoot();
+			Grab();
+			Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * 100, Color.white);
 		}
 
 		private void LateUpdate()
@@ -305,5 +308,27 @@ namespace StarterAssets
 			lastShot = false;
 			shootPressed = value.isPressed;
 		}
+
+		public void OnGrab(InputValue value)
+		{
+			shootCD = FireRate;
+			RaycastHit hit;
+			if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity))
+			{
+				Magnetism_Movable grabbed = hit.collider.GetComponent<Magnetism_Movable>();
+				if(grabbed != null)
+                {
+					held = grabbed.gameObject;
+                }
+			}
+		}
+
+		void Grab()
+        {
+			if (held != null)
+            {
+				held.transform.position = Camera.main.transform.forward;
+            }
+        }
 	}
 }
