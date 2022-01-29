@@ -28,7 +28,6 @@ public class Magnetism_Immovable : MonoBehaviour
         {
             Magnetism_Movable temp = movableObjectsWithCharge[ii];
             int magnetism = Magnetism(temp.GetCharge());
-            Debug.Log(magnetism);
             switch (magnetism)
             {
                 case 0:
