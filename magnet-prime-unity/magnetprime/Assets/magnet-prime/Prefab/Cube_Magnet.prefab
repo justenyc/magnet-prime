@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1499585230202852538}
   - component: {fileID: 1499585230202852541}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Cube_Magnet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -146,3 +146,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myCharge: {fileID: 1499585230202852538}
+  grabbable: 1

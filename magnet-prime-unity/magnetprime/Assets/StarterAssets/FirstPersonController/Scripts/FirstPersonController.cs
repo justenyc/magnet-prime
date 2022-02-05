@@ -114,6 +114,10 @@ namespace StarterAssets
             GroundedCheck();
             Move();
             Shoot();
+        }
+
+        private void FixedUpdate()
+        {
             Grab();
         }
 
@@ -343,7 +347,7 @@ namespace StarterAssets
         {
             if (held != null)
             {
-                held.transform.position = Vector3.MoveTowards(held.transform.position, Camera.main.transform.forward * 3 + Camera.main.transform.position, Time.fixedDeltaTime * 2);
+                held.transform.position = Vector3.MoveTowards(held.transform.position, Camera.main.transform.forward * 3 + Camera.main.transform.position, Time.fixedDeltaTime * 5);
             }
         }
 

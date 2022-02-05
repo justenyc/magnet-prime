@@ -19,7 +19,7 @@ public class Magnetism_Immovable : Magnetism
             Debug.Log("myCharge is now " + myCharge);
         }
 
-        movableObjectsWithCharge = new List<Magnetism_Movable>();
+        //movableObjectsWithCharge = new List<Magnetism_Movable>();
     }
 
     // Update is called once per frame
