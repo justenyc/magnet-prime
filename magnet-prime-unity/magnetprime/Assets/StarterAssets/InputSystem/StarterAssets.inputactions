@@ -60,6 +60,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press"
+                },
+                {
+                    "name": "Polarize",
+                    "type": "Button",
+                    "id": "44bced9e-a7dd-464b-a873-ca0f47b933d4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
                 }
             ],
             "bindings": [
@@ -269,6 +277,17 @@
                     "processors": "",
                     "groups": "KeyboardMouse",
                     "action": "Grab",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "23399d03-3d9f-45b0-9a7d-a4adad6b295a",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "Polarize",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
