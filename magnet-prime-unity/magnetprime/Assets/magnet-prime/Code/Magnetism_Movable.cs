@@ -1,12 +1,14 @@
+using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Charge))]
 [RequireComponent(typeof(Rigidbody))]
-public class Magnetism_Movable : MonoBehaviour
+public class Magnetism_Movable : Magnetism
 {
     public Charge myCharge;
+    public bool grabbable;
 
     private void Start()
     {
@@ -21,5 +23,10 @@ public class Magnetism_Movable : MonoBehaviour
     public int GetCharge()
     {
         return myCharge.GetCharge();
+    }
+
+    public override void OnPlayerPolarize(FirstPersonController player)
+    {
+        base.OnPlayerPolarize(player);
     }
 }

@@ -1,9 +1,10 @@
+using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Charge))]
-public class Magnetism_Immovable : MonoBehaviour
+public class Magnetism_Immovable : Magnetism
 {
     public Charge myCharge;
     public float magnetismStrength = 1;
@@ -80,5 +81,10 @@ public class Magnetism_Immovable : MonoBehaviour
         {
             return 0;
         }
+    }
+
+    public override void OnPlayerPolarize(FirstPersonController player)
+    {
+        base.OnPlayerPolarize(player);
     }
 }
