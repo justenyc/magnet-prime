@@ -28,10 +28,11 @@ namespace StarterAssets
         public float FireRate = 0.1f;
         public float grabDistance = 5f;
         public float polarizeDistance = 5f;
-        public bool polarity = false;
+        public int polarity = 1;
         float shootCD = 1;
         bool shootPressed = false;
         GameObject held;
+        public Transform grabPoint;
         public LineRenderer lineRenderer;
 
         [Space(10)]
@@ -86,6 +87,9 @@ namespace StarterAssets
         public delegate void ShootDelegate(GameObject objectHit);
         public event ShootDelegate InvokeShoot;
 
+        public delegate void PolarizeDelegate(GameObject self, GameObject target);
+        public event PolarizeDelegate InvokePolarize;
+
         public bool lastShot = false;
 
         private void Awake()
@@ -114,6 +118,10 @@ namespace StarterAssets
             GroundedCheck();
             Move();
             Shoot();
+        }
+
+        private void FixedUpdate()
+        {
             Grab();
         }
 
@@ -325,16 +333,25 @@ namespace StarterAssets
                     {
                         held = grabbed.gameObject;
                         held.GetComponent<Rigidbody>().useGravity = false;
+                        held.GetComponent<Rigidbody>().mass = 1000;
+                        held.GetComponent<BoxCollider>().size = new Vector3(2,2,2);
+                        held.layer = LayerMask.NameToLayer("Moving");
+                        held.transform.parent = grabPoint.transform;
+                        held.transform.localPosition = Vector3.zero;
                     }
                 }
                 else
                 {
-                    StartCoroutine(lineRenderer.GetComponent<LineRendererHelper>().DisableLineRenderer(1f));
+                    
                 }
             }
             else
             {
                 held.GetComponent<Rigidbody>().useGravity = true;
+                held.GetComponent<Rigidbody>().mass = 1;
+                held.GetComponent<BoxCollider>().size = new Vector3(1,1,1);
+                held.layer = LayerMask.NameToLayer("Moveable");
+                held.transform.parent = null;
                 held = null;
             }
         }
@@ -343,7 +360,11 @@ namespace StarterAssets
         {
             if (held != null)
             {
-                held.transform.position = Vector3.MoveTowards(held.transform.position, Camera.main.transform.forward * 3 + Camera.main.transform.position, Time.fixedDeltaTime * 2);
+                Rigidbody rb = held.GetComponent<Rigidbody>();
+                held.transform.localPosition = Vector3.zero;//Vector3.Lerp(held.transform.position, Camera.main.transform.forward * 3 + Camera.main.transform.position, Time.fixedDeltaTime * MoveSpeed);
+                held.transform.localRotation = Quaternion.Euler(Vector3.up + held.transform.localRotation.eulerAngles);
+                rb.velocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
             }
         }
 
@@ -352,15 +373,8 @@ namespace StarterAssets
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, polarizeDistance))
             {
-                Magnetism magnetize = hit.collider.GetComponent<Magnetism>();
-                if (magnetize != null)
-                {
-                    magnetize.OnPlayerPolarize(this);
-                }
-            }
-            else
-            {
-                StartCoroutine(lineRenderer.GetComponent<LineRendererHelper>().DisableLineRenderer(1f));
+                if (InvokePolarize != null)
+                    InvokePolarize(this.gameObject, hit.collider.gameObject);
             }
         }
     }

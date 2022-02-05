@@ -19,7 +19,7 @@ public class Magnetism_Immovable : Magnetism
             Debug.Log("myCharge is now " + myCharge);
         }
 
-        movableObjectsWithCharge = new List<Magnetism_Movable>();
+        //movableObjectsWithCharge = new List<Magnetism_Movable>();
     }
 
     // Update is called once per frame
@@ -28,24 +28,12 @@ public class Magnetism_Immovable : Magnetism
         for (int ii = 0; ii < movableObjectsWithCharge.Count; ii++)
         {
             Magnetism_Movable temp = movableObjectsWithCharge[ii];
-            int magnetism = Magnetism(temp.GetCharge());
-            switch (magnetism)
+            int magnetism = MagnetismAction(temp.GetPolarity());
+
+            if (magnetism != 0)
             {
-                case 0:
-                    break;
-
-                case 1:
-                    Rigidbody tempRb = temp.GetComponent<Rigidbody>();
-                    tempRb.AddForce(targetDirection(temp.transform.position).normalized * magnetismStrength * Mathf.Abs(myCharge.GetChargeStrength()) / 10, ForceMode.Force);
-                    break;
-
-                case -1:
-                    Rigidbody tempRbPull = temp.GetComponent<Rigidbody>();
-                    tempRbPull.AddForce(-targetDirection(temp.transform.position).normalized * magnetismStrength * Mathf.Abs(myCharge.GetChargeStrength()) / 10, ForceMode.Force);
-                    break;
-
-                default:
-                    break;
+                Rigidbody tempRb = temp.GetComponent<Rigidbody>();
+                tempRb.AddForce(targetDirection(temp.transform.position).normalized * magnetismStrength * Mathf.Abs(myCharge.GetChargeStrength()) / 10 * magnetism, ForceMode.Force);
             }
         }
     }
@@ -55,36 +43,33 @@ public class Magnetism_Immovable : Magnetism
         return target - this.transform.position;
     }
 
-    int Magnetism(int otherCharge)
+    int MagnetismAction(int otherCharge)
     {
-        int myCurrentCharge = myCharge.GetCharge();
-        int action = myCurrentCharge + otherCharge;
+        int myCurrentCharge = myCharge.GetPolarity();
+        int action = myCurrentCharge * otherCharge;
 
-        if (myCurrentCharge != 0 && otherCharge != 0)
-        {
-            switch (action)
-            {
-                case 2:
-                    return 1;
-
-                case -2:
-                    return 1;
-
-                case 0:
-                    return -1;
-
-                default:
-                    return 0;
-            }
-        }
-        else
-        {
-            return 0;
-        }
+        return action;
     }
 
-    public override void OnPlayerPolarize(FirstPersonController player)
+    public override void OnPlayerPolarize(GameObject player, GameObject objectHit)
     {
-        base.OnPlayerPolarize(player);
+        FirstPersonController fpc = player.GetComponent<FirstPersonController>();
+        if (fpc.polarity * myCharge.GetPolarity() != 0)
+        {
+            if(objectHit != this.gameObject)
+            {
+                Magnetism_Movable temp = objectHit.GetComponent<Magnetism_Movable>();
+                foreach(Magnetism_Movable mm in movableObjectsWithCharge)
+                {
+                    if (mm == temp)
+                        movableObjectsWithCharge.Remove(mm);
+                }
+            }
+            else if (objectHit == this.gameObject)
+            {
+                int action = MagnetismAction(player.GetComponent<FirstPersonController>().polarity);
+                //**WIP**
+            }
+        }
     }
 }

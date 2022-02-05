@@ -6,7 +6,7 @@ using StarterAssets;
 public class Charge : MonoBehaviour
 {
     [SerializeField] FirstPersonController player;
-    [SerializeField] int charge = 0;
+    [SerializeField] int polarity = 0;
     [SerializeField] int chargeStrength = 0;
     [SerializeField] int minimumCharge = 5;
     [SerializeField] int overChargeLimit = 10;
@@ -37,9 +37,9 @@ public class Charge : MonoBehaviour
         player.InvokeShoot += ShootListener;
     }
 
-    public int GetCharge()
+    public int GetPolarity()
     {
-        return charge;
+        return polarity;
     }
 
     public int GetChargeStrength()
@@ -98,17 +98,17 @@ public class Charge : MonoBehaviour
     {
         if (chargeStrength >= minimumCharge)
         {
-            charge = 1;
+            polarity = 1;
             SetFresnelColor(Color.red);
         }
         else if (chargeStrength <= -minimumCharge)
         {
-            charge = -1;
+            polarity = -1;
             SetFresnelColor(Color.blue);
         }
         else if (chargeStrength == 0)
         {
-            charge = 0;
+            polarity = 0;
             SetFresnelColor(Color.black);
         }
     }

@@ -5,7 +5,12 @@ using StarterAssets;
 
 public class Magnetism : MonoBehaviour
 {
-    public virtual void OnPlayerPolarize(FirstPersonController player)
+    private void Start()
+    {
+
+    }
+
+    public virtual void OnPlayerPolarize(GameObject player, GameObject objectHit)
     {
         Debug.Log(player.name + " has used polarize on " + this.name);
     }
