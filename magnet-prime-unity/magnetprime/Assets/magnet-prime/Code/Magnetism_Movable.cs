@@ -7,6 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Magnetism_Movable : Magnetism
 {
+    //**WIP** Polarize actions
     public Charge myCharge;
     public bool grabbable;
     public Vector3 direction;

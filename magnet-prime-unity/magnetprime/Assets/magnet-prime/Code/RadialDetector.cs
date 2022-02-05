@@ -8,6 +8,7 @@ public class RadialDetector : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Magnetism_Movable temp = other.GetComponent<Magnetism_Movable>();
+        Debug.Log(other);
         if (temp != null)
             root.movableObjectsWithCharge.Add(temp);
     }
