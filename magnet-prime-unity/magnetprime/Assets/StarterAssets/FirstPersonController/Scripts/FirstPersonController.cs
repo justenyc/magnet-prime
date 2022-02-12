@@ -332,6 +332,8 @@ namespace StarterAssets
                     Magnetism_Movable grabbed = hit.collider.GetComponent<Magnetism_Movable>();
                     if (grabbed != null && grabbed.grabbable == true)
                     {
+                        grabbed.SetDragToPlayer(false);
+                        grabbed.grabbable = false;
                         held = grabbed.gameObject;
                         held.GetComponent<Rigidbody>().useGravity = false;
                         held.GetComponent<Rigidbody>().mass = 1000;
@@ -348,6 +350,7 @@ namespace StarterAssets
             }
             else
             {
+                held.GetComponent<Magnetism_Movable>().grabbable = true;
                 held.GetComponent<Rigidbody>().useGravity = true;
                 held.GetComponent<Rigidbody>().mass = 1;
                 held.GetComponent<BoxCollider>().size = new Vector3(1,1,1);

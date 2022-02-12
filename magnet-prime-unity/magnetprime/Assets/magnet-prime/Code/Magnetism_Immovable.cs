@@ -38,6 +38,19 @@ public class Magnetism_Immovable : Magnetism
         }
     }
 
+    public void AddMovable(Magnetism_Movable movable)
+    {
+        try
+        {
+            movableObjectsWithCharge.Remove(movable);
+            movableObjectsWithCharge.Add(movable);
+        }
+        catch
+        {
+            movableObjectsWithCharge.Add(movable);
+        }
+    }
+
     Vector3 targetDirection(Vector3 target)
     {
         return target - this.transform.position;

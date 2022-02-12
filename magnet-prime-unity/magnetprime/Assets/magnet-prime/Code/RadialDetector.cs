@@ -9,13 +9,22 @@ public class RadialDetector : MonoBehaviour
     {
         Magnetism_Movable temp = other.GetComponent<Magnetism_Movable>();
         if (temp != null)
-            root.movableObjectsWithCharge.Add(temp);
+            root.AddMovable(temp);
     }
 
     private void OnTriggerExit(Collider other)
     {
         Magnetism_Movable temp = other.GetComponent<Magnetism_Movable>();
         if (temp != null)
-            root.movableObjectsWithCharge.Remove(temp);
+        {
+            try
+            {
+                root.movableObjectsWithCharge.Remove(temp);
+            }
+            catch
+            {
+
+            }
+        }
     }
 }

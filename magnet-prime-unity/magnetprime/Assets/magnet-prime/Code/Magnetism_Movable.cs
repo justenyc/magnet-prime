@@ -7,7 +7,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Magnetism_Movable : Magnetism
 {
-    //**WIP** Polarize actions
     public Charge myCharge;
     public bool grabbable;
     public Vector3 direction;
@@ -15,7 +14,7 @@ public class Magnetism_Movable : Magnetism
     public float polarizeCD = 5f;
     public float polarizeCDTime;
     public bool dragToPlayer = false;
-
+    float polarizeStrength = 1;
     private void Start()
     {
         polarizeCDTime = polarizeCD;
@@ -45,7 +44,7 @@ public class Magnetism_Movable : Magnetism
             if (dragToPlayer)
             {
                 rigidBody.velocity = Vector3.zero;
-                transform.position = Vector3.MoveTowards(transform.position, direction, Time.fixedDeltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, direction, Time.fixedDeltaTime * polarizeStrength * 2);
             }
         }
         else
@@ -53,17 +52,6 @@ public class Magnetism_Movable : Magnetism
             dragToPlayer = false;
         }
     }
-
-    public void SetTargetDirection(Vector3 newDirection)
-    {
-        direction = newDirection;
-    }
-
-    public void SetTargetDirection(Vector3 newDirection, float modifer)
-    {
-        direction = newDirection * modifer;
-    }
-
     public int GetPolarity()
     {
         return myCharge.GetPolarity();
@@ -76,17 +64,23 @@ public class Magnetism_Movable : Magnetism
 
         if (objectHit == this.gameObject)
         {
-            Debug.Log(objectHit.name);
-            if (fpc.polarity * myCharge.GetPolarity() < 0)
+            if (fpc.polarity * myCharge.GetPolarity() < 0 && grabbable == true)
             {
                 dragToPlayer = true;
-                direction = fpc.transform.position;
-                rigidBody.AddForce((player.transform.position - transform.position) * fpc.polarizeStrength/2, ForceMode.Impulse);
+                polarizeStrength = fpc.polarizeStrength;
+                direction = fpc.transform.position + Vector3.up + fpc.transform.forward * fpc.grabDistance;
+                polarizeCDTime = polarizeCD;
             }
             else if (fpc.polarity * myCharge.GetPolarity() > 0)
             {
-                rigidBody.AddForce((transform.position - player.transform.position)*fpc.polarizeStrength, ForceMode.Impulse);
+                SetDragToPlayer(false);
+                rigidBody.AddForce((transform.position - player.transform.position) * fpc.polarizeStrength, ForceMode.Impulse);
             }
         }
+    }
+
+    public void SetDragToPlayer(bool b)
+    {
+        dragToPlayer = b;
     }
 }
