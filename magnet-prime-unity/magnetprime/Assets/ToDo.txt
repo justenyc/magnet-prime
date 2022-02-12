@@ -1,0 +1,10 @@
+Mechanics:
+-Polarize
+ >Hookshot
+-Buttons/Switches
+
+VFX:
+-Player polarity
+-LineRenderer Helper
+-Polarize
+-Radial Detector

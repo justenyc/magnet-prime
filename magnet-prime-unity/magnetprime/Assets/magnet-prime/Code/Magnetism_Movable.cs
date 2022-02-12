@@ -15,8 +15,10 @@ public class Magnetism_Movable : Magnetism
     public float polarizeCDTime;
     public bool dragToPlayer = false;
     float polarizeStrength = 1;
+    Vector3 startingScale;
     private void Start()
     {
+        startingScale = transform.localScale;
         polarizeCDTime = polarizeCD;
         if (myCharge == null)
         {
@@ -82,5 +84,27 @@ public class Magnetism_Movable : Magnetism
     public void SetDragToPlayer(bool b)
     {
         dragToPlayer = b;
+    }
+
+    public IEnumerator LerpScale(bool direction)
+    {
+        Vector3 scaleTo;
+        if (direction)
+        {
+            scaleTo = new Vector3(1, 1, 1);
+        }
+        else
+        {
+            scaleTo = this.startingScale;
+        }
+        float elapsedTime = 0;
+        Vector3 startingScale = transform.localScale;
+        while (elapsedTime < 1)
+        {
+            transform.localScale = Vector3.Lerp(startingScale, scaleTo, (elapsedTime / 0.1f));
+            elapsedTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        transform.localScale = scaleTo;
     }
 }

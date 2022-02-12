@@ -330,14 +330,22 @@ namespace StarterAssets
                 if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, grabDistance))
                 {
                     Magnetism_Movable grabbed = hit.collider.GetComponent<Magnetism_Movable>();
+                    Debug.Log(hit.collider.name);
                     if (grabbed != null && grabbed.grabbable == true)
                     {
                         grabbed.SetDragToPlayer(false);
                         grabbed.grabbable = false;
+                        StartCoroutine(grabbed.LerpScale(true));
                         held = grabbed.gameObject;
                         held.GetComponent<Rigidbody>().useGravity = false;
                         held.GetComponent<Rigidbody>().mass = 1000;
-                        held.GetComponent<BoxCollider>().size = new Vector3(2,2,2);
+
+                        Collider c = held.GetComponent<Collider>();
+                        if (c.GetType() == typeof(SphereCollider))
+                            held.GetComponent<SphereCollider>().radius = 1;
+                        else if (c.GetType() == typeof(BoxCollider))
+                            held.GetComponent<BoxCollider>().size = new Vector3(2, 2, 2);
+
                         held.layer = LayerMask.NameToLayer("Moving");
                         held.transform.parent = grabPoint.transform;
                         held.transform.localPosition = Vector3.zero;
@@ -350,10 +358,16 @@ namespace StarterAssets
             }
             else
             {
-                held.GetComponent<Magnetism_Movable>().grabbable = true;
+                Magnetism_Movable grabbed = held.GetComponent<Magnetism_Movable>();
+                StartCoroutine(grabbed.LerpScale(false));
+                grabbed.grabbable = true;
                 held.GetComponent<Rigidbody>().useGravity = true;
                 held.GetComponent<Rigidbody>().mass = 1;
-                held.GetComponent<BoxCollider>().size = new Vector3(1,1,1);
+                Collider c = held.GetComponent<Collider>();
+                if (c.GetType() == typeof(SphereCollider))
+                    held.GetComponent<SphereCollider>().radius = 0.5f;
+                else if (c.GetType() == typeof(BoxCollider))
+                    held.GetComponent<BoxCollider>().size = new Vector3(1, 1, 1);
                 held.layer = LayerMask.NameToLayer("Moveable");
                 held.transform.parent = null;
                 held = null;
