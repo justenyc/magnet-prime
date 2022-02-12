@@ -68,6 +68,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press"
+                },
+                {
+                    "name": "PolarityChange",
+                    "type": "Button",
+                    "id": "0e71ea08-f46b-4abf-96dc-8e9aefbd4d75",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
                 }
             ],
             "bindings": [
@@ -288,6 +296,17 @@
                     "processors": "",
                     "groups": "KeyboardMouse",
                     "action": "Polarize",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dd2d8fdd-4679-4de6-aeb1-c0448744cd7c",
+                    "path": "<Keyboard>/leftCtrl",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "PolarityChange",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

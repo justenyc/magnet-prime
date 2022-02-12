@@ -28,6 +28,7 @@ namespace StarterAssets
         public float FireRate = 0.1f;
         public float grabDistance = 5f;
         public float polarizeDistance = 5f;
+        public float polarizeStrength = 10f;
         public int polarity = 1;
         float shootCD = 1;
         bool shootPressed = false;
@@ -376,6 +377,11 @@ namespace StarterAssets
                 if (InvokePolarize != null)
                     InvokePolarize(this.gameObject, hit.collider.gameObject);
             }
+        }
+
+        public void OnPolarityChange(InputValue value)
+        {
+            polarity *= -1;
         }
     }
 }

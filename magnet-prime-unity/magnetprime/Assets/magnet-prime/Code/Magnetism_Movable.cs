@@ -42,6 +42,11 @@ public class Magnetism_Movable : Magnetism
         if (polarizeCDTime > 0)
         {
             polarizeCDTime = Mathf.Clamp(polarizeCDTime - Time.fixedDeltaTime, 0, polarizeCD);
+            if (dragToPlayer)
+            {
+                rigidBody.velocity = Vector3.zero;
+                transform.position = Vector3.MoveTowards(transform.position, direction, Time.fixedDeltaTime);
+            }
         }
         else
         {
@@ -69,13 +74,19 @@ public class Magnetism_Movable : Magnetism
         FirstPersonController fpc = player.GetComponent<FirstPersonController>();
         int action = fpc.polarity * myCharge.GetPolarity();
 
-        if (fpc.polarity * myCharge.GetPolarity() < 0)
+        if (objectHit == this.gameObject)
         {
-            polarizeCDTime = polarizeCD;
-        }
-        else if (fpc.polarity * myCharge.GetPolarity() > 0)
-        {
-            rigidBody.AddForce(transform.position - player.transform.position, ForceMode.Impulse);
+            Debug.Log(objectHit.name);
+            if (fpc.polarity * myCharge.GetPolarity() < 0)
+            {
+                dragToPlayer = true;
+                direction = fpc.transform.position;
+                rigidBody.AddForce((player.transform.position - transform.position) * fpc.polarizeStrength/2, ForceMode.Impulse);
+            }
+            else if (fpc.polarity * myCharge.GetPolarity() > 0)
+            {
+                rigidBody.AddForce((transform.position - player.transform.position)*fpc.polarizeStrength, ForceMode.Impulse);
+            }
         }
     }
 }
