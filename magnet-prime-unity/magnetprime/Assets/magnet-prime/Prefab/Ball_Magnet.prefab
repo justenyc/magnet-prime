@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 1499585230202852536}
   - component: {fileID: 1499585230202852537}
   - component: {fileID: 1499585230202852518}
-  - component: {fileID: 1499585230202852519}
   - component: {fileID: 1499585230202852539}
   - component: {fileID: 1499585230202852538}
   - component: {fileID: 1499585230202852541}
+  - component: {fileID: 5429835670199943274}
   m_Layer: 6
-  m_Name: Cube_Magnet
+  m_Name: Ball_Magnet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,7 +43,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1499585230202852516}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &1499585230202852518
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -85,19 +85,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1499585230202852519
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1499585230202852516}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &1499585230202852539
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -152,3 +139,16 @@ MonoBehaviour:
   polarizeCD: 5
   polarizeCDTime: 0
   dragToPlayer: 0
+--- !u!135 &5429835670199943274
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1499585230202852516}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
