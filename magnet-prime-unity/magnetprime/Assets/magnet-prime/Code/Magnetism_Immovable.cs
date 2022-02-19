@@ -1,3 +1,4 @@
+using System;
 using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,6 +11,8 @@ public class Magnetism_Immovable : Magnetism
     public float magnetismStrength = 1;
     public List<Magnetism_Movable> movableObjectsWithCharge;
 
+    public Action<int> polarityChange;
+
     private void Start()
     {
         if (myCharge == null)
@@ -19,6 +22,7 @@ public class Magnetism_Immovable : Magnetism
             Debug.Log("myCharge is now " + myCharge);
         }
 
+        myCharge.polarityChange += myPolarityChange;
         //movableObjectsWithCharge = new List<Magnetism_Movable>();
     }
 
@@ -84,5 +88,13 @@ public class Magnetism_Immovable : Magnetism
                 //**WIP**
             }
         }
+    }
+
+    void myPolarityChange(int ii)
+    {
+        Debug.Log(this.name + " Called myPolarityChange");
+
+        if (this.polarityChange != null)
+            polarityChange(ii);
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,8 +13,7 @@ public class Charge : MonoBehaviour
     [SerializeField] int overChargeLimit = 10;
 
     [SerializeField] bool overChargeDecay = true;
-    public delegate void ChargeDelegate(int charge);
-    public event ChargeDelegate ChargeEvent;
+    public Action<int> polarityChange;
     [SerializeField] Material mainMaterial;
 
     private void Start()
@@ -35,6 +35,9 @@ public class Charge : MonoBehaviour
         }
 
         player.InvokeShoot += ShootListener;
+
+        if (polarityChange != null)
+            polarityChange(polarity);
     }
 
     public int GetPolarity()
@@ -100,16 +103,21 @@ public class Charge : MonoBehaviour
         {
             polarity = 1;
             SetFresnelColor(Color.red);
+            polarityChange(polarity);
         }
         else if (chargeStrength <= -minimumCharge)
         {
             polarity = -1;
             SetFresnelColor(Color.blue);
+            if (polarityChange != null)
+                polarityChange(polarity);
         }
         else if (chargeStrength == 0)
         {
             polarity = 0;
             SetFresnelColor(Color.black);
+            if (polarityChange != null)
+                polarityChange(polarity);
         }
     }
 }
