@@ -91,7 +91,7 @@ public class Magnetism_Movable : Magnetism
         Vector3 scaleTo;
         if (direction)
         {
-            scaleTo = new Vector3(1, 1, 1);
+            scaleTo = new Vector3(0.2f, 0.2f, 0.2f);
         }
         else
         {
