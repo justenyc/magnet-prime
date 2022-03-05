@@ -112,8 +112,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  charge: 1
-  chargeStrength: 5
+  polarity: 0
+  chargeStrength: 0
   minimumCharge: 5
   overChargeLimit: 10
   overChargeDecay: 0
@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myCharge: {fileID: 2295908361975536210}
-  magnetismStrength: 10
+  magnetismStrength: 50
   movableObjectsWithCharge: []
 --- !u!1 &2295908363209372297
 GameObject:
@@ -163,7 +163,7 @@ Transform:
   m_GameObject: {fileID: 2295908363209372297}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_LocalScale: {x: 25, y: 25, z: 25}
   m_Children: []
   m_Father: {fileID: 2295908361975536214}
   m_RootOrder: 0
@@ -259,3 +259,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   root: {fileID: 2295908361975536215}
+  positiveColor: {r: 1, g: 0, b: 0, a: 0}
+  negativeColor: {r: 0, g: 0, b: 1, a: 0}
+  mat: {fileID: 0}
