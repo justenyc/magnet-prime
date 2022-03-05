@@ -466,7 +466,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myCharge: {fileID: 0}
-  hookSpeed: 1
+  hookSpeed: 0.5
   polarizeCD: 5
   polarizeCDTime: 0
 --- !u!114 &5092193993894976758
