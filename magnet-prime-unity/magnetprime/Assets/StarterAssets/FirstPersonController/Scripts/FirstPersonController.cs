@@ -400,5 +400,12 @@ namespace StarterAssets
         {
             polarity *= -1;
         }
+
+        public IEnumerator TemporaryDisable(float time)
+        {
+            this.enabled = false;
+            yield return new WaitForSeconds(time);
+            this.enabled = true;
+        }
     }
 }
