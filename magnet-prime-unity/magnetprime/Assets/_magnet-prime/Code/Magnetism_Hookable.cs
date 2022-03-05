@@ -10,7 +10,7 @@ public class Magnetism_Hookable : Magnetism
 {
     public Charge myCharge;
     public Action<int> polarityChange;
-
+    public float hookSpeed = 1;
     public float polarizeCD = 5f;
     public float polarizeCDTime;
     float polarizeStrength = 1;
@@ -49,8 +49,8 @@ public class Magnetism_Hookable : Magnetism
         {
             if (fpc.polarity * myCharge.GetPolarity() < 0)
             {
-                fpc.transform.DOMove(transform.position, 1, false);
-                fpc.TemporaryDisable()
+                fpc.transform.DOMove(transform.position, hookSpeed, false);
+                fpc.TemporaryDisable(hookSpeed);
                 polarizeCDTime = polarizeCD;
             }
             else if (fpc.polarity * myCharge.GetPolarity() > 0)
