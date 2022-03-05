@@ -367,7 +367,7 @@ namespace StarterAssets
                 if (c.GetType() == typeof(SphereCollider))
                     held.GetComponent<SphereCollider>().radius = 0.5f;
                 else if (c.GetType() == typeof(BoxCollider))
-                    held.GetComponent<BoxCollider>().size = new Vector3(1, 1, 1);
+                    held.GetComponent<BoxCollider>().size = new Vector3(5, 5, 5);
                 held.layer = LayerMask.NameToLayer("Moveable");
                 held.transform.parent = null;
                 held = null;
@@ -403,6 +403,7 @@ namespace StarterAssets
 
         public IEnumerator TemporaryDisable(float time)
         {
+            Debug.Log("called");
             this.enabled = false;
             yield return new WaitForSeconds(time);
             this.enabled = true;

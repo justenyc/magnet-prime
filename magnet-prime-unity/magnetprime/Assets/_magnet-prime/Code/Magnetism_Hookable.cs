@@ -50,7 +50,7 @@ public class Magnetism_Hookable : Magnetism
             if (fpc.polarity * myCharge.GetPolarity() < 0)
             {
                 fpc.transform.DOMove(transform.position, hookSpeed, false);
-                fpc.TemporaryDisable(hookSpeed);
+                StartCoroutine(fpc.TemporaryDisable(hookSpeed));
                 polarizeCDTime = polarizeCD;
             }
             else if (fpc.polarity * myCharge.GetPolarity() > 0)
