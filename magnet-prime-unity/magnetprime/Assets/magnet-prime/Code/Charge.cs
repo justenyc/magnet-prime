@@ -37,7 +37,10 @@ public class Charge : MonoBehaviour
         player.InvokeShoot += ShootListener;
 
         if (polarityChange != null)
+        {
+            Debug.Log("Post of polarityChange by " + this.name);
             polarityChange(polarity);
+        }
     }
 
     public int GetPolarity()
@@ -103,7 +106,8 @@ public class Charge : MonoBehaviour
         {
             polarity = 1;
             SetFresnelColor(Color.red);
-            polarityChange(polarity);
+            if (polarityChange != null)
+                polarityChange(polarity);
         }
         else if (chargeStrength <= -minimumCharge)
         {
