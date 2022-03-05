@@ -8,13 +8,19 @@ public class RadialDetector : MonoBehaviour
     public Color positiveColor;
     public Color negativeColor;
     public Material mat;
+
+    private void Start()
+    {
+        mat = this.GetComponent<MeshRenderer>().material;
+        root.polarityChange += PolarityChangeListener;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         Magnetism_Movable temp = other.GetComponent<Magnetism_Movable>();
         mat = this.GetComponent<MeshRenderer>().material;
         if (temp != null)
             root.AddMovable(temp);
-        root.polarityChange += PolarityChangeListener;
     }
 
     private void OnTriggerExit(Collider other)
