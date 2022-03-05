@@ -344,7 +344,7 @@ namespace StarterAssets
                         if (c.GetType() == typeof(SphereCollider))
                             held.GetComponent<SphereCollider>().radius = 1;
                         else if (c.GetType() == typeof(BoxCollider))
-                            held.GetComponent<BoxCollider>().size = new Vector3(2, 2, 2);
+                            held.GetComponent<BoxCollider>().size = new Vector3(10, 10, 10);
 
                         held.layer = LayerMask.NameToLayer("Moving");
                         held.transform.parent = grabPoint.transform;
