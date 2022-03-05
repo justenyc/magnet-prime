@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using StarterAssets;
+using DG.Tweening;
 
 [RequireComponent(typeof(Charge))]
 public class Magnetism_Hookable : Magnetism
@@ -44,18 +45,17 @@ public class Magnetism_Hookable : Magnetism
         FirstPersonController fpc = player.GetComponent<FirstPersonController>();
         int action = fpc.polarity * myCharge.GetPolarity();
 
-
-        /*if (objectHit == this.gameObject)
+        if (objectHit == this.gameObject)
         {
             if (fpc.polarity * myCharge.GetPolarity() < 0)
             {
-                polarizeStrength = fpc.polarizeStrength;
+                fpc.transform.DOMove(transform.position, 1, false);
                 polarizeCDTime = polarizeCD;
             }
             else if (fpc.polarity * myCharge.GetPolarity() > 0)
             {
-                //Collider[] collidersInRange = 
+                polarizeCDTime = polarizeCD;
             }
-        }*/
+        }
     }
 }
