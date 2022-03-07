@@ -330,7 +330,6 @@ namespace StarterAssets
                 if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, grabDistance))
                 {
                     Magnetism_Movable grabbed = hit.collider.GetComponent<Magnetism_Movable>();
-                    Debug.Log(hit.collider.name);
                     if (grabbed != null && grabbed.grabbable == true)
                     {
                         grabbed.SetDragToPlayer(false);
@@ -403,7 +402,6 @@ namespace StarterAssets
 
         public IEnumerator TemporaryDisable(float time)
         {
-            Debug.Log("called");
             this.enabled = false;
             yield return new WaitForSeconds(time);
             this.enabled = true;
