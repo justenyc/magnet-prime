@@ -122,7 +122,7 @@ public class Magnetism_Movable : Magnetism
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.name);
+        //Debug.Log(other.name);
         if (other.gameObject.layer == LayerMask.NameToLayer("BoxForceField"))
         {
             if (EnteredBoxField != null)
@@ -136,6 +136,7 @@ public class Magnetism_Movable : Magnetism
         this.transform.rotation = startingTransform.startRot;
         this.transform.localScale = startingTransform.startScale;
         rigidBody.velocity = Vector3.zero;
+        dragToPlayer = false;
     }
 
     public struct startTransform
