@@ -13,7 +13,9 @@ public class Magnetism_Hookable : Magnetism
     public float hookSpeed = 1;
     public float polarizeCD = 5f;
     public float polarizeCDTime;
-    float polarizeStrength = 1;
+    float polarizeStrength = 250;
+
+    public Collider[] nearColliders;
 
     FirstPersonController player;
 
@@ -55,6 +57,17 @@ public class Magnetism_Hookable : Magnetism
             }
             else if (fpc.polarity * myCharge.GetPolarity() > 0)
             {
+                Debug.Log("getting near colliders");
+                nearColliders = Physics.OverlapSphere(transform.position, 10);
+                foreach(Collider col in nearColliders)
+                {
+                    Magnetism_Movable temp = col.GetComponent<Magnetism_Movable>();
+                    if(temp != null)
+                    {
+                        int tempAction = myCharge.GetPolarity() * temp.GetPolarity();
+                        col.attachedRigidbody.AddExplosionForce(tempAction * myCharge.GetChargeStrength() * polarizeStrength, transform.position, 10);
+                    }
+                }
                 polarizeCDTime = polarizeCD;
             }
         }

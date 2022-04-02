@@ -35,6 +35,8 @@ namespace StarterAssets
         GameObject held;
         public Transform grabPoint;
         public LineRenderer lineRenderer;
+        public LayerMask gunMask;
+        public LayerMask polarizeMask;
 
         [Space(10)]
         [Tooltip("The height the player can jump")]
@@ -279,7 +281,7 @@ namespace StarterAssets
             {
                 shootCD = FireRate;
                 RaycastHit hit;
-                if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity))
+                if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity, gunMask))
                 {
                     if (lastShot)
                     {
@@ -295,6 +297,7 @@ namespace StarterAssets
                         if (InvokeShoot != null)
                             InvokeShoot(hit.transform.gameObject);
                     }
+                    Debug.Log(hit.transform.gameObject + " | " + hit.transform.gameObject.layer);
                 }
                 else
                 {
@@ -330,9 +333,9 @@ namespace StarterAssets
                 if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, grabDistance))
                 {
                     Magnetism_Movable grabbed = hit.collider.GetComponent<Magnetism_Movable>();
-                    Debug.Log(hit.collider.name);
                     if (grabbed != null && grabbed.grabbable == true)
                     {
+                        grabbed.EnteredBoxField += GrabEnteredBoxField;
                         grabbed.SetDragToPlayer(false);
                         grabbed.grabbable = false;
                         StartCoroutine(grabbed.LerpScale(true));
@@ -344,7 +347,7 @@ namespace StarterAssets
                         if (c.GetType() == typeof(SphereCollider))
                             held.GetComponent<SphereCollider>().radius = 1;
                         else if (c.GetType() == typeof(BoxCollider))
-                            held.GetComponent<BoxCollider>().size = new Vector3(10, 10, 10);
+                            held.GetComponent<BoxCollider>().size = new Vector3(2, 2, 2);
 
                         held.layer = LayerMask.NameToLayer("Moving");
                         held.transform.parent = grabPoint.transform;
@@ -367,11 +370,33 @@ namespace StarterAssets
                 if (c.GetType() == typeof(SphereCollider))
                     held.GetComponent<SphereCollider>().radius = 0.5f;
                 else if (c.GetType() == typeof(BoxCollider))
-                    held.GetComponent<BoxCollider>().size = new Vector3(5, 5, 5);
+                    held.GetComponent<BoxCollider>().size = new Vector3(1, 1, 1);
                 held.layer = LayerMask.NameToLayer("Moveable");
                 held.transform.parent = null;
                 held = null;
             }
+        }
+
+        void GrabEnteredBoxField()
+        {
+            Magnetism_Movable grabbed = held.GetComponent<Magnetism_Movable>();
+            StartCoroutine(grabbed.LerpScale(false));
+            grabbed.grabbable = true;
+
+            held.GetComponent<Rigidbody>().useGravity = true;
+            held.GetComponent<Rigidbody>().mass = 1;
+
+            Collider c = held.GetComponent<Collider>();
+            if (c.GetType() == typeof(SphereCollider))
+                held.GetComponent<SphereCollider>().radius = 0.5f;
+            else if (c.GetType() == typeof(BoxCollider))
+                held.GetComponent<BoxCollider>().size = new Vector3(1, 1, 1);
+
+            held.layer = LayerMask.NameToLayer("Moveable");
+            held.transform.parent = null;
+            grabbed.Reset();
+            grabbed.EnteredBoxField -= GrabEnteredBoxField;
+            held = null;
         }
 
         void Grab()
@@ -389,10 +414,11 @@ namespace StarterAssets
         public void OnPolarize(InputValue value)
         {
             RaycastHit hit;
-            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, polarizeDistance))
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, polarizeDistance, polarizeMask))
             {
                 if (InvokePolarize != null)
                     InvokePolarize(this.gameObject, hit.collider.gameObject);
+                Debug.Log(hit.collider.gameObject);
             }
         }
 
@@ -403,7 +429,6 @@ namespace StarterAssets
 
         public IEnumerator TemporaryDisable(float time)
         {
-            Debug.Log("called");
             this.enabled = false;
             yield return new WaitForSeconds(time);
             this.enabled = true;
