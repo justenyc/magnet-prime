@@ -373,6 +373,7 @@ namespace StarterAssets
                     held.GetComponent<BoxCollider>().size = new Vector3(1, 1, 1);
                 held.layer = LayerMask.NameToLayer("Moveable");
                 held.transform.parent = null;
+                grabbed.EnteredBoxField -= GrabEnteredBoxField;
                 held = null;
             }
         }
