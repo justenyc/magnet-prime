@@ -1,3 +1,4 @@
+using System;
 using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Magnetism_Movable : Magnetism
 {
+    public startTransform startingTransform;
     public Charge myCharge;
     public bool grabbable;
     public Vector3 direction;
@@ -16,10 +18,18 @@ public class Magnetism_Movable : Magnetism
     public bool dragToPlayer = false;
     float polarizeStrength = 1;
     Vector3 startingScale;
+
+    public Action EnteredBoxField; 
+
     private void Start()
     {
+        startingTransform.startPos = this.transform.position;
+        startingTransform.startRot = this.transform.rotation;
+        startingTransform.startScale = this.transform.localScale;
+
         startingScale = transform.localScale;
         polarizeCDTime = polarizeCD;
+
         if (myCharge == null)
         {
             Debug.LogError(this.name + " Says: myCharge not found > Using GetComponent<Charge>()");
@@ -91,7 +101,7 @@ public class Magnetism_Movable : Magnetism
         Vector3 scaleTo;
         if (direction)
         {
-            scaleTo = new Vector3(0.2f, 0.2f, 0.2f);
+            scaleTo = new Vector3(1f, 1f, 1f);
         }
         else
         {
@@ -107,4 +117,29 @@ public class Magnetism_Movable : Magnetism
         }
         transform.localScale = scaleTo;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other.name);
+        if (other.gameObject.layer == LayerMask.NameToLayer("BoxForceField"))
+        {
+            if (EnteredBoxField != null)
+                EnteredBoxField();
+        }
+    }
+
+    public void Reset()
+    {
+        Debug.Log("Reset called");
+        this.transform.position = startingTransform.startPos;
+        this.transform.rotation = startingTransform.startRot;
+        this.transform.localScale = startingTransform.startScale;
+    }
+
+    public struct startTransform
+    {
+        public Vector3 startPos;
+        public Quaternion startRot;
+        public Vector3 startScale;
+    };
 }
