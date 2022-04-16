@@ -7,6 +7,7 @@ public class RadialDetector : MonoBehaviour
     public Magnetism_Immovable root;
     public Color positiveColor;
     public Color negativeColor;
+    public Color neutralColor;
     public Material mat;
 
     private void Start()
@@ -45,16 +46,14 @@ public class RadialDetector : MonoBehaviour
         if (ii > 0)
         {
             mat.SetColor("Color_Main", positiveColor);
-            mat.SetFloat("Alpha", 0);
         }
         else if (ii < 0)
         {
             mat.SetColor("Color_Main", negativeColor);
-            mat.SetFloat("Alpha", 0);
         }
         else
         {
-            mat.SetFloat("Alpha", 1);
+            mat.SetColor("Color_Main", neutralColor);
         }
     }
 }
