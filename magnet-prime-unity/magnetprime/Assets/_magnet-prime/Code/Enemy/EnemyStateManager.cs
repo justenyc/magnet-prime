@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class NavMeshTesting : MonoBehaviour
+public class EnemyStateManager : MonoBehaviour
 {
     public NavMeshAgent agent;
     public Transform head;
@@ -12,14 +12,14 @@ public class NavMeshTesting : MonoBehaviour
     public Transform patrolPointHolder;
     public bool patrolling = false;
     public List<Transform> points;
+    public IEnemyState currentState;
 
     // Start is called before the first frame update
     void Start()
     {
-        InitializePatrolPoints();
-        agent.destination = points[patrolPointIndex].position;
-        
-        if(!head)
+
+
+        if (!head)
         {
             Debug.LogError("Head not found please check the inspector for " + this.name);
             Debug.Break();
@@ -37,22 +37,6 @@ public class NavMeshTesting : MonoBehaviour
         Debug.DrawRay(transform.position, head.forward * 10, Color.cyan);
     }
 
-    void InitializePatrolPoints()
-    {
-        if (patrolPointHolder != null)
-        {
-            foreach (Transform t in patrolPointHolder)
-            {
-                points.Add(t);
-            }
-        }
-        else
-        {
-            Debug.LogError("PatrolPoints in " + this.name + " were not found. Please check the inspector");
-            Debug.Break();
-        }
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("PatrolPoint"))
@@ -61,7 +45,7 @@ public class NavMeshTesting : MonoBehaviour
 
             if (patrolPointIndex == points.Count)
                 patrolPointIndex = 0;
-            
+
             agent.destination = points[patrolPointIndex].position;
         }
     }
