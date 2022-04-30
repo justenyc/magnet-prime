@@ -5,23 +5,37 @@ using UnityEngine.AI;
 
 public class EnemyStateManager : MonoBehaviour
 {
+    [Header("Set Objects")]
     public NavMeshAgent agent;
     public Transform head;
+    public GameObject projectile;
+
+    [Header("Patrol Properties")]
     public float agentSpeed = 3.5f;
-    public int patrolPointIndex = 0;
+    public float sightDistance;
+    public float sightModifier = 10f;
+    public LayerMask mask;
     public Transform patrolPointHolder;
-    public bool patrolling = false;
-    public List<Transform> points;
+    [HideInInspector] public int patrolPointIndex = 0;
+    [HideInInspector] public bool patrolling = false;
+    [HideInInspector] public List<Transform> points;
+
+    [Space(10)]
+    public float fireRate = 1f;
+    [HideInInspector] public float fireRateCountdown;
     public IEnemyState currentState;
 
     // Start is called before the first frame update
     void Start()
     {
+        fireRateCountdown = fireRate;
 
+        currentState = new IPatrolling(this);
+        currentState.StateStart();
 
         if (!head)
         {
-            Debug.LogError("Head not found please check the inspector for " + this.name);
+            Debug.LogError("Head not found. Please check the inspector for " + this.name);
             Debug.Break();
         }
     }
@@ -29,24 +43,11 @@ public class EnemyStateManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (patrolling)
-            agent.speed = agentSpeed;
-        else
-            agent.speed = 0;
-
-        Debug.DrawRay(transform.position, head.forward * 10, Color.cyan);
+        currentState.StateUpdate();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("PatrolPoint"))
-        {
-            patrolPointIndex++;
-
-            if (patrolPointIndex == points.Count)
-                patrolPointIndex = 0;
-
-            agent.destination = points[patrolPointIndex].position;
-        }
+        currentState.OnTriggerEnter(other);
     }
 }
