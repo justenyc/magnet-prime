@@ -6,4 +6,5 @@ public interface IEnemyState
 {
     public void StateStart();
     public void StateUpdate();
+    public void OnTriggerEnter(Collider other);
 }

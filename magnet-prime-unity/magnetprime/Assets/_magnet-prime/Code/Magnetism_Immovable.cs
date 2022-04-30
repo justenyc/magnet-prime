@@ -37,7 +37,13 @@ public class Magnetism_Immovable : Magnetism
             if (magnetism != 0)
             {
                 Rigidbody tempRb = temp.GetComponent<Rigidbody>();
+                tempRb.useGravity = false;
                 tempRb.AddForce(targetDirection(temp.transform.position).normalized * magnetismStrength * Mathf.Abs(myCharge.GetChargeStrength()) / 10 * magnetism, ForceMode.Force);
+            }
+            else
+            {
+                Rigidbody tempRb = temp.GetComponent<Rigidbody>();
+                tempRb.useGravity = true;
             }
         }
     }

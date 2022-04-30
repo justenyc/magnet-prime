@@ -11,20 +11,53 @@ public class IPatrolling : IEnemyState
         manager = managerRef;
     }
     
-    // Start is called before the first frame update
     public void StateStart()
     {
         InitializePatrolPoints();
         manager.agent.destination = manager.points[manager.patrolPointIndex].position;
     }
 
-    // Update is called once per frame
     public void StateUpdate()
     {
-        
+        if (manager.patrolling)
+            manager.agent.speed = manager.agentSpeed;
+        else
+            manager.agent.speed = 0;
+
+        Sight(manager.head.forward, manager.sightDistance);
+        Sight(manager.head.forward + manager.transform.right * manager.sightModifier, manager.sightDistance);
+        Sight(manager.head.forward + manager.transform.right * -manager.sightModifier, manager.sightDistance);
+        //Debug.DrawRay(manager.head.position, manager.head.forward * manager.sightDistance + manager.transform.right * manager.sightModifier, Color.magenta);
+        //Debug.DrawRay(manager.head.position, (manager.head.forward + manager.transform.right * manager.sightModifier) * manager.sightDistance, Color.magenta);
     }
 
-    void InitializePatrolPoints()
+    private void Sight(Vector3 direction, float distance)
+    {
+        Debug.DrawRay(manager.head.position, direction * distance, Color.green);
+
+        RaycastHit hit;
+        if (Physics.Raycast(manager.head.position, direction, out hit, distance, manager.mask))
+        {
+            Debug.Log(hit.collider.name);
+            if (hit.collider.tag == "Player")
+            {
+                manager.currentState = new IAlert(manager, hit.collider.transform);
+            }
+        }
+    }
+
+    private void Sight(Vector3 direction, float distance, float angle)
+    {
+        Debug.DrawRay(manager.head.position, direction * distance, Color.green);
+
+        RaycastHit hit;
+        if (Physics.Raycast(manager.head.position, direction, out hit, distance, manager.mask))
+        {
+            Debug.Log(hit.collider.name);
+        }
+    }
+
+    public void InitializePatrolPoints()
     {
         if (manager.patrolPointHolder != null)
         {
@@ -37,6 +70,19 @@ public class IPatrolling : IEnemyState
         {
             Debug.LogError("PatrolPoints in " + manager.name + " were not found. Please check the inspector");
             Debug.Break();
+        }
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("PatrolPoint"))
+        {
+            manager.patrolPointIndex++;
+
+            if (manager.patrolPointIndex == manager.points.Count)
+                manager.patrolPointIndex = 0;
+
+            manager.agent.destination = manager.points[manager.patrolPointIndex].position;
         }
     }
 }
