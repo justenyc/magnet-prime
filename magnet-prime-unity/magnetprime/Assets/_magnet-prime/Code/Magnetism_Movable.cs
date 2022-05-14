@@ -17,6 +17,7 @@ public class Magnetism_Movable : Magnetism
     public float polarizeCDTime;
     public bool dragToPlayer = false;
     float polarizeStrength = 1;
+    public bool beingMagnetized = false;
     Vector3 startingScale;
 
     public Action EnteredBoxField; 
@@ -30,7 +31,7 @@ public class Magnetism_Movable : Magnetism
         startingScale = transform.localScale;
         polarizeCDTime = polarizeCD;
 
-        EnteredBoxField += Reset;
+        EnteredBoxField += ResetValues;
 
         if (myCharge == null)
         {
@@ -130,13 +131,21 @@ public class Magnetism_Movable : Magnetism
         }
     }
 
-    public void Reset()
+    public void ResetValues()
     {
-        this.transform.position = startingTransform.startPos;
-        this.transform.rotation = startingTransform.startRot;
-        this.transform.localScale = startingTransform.startScale;
-        rigidBody.velocity = Vector3.zero;
-        dragToPlayer = false;
+        try
+        {
+            this.transform.position = startingTransform.startPos;
+            this.transform.rotation = startingTransform.startRot;
+            this.transform.localScale = startingTransform.startScale;
+            rigidBody.velocity = Vector3.zero;
+            dragToPlayer = false;
+            beingMagnetized = false;
+        }
+        catch
+        {
+
+        }
     }
 
     public struct startTransform

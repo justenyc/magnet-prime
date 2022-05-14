@@ -9,11 +9,15 @@ public class IPatrolling : IEnemyState
     public IPatrolling(EnemyStateManager managerRef)
     {
         manager = managerRef;
+        StateStart();
     }
-    
+
     public void StateStart()
     {
         InitializePatrolPoints();
+        manager.sightLight.SetActive(true);
+        manager.rb.velocity = Vector3.zero;
+        manager.agent.enabled = true;
         manager.agent.destination = manager.points[manager.patrolPointIndex].position;
     }
 
@@ -23,6 +27,9 @@ public class IPatrolling : IEnemyState
             manager.agent.speed = manager.agentSpeed;
         else
             manager.agent.speed = 0;
+
+        if (manager.myMagnetism.beingMagnetized)
+            manager.currentState = new IMagnetized(manager);
 
         Sight(manager.head.forward, manager.sightDistance);
         Sight(manager.head.forward + manager.transform.right * manager.sightModifier, manager.sightDistance);
@@ -48,12 +55,15 @@ public class IPatrolling : IEnemyState
 
     private void Sight(Vector3 direction, float distance, float angle)
     {
-        Debug.DrawRay(manager.head.position, direction * distance, Color.green);
-
-        RaycastHit hit;
-        if (Physics.Raycast(manager.head.position, direction, out hit, distance, manager.mask))
+        if (!manager.myMagnetism.beingMagnetized)
         {
-            Debug.Log(hit.collider.name);
+            Debug.DrawRay(manager.head.position, direction * distance, Color.green);
+
+            RaycastHit hit;
+            if (Physics.Raycast(manager.head.position, direction, out hit, distance, manager.mask))
+            {
+                Debug.Log(hit.collider.name);
+            }
         }
     }
 
