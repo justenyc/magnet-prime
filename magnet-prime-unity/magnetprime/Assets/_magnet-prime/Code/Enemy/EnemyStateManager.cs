@@ -18,6 +18,8 @@ public class EnemyStateManager : MonoBehaviour
     public float sightModifier = 10f;
     public LayerMask mask;
     public Transform patrolPointHolder;
+    [Tooltip("How long it takes for the eney to transition from the magnetized state to another state")]
+    public float magnetizedTransitionTime = 2f;
     [HideInInspector] public int patrolPointIndex = 0;
     [HideInInspector] public bool patrolling = false;
     [HideInInspector] public List<Transform> points;
@@ -48,7 +50,6 @@ public class EnemyStateManager : MonoBehaviour
     void Update()
     {
         currentState.StateUpdate();
-        agent.enabled = !myMagnetism.beingMagnetized;
     }
 
     private void OnTriggerEnter(Collider other)
