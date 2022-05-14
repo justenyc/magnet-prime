@@ -398,7 +398,7 @@ namespace StarterAssets
 
             held.layer = LayerMask.NameToLayer("Moveable");
             held.transform.parent = null;
-            grabbed.Reset();
+            grabbed.ResetValues();
             grabbed.EnteredBoxField -= GrabEnteredBoxField;
             held = null;
         }

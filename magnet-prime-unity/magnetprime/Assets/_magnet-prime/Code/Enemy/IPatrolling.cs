@@ -19,6 +19,11 @@ public class IPatrolling : IEnemyState
 
     public void StateUpdate()
     {
+        manager.agent.destination = manager.points[manager.patrolPointIndex].position;
+
+        if (!manager.myMagnetism.beingMagnetized)
+            manager.rb.velocity = Vector3.zero;
+
         if (manager.patrolling)
             manager.agent.speed = manager.agentSpeed;
         else
@@ -33,27 +38,38 @@ public class IPatrolling : IEnemyState
 
     private void Sight(Vector3 direction, float distance)
     {
-        Debug.DrawRay(manager.head.position, direction * distance, Color.green);
-
-        RaycastHit hit;
-        if (Physics.Raycast(manager.head.position, direction, out hit, distance, manager.mask))
+        if (!manager.myMagnetism.beingMagnetized)
         {
-            Debug.Log(hit.collider.name);
-            if (hit.collider.tag == "Player")
+            Debug.DrawRay(manager.head.position, direction * distance, Color.green);
+            manager.sightLight.SetActive(true);
+
+            RaycastHit hit;
+            if (Physics.Raycast(manager.head.position, direction, out hit, distance, manager.mask))
             {
-                manager.currentState = new IAlert(manager, hit.collider.transform);
+                Debug.Log(hit.collider.name);
+                if (hit.collider.tag == "Player")
+                {
+                    manager.currentState = new IAlert(manager, hit.collider.transform);
+                }
             }
+        }
+        else
+        {
+            manager.sightLight.SetActive(false);
         }
     }
 
     private void Sight(Vector3 direction, float distance, float angle)
     {
-        Debug.DrawRay(manager.head.position, direction * distance, Color.green);
-
-        RaycastHit hit;
-        if (Physics.Raycast(manager.head.position, direction, out hit, distance, manager.mask))
+        if (!manager.myMagnetism.beingMagnetized)
         {
-            Debug.Log(hit.collider.name);
+            Debug.DrawRay(manager.head.position, direction * distance, Color.green);
+
+            RaycastHit hit;
+            if (Physics.Raycast(manager.head.position, direction, out hit, distance, manager.mask))
+            {
+                Debug.Log(hit.collider.name);
+            }
         }
     }
 

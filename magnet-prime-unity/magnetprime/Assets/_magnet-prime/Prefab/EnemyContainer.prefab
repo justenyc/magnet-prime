@@ -621,6 +621,8 @@ MonoBehaviour:
   patrolPointIndex: 0
   patrolling: 1
   points: []
+  fireRate: 1
+  fireRateCountdown: 0
 --- !u!195 &7492947976853117864
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -38,7 +38,7 @@ public class Charge : MonoBehaviour
 
         if (polarityChange != null)
         {
-            Debug.Log("Post of polarityChange by " + this.name);
+            //Debug.Log("Post of polarityChange by " + this.name);
             polarityChange(polarity);
         }
     }

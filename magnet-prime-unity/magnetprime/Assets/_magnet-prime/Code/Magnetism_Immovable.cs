@@ -36,12 +36,14 @@ public class Magnetism_Immovable : Magnetism
 
             if (magnetism != 0)
             {
+                temp.beingMagnetized = true;
                 Rigidbody tempRb = temp.GetComponent<Rigidbody>();
                 tempRb.useGravity = false;
                 tempRb.AddForce(targetDirection(temp.transform.position).normalized * magnetismStrength * Mathf.Abs(myCharge.GetChargeStrength()) / 10 * magnetism, ForceMode.Force);
             }
             else
             {
+                temp.beingMagnetized = false;
                 Rigidbody tempRb = temp.GetComponent<Rigidbody>();
                 tempRb.useGravity = true;
             }
@@ -98,7 +100,7 @@ public class Magnetism_Immovable : Magnetism
 
     void myPolarityChange(int ii)
     {
-        Debug.Log(this.name + " Called myPolarityChange");
+        //Debug.Log(this.name + " Called myPolarityChange");
 
         if (this.polarityChange != null)
             polarityChange(ii);

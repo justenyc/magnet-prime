@@ -32,6 +32,7 @@ public class RadialDetector : MonoBehaviour
             try
             {
                 temp.GetComponent<Rigidbody>().useGravity = true;
+                temp.beingMagnetized = false;
                 root.movableObjectsWithCharge.Remove(temp);
             }
             catch
@@ -43,7 +44,7 @@ public class RadialDetector : MonoBehaviour
 
     void PolarityChangeListener(int ii)
     {
-        Debug.Log("RadialDetector.RadialChangeListener Called");
+        //Debug.Log("RadialDetector.RadialChangeListener Called");
         if (ii > 0)
         {
             mat.SetColor("Color_Main", positiveColor);

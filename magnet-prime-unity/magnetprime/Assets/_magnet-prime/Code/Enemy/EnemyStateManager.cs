@@ -8,7 +8,9 @@ public class EnemyStateManager : MonoBehaviour
     [Header("Set Objects")]
     public NavMeshAgent agent;
     public Transform head;
+    public GameObject sightLight;
     public GameObject projectile;
+    public Rigidbody rb;
 
     [Header("Patrol Properties")]
     public float agentSpeed = 3.5f;
@@ -25,9 +27,11 @@ public class EnemyStateManager : MonoBehaviour
     [HideInInspector] public float fireRateCountdown;
     public IEnemyState currentState;
 
+    [HideInInspector] public Magnetism_Movable myMagnetism;
     // Start is called before the first frame update
     void Start()
     {
+        myMagnetism = this.GetComponent<Magnetism_Movable>();
         fireRateCountdown = fireRate;
 
         currentState = new IPatrolling(this);
@@ -44,6 +48,7 @@ public class EnemyStateManager : MonoBehaviour
     void Update()
     {
         currentState.StateUpdate();
+        agent.enabled = !myMagnetism.beingMagnetized;
     }
 
     private void OnTriggerEnter(Collider other)
