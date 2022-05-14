@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
@@ -92,6 +93,8 @@ namespace StarterAssets
 
         public delegate void PolarizeDelegate(GameObject self, GameObject target);
         public event PolarizeDelegate InvokePolarize;
+
+        public Action Interact;
 
         public bool lastShot = false;
 
@@ -426,6 +429,12 @@ namespace StarterAssets
         public void OnPolarityChange(InputValue value)
         {
             polarity *= -1;
+        }
+
+        public void OnInteract(InputValue value)
+        {
+            if (Interact != null)
+                Interact();
         }
 
         public IEnumerator TemporaryDisable(float time)
