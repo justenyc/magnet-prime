@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwitchDependent_Door : SwitchDependent
+public class SwitchDependent_Key : SwitchDependent
 {
     // Start is called before the first frame update
     void Start()
@@ -13,6 +13,6 @@ public class SwitchDependent_Door : SwitchDependent
     public override void OnSwitch(bool active)
     {
         Debug.Log(this.name + " | OnSwitch()");
-        this.gameObject.SetActive(!active);
+        this.gameObject.SetActive(active);
     }
 }
