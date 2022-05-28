@@ -8,8 +8,9 @@ public class Interactable_Collectable : Interactable
     public override void Interact()
     {
         Inventory.instance.AddItem(this);
-        this.gameObject.SetActive(false);
+        //this.gameObject.SetActive(false);
         UiManager.instance.EnableInteractMessage(false);
+        Destroy(this.gameObject);
     }
 
     private void OnTriggerEnter(Collider other)
