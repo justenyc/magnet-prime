@@ -95,6 +95,7 @@ namespace StarterAssets
         public event PolarizeDelegate InvokePolarize;
 
         public Action Interact;
+        public Action<int> PolarityChanged;
 
         public bool lastShot = false;
 
@@ -143,7 +144,7 @@ namespace StarterAssets
             Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers, QueryTriggerInteraction.Ignore);
         }
 
-        private void CameraRotation()
+        public void CameraRotation()
         {
             // if there is an input
             if (_input.look.sqrMagnitude >= _threshold)
@@ -429,6 +430,10 @@ namespace StarterAssets
         public void OnPolarityChange(InputValue value)
         {
             polarity *= -1;
+            if (PolarityChanged != null)
+            {
+                PolarityChanged(polarity);
+            }
         }
 
         public void OnInteract(InputValue value)

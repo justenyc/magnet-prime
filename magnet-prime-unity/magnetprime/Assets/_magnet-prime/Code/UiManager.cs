@@ -2,12 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using DG.Tweening;
+using System.Threading.Tasks;
 
 public class UiManager : MonoBehaviour
 {
-    public GameObject interactMessage;
-    public TextMeshProUGUI infoMessage;
     public static UiManager instance;
+    public GameObject interactMessage;
+    public RectTransform textBox;
+
+    public TextMeshProUGUI infoMessage;
+    public TextMeshProUGUI textBoxText;
 
     private void Start()
     {
@@ -22,5 +27,15 @@ public class UiManager : MonoBehaviour
     public void SetInfoMessage(string newMessage)
     {
         infoMessage.text = newMessage;
+    }
+
+    public void CloseTextBox()
+    {
+        textBox.DOScaleX(0, 0.5f).SetUpdate(true);
+    }
+
+    public void OpenTextBox(string message)
+    {
+        textBox.DOScaleX(1, 0.5f).SetUpdate(true);
     }
 }

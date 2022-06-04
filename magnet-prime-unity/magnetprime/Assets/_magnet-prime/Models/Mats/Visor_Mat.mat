@@ -38,7 +38,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 8812a07b8d892344fa4b9299cd3536f7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -62,7 +62,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 8812a07b8d892344fa4b9299cd3536f7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -78,7 +78,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_88aafb1d9dcf4799957af1559489e1ed_Texture_1:
-        m_Texture: {fileID: 2800000, guid: e7284ddf612a62249bfbc486c243db04, type: 3}
+        m_Texture: {fileID: 2800000, guid: b32f0e065b60e3c4a810e070b89a575f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -100,6 +100,7 @@ Material:
     m_Floats:
     - Power_Fresnel: 1
     - Power_Metallic: 0
+    - Vector1_81e85deb1aef4f928dc6a0a56b080b76: 1
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -114,11 +115,12 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Metallic: 0
+    - _Metallic: 0.5
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _SampleGI: 0
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -130,9 +132,11 @@ Material:
     - Color_Emission: {r: 0, g: 0, b: 0, a: 0}
     - Color_Fresnel: {r: 0, g: 0, b: 0, a: 0}
     - Color_Main: {r: 1, g: 1, b: 1, a: 1}
+    - Vector2_218e240caf63412f91451d059a939dfb: {r: 0, g: 0, b: 0, a: 0}
     - Vector2_6a18ea6b548b4da69a4d776126b54544: {r: 0, g: 0, b: 0, a: 0}
+    - Vector2_89e2716857ec43f9b30552961920d54d: {r: 10, g: 10, b: 10, a: 10}
     - Vector2_a3e7d82afdee426a923f40b94ff8630d: {r: 1, g: 1, b: 0, a: 0}
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 0.2784314}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 0.5019608}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
