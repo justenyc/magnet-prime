@@ -17,7 +17,6 @@ public class UiManager : MonoBehaviour
     private void Start()
     {
         instance = this;
-        CloseTextBox();
     }
 
     public void EnableInteractMessage(bool enable)

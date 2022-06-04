@@ -25,8 +25,11 @@ public class Game_Manager : MonoBehaviour
 
     public void PauseGame(bool pause)
     {
-        Debug.Log($"PauseGame: {pause}");
         paused = pause;
+        if (paused == true)
+            Time.timeScale = 0f;
+        else if (paused == false)
+            Time.timeScale = 1;
     }
 
     public void SetState(string s)
