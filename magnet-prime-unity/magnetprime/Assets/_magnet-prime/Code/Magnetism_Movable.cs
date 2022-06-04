@@ -148,6 +148,14 @@ public class Magnetism_Movable : Magnetism
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (rigidBody.velocity.magnitude > 0.1f)
+        {
+
+        }
+    }
+
     public struct startTransform
     {
         public Vector3 startPos;
