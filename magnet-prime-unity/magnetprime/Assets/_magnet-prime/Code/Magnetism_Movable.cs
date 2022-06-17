@@ -6,6 +6,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Charge))]
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(AudioSource))]
 public class Magnetism_Movable : Magnetism
 {
     public startTransform startingTransform;
@@ -18,15 +19,18 @@ public class Magnetism_Movable : Magnetism
     public bool dragToPlayer = false;
     float polarizeStrength = 1;
     public bool beingMagnetized = false;
+
+    AudioSource aSource;
     Vector3 startingScale;
 
-    public Action EnteredBoxField; 
+    public Action EnteredBoxField;
 
     private void Start()
     {
         startingTransform.startPos = this.transform.position;
         startingTransform.startRot = this.transform.rotation;
         startingTransform.startScale = this.transform.localScale;
+        aSource = this.GetComponent<AudioSource>();
 
         startingScale = transform.localScale;
         polarizeCDTime = polarizeCD;
@@ -150,9 +154,17 @@ public class Magnetism_Movable : Magnetism
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (rigidBody.velocity.magnitude > 0.1f)
+        if (rigidBody.velocity.magnitude > 10f)
         {
-
+            SfxManager.instance.SetVolume(aSource, 0.1f);
+            SfxManager.instance.RandomizePitch(aSource, 1f, 1.5f);
+            SfxManager.instance.PlayFromSource(aSource, "Box_clang");
+        }
+        else if (rigidBody.velocity.magnitude > 0f)
+        {
+            SfxManager.instance.SetVolume(aSource, 0.25f);
+            SfxManager.instance.RandomizePitch(aSource, 0.1f, 0.5f);
+            SfxManager.instance.PlayFromSource(aSource, "Box Drop");
         }
     }
 

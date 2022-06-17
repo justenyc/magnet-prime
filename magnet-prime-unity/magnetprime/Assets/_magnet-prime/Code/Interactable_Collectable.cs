@@ -25,6 +25,7 @@ public class Interactable_Collectable : Interactable
             case Type.Key:
                 Inventory.instance.AddItem(this);
                 UiManager.instance.EnableInteractMessage(false);
+                fpc.Interact -= Interact;
                 Destroy(this.gameObject);
                 return;
 

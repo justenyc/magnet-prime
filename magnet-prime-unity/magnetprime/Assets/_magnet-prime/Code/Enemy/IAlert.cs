@@ -34,10 +34,10 @@ public class IAlert : IEnemyState
         RaycastHit hit;
         if (Physics.Raycast(manager.head.position, player.position - manager.head.position, out hit, Mathf.Infinity, manager.mask))
         {
-            Debug.Log(hit.collider.name);
+            //Debug.Log(hit.collider.name);
             if (hit.collider.tag == "Player")
             {
-                Debug.Log("Locked onto player");
+                //Debug.Log("Locked onto player");
                 FireProjectile(hit.transform);
             }
             else

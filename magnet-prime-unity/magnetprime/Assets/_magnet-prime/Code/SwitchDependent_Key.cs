@@ -8,7 +8,7 @@ public class SwitchDependent_Key : SwitchDependent
     void Start()
     {
         base.Start();
-        this.gameObject.SetActive(false);
+        //this.gameObject.SetActive(false);
     }
 
     public override void OnSwitch(bool active)
