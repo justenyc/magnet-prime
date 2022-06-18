@@ -1,24 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StarterAssets;
 
 public class Gun : MonoBehaviour
 {
+    public FirstPersonController fpc;
+    public AudioSource aSource;
+    [Space(10)]
     public Material posMat;
     public ParticleSystem posParticle;
     public Material negMat;
     public ParticleSystem negParticle;
 
-
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        fpc.InvokeShoot += ShootListener;
     }
 
-    // Update is called once per frame
-    void Update()
+    void ShootListener(GameObject go = null)
     {
-        
+        if (fpc.lastShot)
+        {
+            posParticle.Play();
+            SfxManager.instance.PlayFromSource(aSource, "MagnetGun_Shot1");
+            return;
+        }
+        negParticle.Play();
+        SfxManager.instance.PlayFromSource(aSource, "MagnetGun_Shot2");
+        return;
     }
 }

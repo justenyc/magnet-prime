@@ -157,13 +157,13 @@ public class Magnetism_Movable : Magnetism
         if (rigidBody.velocity.magnitude > 10f)
         {
             SfxManager.instance.SetVolume(aSource, 0.1f);
-            SfxManager.instance.RandomizePitch(aSource, 1f, 1.5f);
+            SfxManager.instance.RandomizePitch(aSource, 0.1f, 0.5f);
             SfxManager.instance.PlayFromSource(aSource, "Box_clang");
         }
-        else if (rigidBody.velocity.magnitude > 0f)
+        else if (rigidBody.velocity.magnitude > 1f)
         {
             SfxManager.instance.SetVolume(aSource, 0.25f);
-            SfxManager.instance.RandomizePitch(aSource, 0.1f, 0.5f);
+            SfxManager.instance.RandomizePitch(aSource, 1f, 1.5f);
             SfxManager.instance.PlayFromSource(aSource, "Box Drop");
         }
     }
