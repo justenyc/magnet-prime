@@ -7,8 +7,7 @@ public class Interactable_KeyDoor : Interactable
 {
     public List<Interactable_Collectable> KeysRequired;
     Dictionary<Interactable_Collectable, bool> keysFound;
-    public MeshRenderer myMesh;
-    public Collider myCollider;
+    public LayerMask Mask;
 
     private void Start()
     {
@@ -29,17 +28,22 @@ public class Interactable_KeyDoor : Interactable
 
             if (KeysCheck())
             {
-                myMesh.enabled = false;
-                myCollider.enabled = false;
+                GetComponent<MeshRenderer>().enabled = false;
+                OnDisable();
+                foreach (Collider c in GetComponentsInChildren<Collider>())
+                    c.enabled = false;
+                SfxManager.instance.PlayFromSource(SfxManager.instance.mainSource, "Door_Open");
                 UiManager.instance.SetInfoMessage("");
             }
             else
             {
+                SfxManager.instance.PlayFromSource(SfxManager.instance.mainSource, "KeyNotFound");
                 UiManager.instance.SetInfoMessage("Required Keys Not Found");
             }
         }
         else
         {
+            SfxManager.instance.PlayFromSource(SfxManager.instance.mainSource, "KeyNotFound");
             UiManager.instance.SetInfoMessage("Required Keys Not Found");
         }
     }
@@ -91,6 +95,22 @@ public class Interactable_KeyDoor : Interactable
             fpc.Interact -= Interact;
             UiManager.instance.EnableInteractMessage(false);
             UiManager.instance.SetInfoMessage("");
+        }
+    }
+
+    private void OnDisable()
+    {
+        Collider col = GetComponent<Collider>();
+        Collider[] cols;
+        if(col.GetType() == typeof(BoxCollider))
+        {
+            BoxCollider box = col.GetComponent<BoxCollider>();
+            cols = Physics.OverlapBox(transform.position, box.size/2);
+
+            foreach (Collider c in cols)
+            {
+                OnTriggerExit(c);
+            }
         }
     }
 }

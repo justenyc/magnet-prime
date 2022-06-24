@@ -10,6 +10,7 @@ public class Magnetism_Immovable : Magnetism
     public Charge myCharge;
     public float magnetismStrength = 1;
     public List<Magnetism_Movable> movableObjectsWithCharge;
+    public AudioSource audioSource { get; private set; }
 
     public Action<int> polarityChange;
 
@@ -22,6 +23,7 @@ public class Magnetism_Immovable : Magnetism
             Debug.Log("myCharge is now " + myCharge);
         }
 
+        audioSource = this.GetComponent<AudioSource>();
         myCharge.polarityChange += myPolarityChange;
         //movableObjectsWithCharge = new List<Magnetism_Movable>();
     }
@@ -103,6 +105,25 @@ public class Magnetism_Immovable : Magnetism
         //Debug.Log(this.name + " Called myPolarityChange");
 
         if (this.polarityChange != null)
+        {
             polarityChange(ii);
+        }
+
+        if(ii > 0)
+        {
+            SfxManager.instance.SetVolume(audioSource, 0.25f);
+            SfxManager.instance.RandomizePitch(audioSource, 1f, 1.25f);
+            SfxManager.instance.PlayFromSource(audioSource, "Magnet_buzz", false, true);
+        }
+        else if(ii < 0)
+        {
+            SfxManager.instance.SetVolume(audioSource, 0.25f);
+            SfxManager.instance.RandomizePitch(audioSource, 0.5f, 0.75f);
+            SfxManager.instance.PlayFromSource(audioSource, "Magnet_buzz", false, true);
+        }
+        else
+        {
+            SfxManager.instance.PlayFromSource(audioSource, "Magnet_buzz", false, false, false);
+        }
     }
 }

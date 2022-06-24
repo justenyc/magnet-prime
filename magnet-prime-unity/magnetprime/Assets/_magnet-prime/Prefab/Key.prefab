@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8578976162311816136}
   - component: {fileID: 8578976162311816137}
   - component: {fileID: -3327683724611920080}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Key
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,6 +109,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17266cce50204d44ab53db70cb678563, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 1
+  message: <ERROR_CODE_404> MESSAGE NOT FOUND
 --- !u!114 &-3327683724611920080
 MonoBehaviour:
   m_ObjectHideFlags: 0

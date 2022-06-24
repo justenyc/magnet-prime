@@ -19,6 +19,8 @@ public class IAlert : IEnemyState
     {
         manager.fireRateCountdown = manager.fireRate;
         manager.agent.speed = 0;
+
+        SfxManager.instance.PlayFromSource(manager.aSource, "Enemy_Alert");
     }
 
     // Update is called once per frame
@@ -58,6 +60,8 @@ public class IAlert : IEnemyState
             Projectile newProj = GameObject.Instantiate(manager.projectile, manager.transform.position + manager.transform.forward, manager.transform.rotation).GetComponent<Projectile>();
             newProj.target = target;
             manager.fireRateCountdown = manager.fireRate;
+            SfxManager.instance.RandomizePitch(manager.aSource, 1, 1.5f);
+            SfxManager.instance.PlayFromSource(manager.aSource, "Enemy_Projectile");
         }
     }
 

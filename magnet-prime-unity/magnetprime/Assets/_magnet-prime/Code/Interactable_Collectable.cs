@@ -12,6 +12,7 @@ public class Interactable_Collectable : Interactable
     FirstPersonController fpc;
     public override void Interact()
     {
+        //Input System Package > Update Mode must be "Process Events In Dynamic Update"
         switch (type)
         {
             case Type.Log:
@@ -26,7 +27,10 @@ public class Interactable_Collectable : Interactable
                 Inventory.instance.AddItem(this);
                 UiManager.instance.EnableInteractMessage(false);
                 fpc.Interact -= Interact;
-                Destroy(this.gameObject);
+                SfxManager.instance.PlayFromSource(SfxManager.instance.mainSource, "KeyPickUp", true);
+                GetComponent<MeshRenderer>().enabled = false;
+                GetComponent<Collider>().enabled = false;
+                Destroy(this.gameObject, 1f);
                 return;
 
             default:

@@ -20,7 +20,7 @@ public class Magnetism_Movable : Magnetism
     float polarizeStrength = 1;
     public bool beingMagnetized = false;
 
-    AudioSource aSource;
+    public AudioSource aSource { get; private set; }
     Vector3 startingScale;
 
     public Action EnteredBoxField;
@@ -145,6 +145,8 @@ public class Magnetism_Movable : Magnetism
             rigidBody.velocity = Vector3.zero;
             dragToPlayer = false;
             beingMagnetized = false;
+
+            SfxManager.instance.PlayFromSource(aSource, "BoxRespawn");
         }
         catch
         {

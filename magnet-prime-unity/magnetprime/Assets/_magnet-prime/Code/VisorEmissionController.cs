@@ -16,6 +16,7 @@ public class VisorEmissionController : MonoBehaviour
         fpc.PolarityChanged += ChangeColor;
         mat = gameObject.GetComponent<MeshRenderer>().material;
         mat.EnableKeyword("_EmissionColor");
+        ChangeColor(fpc.polarity);
     }
 
     void ChangeColor(int polarity)
