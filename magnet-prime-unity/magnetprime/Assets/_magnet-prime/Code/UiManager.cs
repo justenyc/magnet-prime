@@ -38,4 +38,9 @@ public class UiManager : MonoBehaviour
     {
         textBox.DOScaleX(1, 0.5f).SetUpdate(true);
     }
+
+    public void UpdateTextBoxText(string newMessage)
+    {
+        textBoxText.text = newMessage;
+    }
 }

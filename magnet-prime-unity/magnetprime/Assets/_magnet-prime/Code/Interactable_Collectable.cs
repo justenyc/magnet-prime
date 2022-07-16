@@ -17,9 +17,17 @@ public class Interactable_Collectable : Interactable
             case Type.Log:
                 Game_Manager.instance.PauseGame(Game_Manager.instance.paused ? false : true);
                 if (Game_Manager.instance.paused)
+                {
+                    UiManager.instance.UpdateTextBoxText(message);
                     UiManager.instance.OpenTextBox(message);
+                    UiManager.instance.EnableInteractMessage(false);
+                }
                 else
+                {
                     UiManager.instance.CloseTextBox();
+                    UiManager.instance.EnableInteractMessage(true);
+                }
+
                 return;
 
             case Type.Key:
@@ -51,6 +59,11 @@ public class Interactable_Collectable : Interactable
             UiManager.instance.EnableInteractMessage(false);
         }
         fpc = null;
+    }
+
+    private void OnDestroy()
+    {
+        fpc.Interact -= Interact;
     }
 }
 
