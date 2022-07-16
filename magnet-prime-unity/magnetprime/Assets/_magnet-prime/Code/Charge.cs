@@ -18,22 +18,10 @@ public class Charge : MonoBehaviour
 
     private void Start()
     {
-        if (mainMaterial == null)
-        {
-            Debug.LogError(this.name + " Says: Main Material not found > Using GetComponent<>()");
-            mainMaterial = this.GetComponent<MeshRenderer>().material;
-            Debug.Log("Main Material is now " + mainMaterial);
-            ChargeHandler();
-        }
+        mainMaterial = mainMaterial == null ? this.GetComponent<MeshRenderer>().material : mainMaterial;
         ChargeHandler();
 
-        if (player == null)
-        {
-            Debug.LogError(this.name + " Says: Player not found > Using FindObjectOfType<FirstPersonController>()");
-            player = FindObjectOfType<FirstPersonController>();
-            Debug.Log("Player is now " + player);
-        }
-
+        player = player == null ? FindObjectOfType<FirstPersonController>() : player;
         player.InvokeShoot += ShootListener;
 
         if (polarityChange != null)

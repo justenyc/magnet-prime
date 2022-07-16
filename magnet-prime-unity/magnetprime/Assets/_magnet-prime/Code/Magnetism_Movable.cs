@@ -37,19 +37,8 @@ public class Magnetism_Movable : Magnetism
 
         EnteredBoxField += ResetValues;
 
-        if (myCharge == null)
-        {
-            Debug.LogError(this.name + " Says: myCharge not found > Using GetComponent<Charge>()");
-            myCharge = this.GetComponent<Charge>();
-            Debug.Log("myCharge is now " + myCharge);
-        }
-
-        if (rigidBody == null)
-        {
-            Debug.LogError(this.name + " Says: RigidBody not found > Using GetComponent<RigidBody>()");
-            rigidBody = this.GetComponent<Rigidbody>();
-            Debug.Log("RigidBody is now " + myCharge);
-        }
+        myCharge = this.GetComponent<Charge>() ?? myCharge; ;
+        rigidBody = this.GetComponent<Rigidbody>() ?? rigidBody;
 
         FirstPersonController player = FindObjectOfType<FirstPersonController>();
         player.InvokePolarize += OnPlayerPolarize;
@@ -89,11 +78,15 @@ public class Magnetism_Movable : Magnetism
                 polarizeStrength = fpc.polarizeStrength;
                 direction = fpc.transform.position + Vector3.up + fpc.transform.forward * fpc.grabDistance;
                 polarizeCDTime = polarizeCD;
+                SfxManager.instance.SetVolume(SfxManager.instance.mainSource, 1);
+                SfxManager.instance.PlayFromSource(SfxManager.instance.mainSource, "Polarize_Pull", oneshot: true);
             }
             else if (fpc.polarity * myCharge.GetPolarity() > 0)
             {
                 SetDragToPlayer(false);
                 rigidBody.AddForce((transform.position - player.transform.position) * fpc.polarizeStrength, ForceMode.Impulse);
+                SfxManager.instance.SetVolume(SfxManager.instance.mainSource, 1);
+                SfxManager.instance.PlayFromSource(SfxManager.instance.mainSource, "Polarize_Push", oneshot: true);
             }
         }
     }
@@ -156,17 +149,18 @@ public class Magnetism_Movable : Magnetism
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (rigidBody.velocity.magnitude > 10f)
+        if (collision.impulse.magnitude > 10f)
         {
-            SfxManager.instance.SetVolume(aSource, 0.1f);
+            float vol = 0.25f * rigidBody.velocity.magnitude;
+            SfxManager.instance.SetVolume(aSource, Mathf.Clamp(vol, 0.25f, 1));
             SfxManager.instance.RandomizePitch(aSource, 0.1f, 0.5f);
-            SfxManager.instance.PlayFromSource(aSource, "Box_clang");
+            SfxManager.instance.PlayFromSource(aSource, "Box_clang", oneshot: true);
         }
-        else if (rigidBody.velocity.magnitude > 1f)
+        else if (collision.impulse.magnitude > 1f)
         {
             SfxManager.instance.SetVolume(aSource, 0.25f);
             SfxManager.instance.RandomizePitch(aSource, 1f, 1.5f);
-            SfxManager.instance.PlayFromSource(aSource, "Box Drop");
+            SfxManager.instance.PlayFromSource(aSource, "Box Drop", oneshot: true);
         }
     }
 

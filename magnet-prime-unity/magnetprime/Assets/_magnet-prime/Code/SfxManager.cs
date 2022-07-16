@@ -9,9 +9,12 @@ public class SfxManager : MonoBehaviour
     public static SfxManager instance;
     public AudioClip[] audioClips;
     public AudioSource mainSource;
+    [SerializeField] float playCd = 0.5f;
+    [SerializeField] float playCdTimer;
+
     Dictionary<string, AudioClip> acDict;
 
-    private void Start()
+    private void Awake()
     {
         acDict = new Dictionary<string, AudioClip>();
         instance = instance ? instance : this;
@@ -21,28 +24,37 @@ public class SfxManager : MonoBehaviour
 
     void InitializeDict()
     {
-        foreach(AudioClip ac in audioClips)
+        foreach (AudioClip ac in audioClips)
         {
             acDict.Add(ac.name, ac);
         }
     }
+
+    /*private void FixedUpdate()
+    {
+        if (playCdTimer > 0)
+            playCdTimer -= Time.deltaTime;
+    }*/
 
     public AudioClip GetClipByName(string name)
     {
         return acDict[name] ? acDict[name] : null;
     }
 
+    #region Public Actions
     public void PlayFromSource(AudioSource aSource, string sfxName, bool oneshot = false, bool loop = false, bool play = true)
     {
         if (play)
         {
             aSource.loop = loop;
-            aSource.Stop();
             aSource.clip = GetClipByName(sfxName);
+
             if (oneshot)
                 aSource.PlayOneShot(aSource.clip);
             else
                 aSource.Play();
+
+            playCdTimer = playCd;
         }
         else
         {
@@ -59,4 +71,10 @@ public class SfxManager : MonoBehaviour
     {
         aSource.volume = newVolume;
     }
+
+    public void SetPitch(AudioSource aSource, float pitch)
+    {
+        aSource.pitch = pitch;
+    }
+    #endregion
 }

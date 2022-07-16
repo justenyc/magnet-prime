@@ -111,19 +111,19 @@ public class Magnetism_Immovable : Magnetism
 
         if(ii > 0)
         {
-            SfxManager.instance.SetVolume(audioSource, 0.25f);
+            SfxManager.instance.SetVolume(audioSource, 0.2f);
             SfxManager.instance.RandomizePitch(audioSource, 1f, 1.25f);
-            SfxManager.instance.PlayFromSource(audioSource, "Magnet_buzz", false, true);
+            SfxManager.instance.PlayFromSource(audioSource, "Magnet_buzz", loop: true);
         }
         else if(ii < 0)
         {
             SfxManager.instance.SetVolume(audioSource, 0.25f);
             SfxManager.instance.RandomizePitch(audioSource, 0.5f, 0.75f);
-            SfxManager.instance.PlayFromSource(audioSource, "Magnet_buzz", false, true);
+            SfxManager.instance.PlayFromSource(audioSource, "Magnet_buzz", loop: true);
         }
         else
         {
-            SfxManager.instance.PlayFromSource(audioSource, "Magnet_buzz", false, false, false);
+            SfxManager.instance.PlayFromSource(audioSource, "Magnet_buzz", play: false);
         }
     }
 }
