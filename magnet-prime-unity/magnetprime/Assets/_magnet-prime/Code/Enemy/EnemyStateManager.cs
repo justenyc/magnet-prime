@@ -11,6 +11,7 @@ public class EnemyStateManager : MonoBehaviour
     public GameObject sightLight;
     public GameObject projectile;
     public Rigidbody rb;
+    public AudioSource aSource;
 
     [Header("Patrol Properties")]
     public float agentSpeed = 3.5f;
@@ -35,6 +36,7 @@ public class EnemyStateManager : MonoBehaviour
     {
         myMagnetism = this.GetComponent<Magnetism_Movable>();
         fireRateCountdown = fireRate;
+        aSource = this.GetComponent<AudioSource>();
 
         currentState = new IPatrolling(this);
         currentState.StateStart();

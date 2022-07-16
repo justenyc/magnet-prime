@@ -45,7 +45,7 @@ public class IPatrolling : IEnemyState
         RaycastHit hit;
         if (Physics.Raycast(manager.head.position, direction, out hit, distance, manager.mask))
         {
-            Debug.Log(hit.collider.name);
+            //Debug.Log(hit.collider.name);
             if (hit.collider.tag == "Player")
             {
                 manager.currentState = new IAlert(manager, hit.collider.transform);

@@ -35,7 +35,6 @@ namespace StarterAssets
         bool shootPressed = false;
         GameObject held;
         public Transform grabPoint;
-        public LineRenderer lineRenderer;
         public LayerMask gunMask;
         public LayerMask polarizeMask;
 
@@ -69,6 +68,8 @@ namespace StarterAssets
         [Tooltip("How far in degrees can you move the camera down")]
         public float BottomClamp = -90.0f;
 
+        [Header("Audio Source")]
+        public AudioSource audioSource;
         // cinemachine
         private float _cinemachineTargetPitch;
 
@@ -228,6 +229,7 @@ namespace StarterAssets
                 {
                     // the square root of H * -2 * G = how much velocity needed to reach desired height
                     _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
+                    SfxManager.instance.PlayFromSource(audioSource, "jump_huah_boots", true);
                 }
 
                 // jump timeout
@@ -356,6 +358,9 @@ namespace StarterAssets
                         held.layer = LayerMask.NameToLayer("Moving");
                         held.transform.parent = grabPoint.transform;
                         held.transform.localPosition = Vector3.zero;
+
+                        SfxManager.instance.RandomizePitch(grabbed.aSource, 1.9f, 2);
+                        SfxManager.instance.PlayFromSource(grabbed.aSource, "Box_PickUp");
                     }
                 }
                 else
@@ -379,6 +384,9 @@ namespace StarterAssets
                 held.transform.parent = null;
                 grabbed.EnteredBoxField -= GrabEnteredBoxField;
                 held = null;
+
+                SfxManager.instance.RandomizePitch(grabbed.aSource, 0.5f, 0.6f);
+                SfxManager.instance.PlayFromSource(grabbed.aSource, "Box_PickUp");
             }
         }
 
