@@ -22,11 +22,17 @@ public class Interactable_Collectable : Interactable
                     UiManager.instance.UpdateTextBoxText(message);
                     UiManager.instance.OpenTextBox(message);
                     UiManager.instance.EnableInteractMessage(false);
+                    SfxManager.instance.SetVolume(SfxManager.instance.mainSource, 0.5f);
+                    SfxManager.instance.SetPitch(SfxManager.instance.mainSource, 1);
+                    SfxManager.instance.PlayFromSource(SfxManager.instance.mainSource, "TextBoxOpen", oneshot: true);
                 }
                 else
                 {
                     UiManager.instance.CloseTextBox();
                     UiManager.instance.EnableInteractMessage(true);
+                    SfxManager.instance.SetVolume(SfxManager.instance.mainSource, 0.5f);
+                    SfxManager.instance.SetPitch(SfxManager.instance.mainSource, 0.5f);
+                    SfxManager.instance.PlayFromSource(SfxManager.instance.mainSource, "TextBoxOpen", oneshot: true);
                 }
 
                 return;
@@ -35,7 +41,8 @@ public class Interactable_Collectable : Interactable
                 Inventory.instance.AddItem(this);
                 UiManager.instance.EnableInteractMessage(false);
                 fpc.Interact -= Interact;
-                SfxManager.instance.PlayFromSource(SfxManager.instance.mainSource, "KeyPickUp", true);
+                SfxManager.instance.SetVolume(SfxManager.instance.mainSource, 1);
+                SfxManager.instance.PlayFromSource(SfxManager.instance.mainSource, "KeyPickUp", oneshot: true);
                 GetComponent<MeshRenderer>().enabled = false;
                 GetComponent<Collider>().enabled = false;
                 Destroy(this.gameObject, 1f);
@@ -68,7 +75,14 @@ public class Interactable_Collectable : Interactable
 
     private void OnDestroy()
     {
-        fpc.Interact -= Interact;
+        try
+        {
+            fpc.Interact -= Interact;
+        }
+        catch
+        {
+
+        }
     }
 }
 

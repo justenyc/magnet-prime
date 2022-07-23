@@ -22,12 +22,7 @@ public class Magnetism_Hookable : Magnetism
     // Start is called before the first frame update
     void Start()
     {
-        if (myCharge == null)
-        {
-            Debug.LogError(this.name + " Says: myCharge not found > Using GetComponent<Charge>()");
-            myCharge = this.GetComponent<Charge>();
-            Debug.Log("myCharge is now " + myCharge);
-        }
+        myCharge = this.GetComponent<Charge>() ?? myCharge;
 
         player = FindObjectOfType<FirstPersonController>();
         player.InvokePolarize += OnPlayerPolarize;

@@ -17,7 +17,7 @@ public class SwitchDependent : MonoBehaviour
         }
     }
 
-    void SwitchListener()
+    public void SwitchListener()
     {
         if (switches.Length > 0)
         {
@@ -36,5 +36,16 @@ public class SwitchDependent : MonoBehaviour
     public virtual void OnSwitch(bool active)
     {
 
+    }
+
+    private void OnDestroy()
+    {
+        if (switches.Length > 0)
+        {
+            foreach (Switch s in switches)
+            {
+                s.SwitchAction -= SwitchListener;
+            }
+        }
     }
 }

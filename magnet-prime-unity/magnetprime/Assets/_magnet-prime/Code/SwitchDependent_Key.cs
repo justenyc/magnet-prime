@@ -8,12 +8,13 @@ public class SwitchDependent_Key : SwitchDependent
     void Start()
     {
         base.Start();
+        base.SwitchListener();
         //this.gameObject.SetActive(false);
     }
 
     public override void OnSwitch(bool active)
     {
-        Debug.Log(this.name + " | OnSwitch()");
+        //Debug.Log(this.name + " | OnSwitch()");
         this.gameObject.SetActive(active);
     }
 }
