@@ -14,7 +14,7 @@ public class Switch : MonoBehaviour
         switchActive = true;
         if (SwitchAction != null)
             SwitchAction();
-        Debug.Log(switchActive);
+        //Debug.Log(switchActive);
     }
 
     private void OnTriggerExit(Collider other)
@@ -22,6 +22,6 @@ public class Switch : MonoBehaviour
         switchActive = false;
         if (SwitchAction != null)
             SwitchAction();
-        Debug.Log(switchActive);
+        //Debug.Log(switchActive);
     }
 }

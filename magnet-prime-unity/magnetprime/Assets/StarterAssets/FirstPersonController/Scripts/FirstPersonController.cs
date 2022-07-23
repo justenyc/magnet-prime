@@ -432,7 +432,7 @@ namespace StarterAssets
             {
                 if (InvokePolarize != null)
                     InvokePolarize(this.gameObject, hit.collider.gameObject);
-                Debug.Log(hit.collider.gameObject);
+                //Debug.Log(hit.collider.gameObject);
             }
         }
 
@@ -443,6 +443,11 @@ namespace StarterAssets
             {
                 PolarityChanged(polarity);
             }
+            SfxManager.instance.SetVolume(audioSource, 0.5f);
+            if (polarity > 0)
+                SfxManager.instance.PlayFromSource(SfxManager.instance.mainSource, "PolarityPos");
+            else
+                SfxManager.instance.PlayFromSource(SfxManager.instance.mainSource, "PolarityNeg");
         }
 
         public void OnInteract(InputValue value)
