@@ -5,6 +5,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public float lifeTime = 5f;
+    public float damage = 50f;
     public float moveSpeed;
     public float trackSpeed;
     public Transform target;
@@ -48,5 +49,14 @@ public class Projectile : MonoBehaviour
     void Deactivate(float delay)
     {
         Destroy(this.gameObject, delay);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.TryGetComponent<Health>(out Health health))
+        {
+            health.TakeDamage(damage);
+            Debug.Log(health.gameObject.name);
+        }
     }
 }

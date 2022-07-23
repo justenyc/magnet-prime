@@ -16,5 +16,7 @@ public class SwitchDependent_Key : SwitchDependent
     {
         //Debug.Log(this.name + " | OnSwitch()");
         this.gameObject.SetActive(active);
+        if (active)
+            SfxManager.instance.PlayFromSource(SfxManager.instance.mainSource, "KeyAppear");
     }
 }

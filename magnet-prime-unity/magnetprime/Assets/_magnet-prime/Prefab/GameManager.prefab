@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2168144645156794229}
   - component: {fileID: 2168144645156794228}
   - component: {fileID: 2168144645156794231}
+  - component: {fileID: 1164207163}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -81,6 +82,22 @@ MonoBehaviour:
   - {fileID: 8300000, guid: cc1c3a0fe363fb64082bec2e06122cd3, type: 3}
   - {fileID: 8300000, guid: f54e526123297844fb7d547436600e1c, type: 3}
   - {fileID: 8300000, guid: 40ff0643b8e20f54eabe815ee3c1b161, type: 3}
+  - {fileID: 8300000, guid: 8744f0d5a4eca464380883fa903b176d, type: 3}
   mainSource: {fileID: 0}
   playCd: 0.5
   playCdTimer: 0
+--- !u!114 &1164207163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2168144645156794226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a9f5828326c40241b91dfa545390983, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultCheckpoint: {fileID: 0}
+  currentCheckpoint: {fileID: 0}
+  playerHealth: {fileID: 0}
