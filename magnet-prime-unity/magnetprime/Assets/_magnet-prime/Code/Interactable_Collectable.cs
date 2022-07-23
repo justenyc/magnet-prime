@@ -43,7 +43,7 @@ public class Interactable_Collectable : Interactable
                 fpc.Interact -= Interact;
                 SfxManager.instance.SetVolume(SfxManager.instance.mainSource, 1);
                 SfxManager.instance.PlayFromSource(SfxManager.instance.mainSource, "KeyPickUp", oneshot: true);
-                GetComponent<MeshRenderer>().enabled = false;
+                GetComponentInChildren<MeshRenderer>().enabled = false;
                 GetComponent<Collider>().enabled = false;
                 Destroy(this.gameObject, 1f);
                 return;
