@@ -8,6 +8,7 @@ public class Interactable_KeyDoor : Interactable
     public List<Interactable_Collectable> KeysRequired;
     Dictionary<Interactable_Collectable, bool> keysFound;
     public LayerMask Mask;
+    public Animator animator;
 
     private void Start()
     {
@@ -28,7 +29,8 @@ public class Interactable_KeyDoor : Interactable
 
             if (KeysCheck())
             {
-                GetComponent<MeshRenderer>().enabled = false;
+                //GetComponent<MeshRenderer>().enabled = false;
+                animator.SetTrigger("Open");
                 OnDisable();
                 foreach (Collider c in GetComponentsInChildren<Collider>())
                     c.enabled = false;

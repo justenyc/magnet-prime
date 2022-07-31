@@ -463,5 +463,14 @@ namespace StarterAssets
             yield return new WaitForSeconds(time);
             this.enabled = true;
         }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            Debug.Log(other.gameObject.layer);
+            if (other.gameObject.layer == LayerMask.NameToLayer("AbsoluteDeath"))
+            {
+                GetComponent<Health>().Die();
+            }
+        }
     }
 }

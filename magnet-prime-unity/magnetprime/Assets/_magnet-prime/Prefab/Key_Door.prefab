@@ -141,10 +141,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9222079cc76d8154f91a375e5595a4ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  KeysRequired: []
+  KeysRequired:
+  - {fileID: 0}
   Mask:
     serializedVersion: 2
     m_Bits: 0
+  animator: {fileID: 2093113483}
 --- !u!65 &7671339173003804902
 BoxCollider:
   m_ObjectHideFlags: 0
