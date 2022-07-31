@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StarterAssets;
 
 public class Health : MonoBehaviour
 {
@@ -43,7 +44,11 @@ public class Health : MonoBehaviour
 
     public void Die()
     {
+        GetComponent<CharacterController>().enabled = false;
+        GetComponent<FirstPersonController>().enabled = false;
         if (DieAction != null)
             DieAction();
+        GetComponent<CharacterController>().enabled = true;
+        GetComponent<FirstPersonController>().enabled = true;
     }
 }

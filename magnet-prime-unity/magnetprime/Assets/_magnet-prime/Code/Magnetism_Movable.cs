@@ -121,7 +121,7 @@ public class Magnetism_Movable : Magnetism
     private void OnTriggerEnter(Collider other)
     {
         //Debug.Log(other.name);
-        if (other.gameObject.layer == LayerMask.NameToLayer("BoxForceField"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("BoxForceField") || other.gameObject.layer == LayerMask.NameToLayer("AbsoluteDeath"))
         {
             if (EnteredBoxField != null)
                 EnteredBoxField();
@@ -149,6 +149,7 @@ public class Magnetism_Movable : Magnetism
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log(collision.impulse.magnitude);
         if (collision.impulse.magnitude > 10f)
         {
             float vol = 0.25f * rigidBody.velocity.magnitude;

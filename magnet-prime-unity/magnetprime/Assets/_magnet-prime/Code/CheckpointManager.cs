@@ -14,11 +14,12 @@ public class CheckpointManager : MonoBehaviour
         instance = instance ?? this;
         playerHealth = FindObjectOfType<Health>();
         playerHealth.DieAction += OnPlayerDie;
+        playerHealth.gameObject.transform.position = Vector3.zero;
     }
     
     void OnPlayerDie()
     {
-        playerHealth.gameObject.transform.position = currentCheckpoint?.position ?? defaultCheckpoint.position;
+        playerHealth.gameObject.transform.position = currentCheckpoint.position;
     }
 
     public void SetCheckpoint(Transform checkpoint)
