@@ -136,7 +136,7 @@ Material:
     - Vector2_6a18ea6b548b4da69a4d776126b54544: {r: 0, g: 0, b: 0, a: 0}
     - Vector2_89e2716857ec43f9b30552961920d54d: {r: 10, g: 10, b: 10, a: 10}
     - Vector2_a3e7d82afdee426a923f40b94ff8630d: {r: 1, g: 1, b: 0, a: 0}
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 0.5019608}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 0.2509804}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}

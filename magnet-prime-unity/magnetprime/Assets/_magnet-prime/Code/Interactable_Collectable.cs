@@ -45,7 +45,8 @@ public class Interactable_Collectable : Interactable
                 SfxManager.instance.PlayFromSource(SfxManager.instance.mainSource, "KeyPickUp", oneshot: true);
                 GetComponentInChildren<MeshRenderer>().enabled = false;
                 GetComponent<Collider>().enabled = false;
-                Destroy(this.gameObject, 1f);
+                GetComponent<Rotator>().enabled = false;
+                //Destroy(this.gameObject, 1f);
                 return;
 
             default:

@@ -105,10 +105,13 @@ public class Interactable_KeyDoor : Interactable
         if(col.GetType() == typeof(BoxCollider))
         {
             BoxCollider box = col.GetComponent<BoxCollider>();
-            cols = Physics.OverlapBox(transform.position, box.size/2);
-
+            
+            cols = Physics.OverlapBox(transform.position + (box.center * -1), box.size);
+            Debug.Log($"SearchCenter: {transform.position}, BoxCenter: {box.center}, \nSize: {box.size}");
+            
             foreach (Collider c in cols)
             {
+                Debug.Log(c);
                 OnTriggerExit(c);
             }
         }
