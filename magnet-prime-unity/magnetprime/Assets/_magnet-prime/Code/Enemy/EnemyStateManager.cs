@@ -7,6 +7,7 @@ public class EnemyStateManager : MonoBehaviour
 {
     [Header("Set Objects")]
     public NavMeshAgent agent;
+    public Animator animator;
     public Transform head;
     public GameObject sightLight;
     public GameObject projectile;
@@ -29,6 +30,7 @@ public class EnemyStateManager : MonoBehaviour
     public float fireRate = 1f;
     [HideInInspector] public float fireRateCountdown;
     public IEnemyState currentState;
+    [HideInInspector] public Transform playerPosition;
 
     [HideInInspector] public Magnetism_Movable myMagnetism;
     // Start is called before the first frame update
@@ -57,5 +59,14 @@ public class EnemyStateManager : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         currentState.OnTriggerEnter(other);
+    }
+
+    public void FireProjectile(Transform target)
+    {
+        Projectile newProj = Instantiate(projectile, transform.position + transform.forward, transform.rotation).GetComponent<Projectile>();
+        newProj.target = target;
+        fireRateCountdown = fireRate;
+        SfxManager.instance.RandomizePitch(aSource, 1, 1.5f);
+        SfxManager.instance.PlayFromSource(aSource, "Enemy_Projectile");
     }
 }

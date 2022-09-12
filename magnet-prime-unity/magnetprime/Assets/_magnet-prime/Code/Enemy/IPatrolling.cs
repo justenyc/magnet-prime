@@ -19,21 +19,28 @@ public class IPatrolling : IEnemyState
         manager.rb.velocity = Vector3.zero;
         manager.agent.enabled = true;
         manager.agent.destination = manager.points[manager.patrolPointIndex].position;
+        manager.animator.SetBool("Magnetized", manager.myMagnetism.beingMagnetized);
     }
 
     public void StateUpdate()
     {
         if (manager.patrolling)
+        {
             manager.agent.speed = manager.agentSpeed;
+        }
         else
+        {
             manager.agent.speed = 0;
+        }
+
+        manager.animator.SetFloat("MoveSpeed", manager.agentSpeed);
 
         if (manager.myMagnetism.beingMagnetized)
             manager.currentState = new IMagnetized(manager);
 
-        Sight(manager.head.forward, manager.sightDistance);
-        Sight(manager.head.forward + manager.transform.right * manager.sightModifier, manager.sightDistance);
-        Sight(manager.head.forward + manager.transform.right * -manager.sightModifier, manager.sightDistance);
+        Sight(-manager.head.forward, manager.sightDistance);
+        Sight(-manager.head.forward + manager.transform.right * manager.sightModifier, manager.sightDistance);
+        Sight(-manager.head.forward + manager.transform.right * -manager.sightModifier, manager.sightDistance);
         //Debug.DrawRay(manager.head.position, manager.head.forward * manager.sightDistance + manager.transform.right * manager.sightModifier, Color.magenta);
         //Debug.DrawRay(manager.head.position, (manager.head.forward + manager.transform.right * manager.sightModifier) * manager.sightDistance, Color.magenta);
     }
@@ -94,5 +101,10 @@ public class IPatrolling : IEnemyState
 
             manager.agent.destination = manager.points[manager.patrolPointIndex].position;
         }
+    }
+
+    public void ChangeState(IEnemyState newState)
+    {
+        manager.currentState = newState;
     }
 }

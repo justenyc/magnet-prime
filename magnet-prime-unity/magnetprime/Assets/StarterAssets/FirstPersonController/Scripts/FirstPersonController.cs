@@ -466,7 +466,7 @@ namespace StarterAssets
 
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log(other.gameObject.layer);
+            //Debug.Log(other.gameObject.layer);
             if (other.gameObject.layer == LayerMask.NameToLayer("AbsoluteDeath"))
             {
                 GetComponent<Health>().Die();

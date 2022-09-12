@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d0d136b869c3ad4588735b8d4e623c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vfxManager: {fileID: 11400000, guid: a60819aefef606b43a5fa19a252fb517, type: 2}
   state: 
   paused: 0
 --- !u!114 &2168144645156794231

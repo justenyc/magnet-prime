@@ -19,7 +19,7 @@ public class IAlert : IEnemyState
     {
         manager.fireRateCountdown = manager.fireRate;
         manager.agent.speed = 0;
-
+        manager.animator.SetBool("Alert", true);
         SfxManager.instance.PlayFromSource(manager.aSource, "Enemy_Alert");
     }
 
@@ -39,34 +39,24 @@ public class IAlert : IEnemyState
             //Debug.Log(hit.collider.name);
             if (hit.collider.tag == "Player")
             {
-                //Debug.Log("Locked onto player");
-                FireProjectile(hit.transform);
+                manager.playerPosition = hit.transform;
             }
             else
             {
-                manager.currentState = new IPatrolling(manager);
+                manager.playerPosition = null;
+                ChangeState(new IPatrolling(manager));
             }
-        }
-    }
-
-    void FireProjectile(Transform target)
-    {
-        if (manager.fireRateCountdown > 0)
-        {
-            manager.fireRateCountdown -= Time.deltaTime;
-        }
-        else
-        {
-            Projectile newProj = GameObject.Instantiate(manager.projectile, manager.transform.position + manager.transform.forward, manager.transform.rotation).GetComponent<Projectile>();
-            newProj.target = target;
-            manager.fireRateCountdown = manager.fireRate;
-            SfxManager.instance.RandomizePitch(manager.aSource, 1, 1.5f);
-            SfxManager.instance.PlayFromSource(manager.aSource, "Enemy_Projectile");
         }
     }
 
     public void OnTriggerEnter(Collider other)
     {
 
+    }
+
+    public void ChangeState(IEnemyState newState)
+    {
+        manager.animator.SetBool("Alert", false);
+        manager.currentState = newState;
     }
 }
