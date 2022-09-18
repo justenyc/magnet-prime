@@ -55,6 +55,11 @@ public class Interactable_KeyDoor : Interactable
         keysFound = new Dictionary<Interactable_Collectable, bool>();
         foreach (Interactable_Collectable key in KeysRequired)
         {
+            if(key == null)
+            {
+                Debug.LogError($"KeysRequired from {this.name} cannot contain a null value!");
+                return;
+            }
             keysFound.Add(key, false);
         }
     }
@@ -104,13 +109,13 @@ public class Interactable_KeyDoor : Interactable
     {
         Collider col = GetComponent<Collider>();
         Collider[] cols;
-        if(col.GetType() == typeof(BoxCollider))
+        if (col.GetType() == typeof(BoxCollider))
         {
             BoxCollider box = col.GetComponent<BoxCollider>();
-            
-            cols = Physics.OverlapBox(transform.position + (box.center * -1), box.size);
-            Debug.Log($"SearchCenter: {transform.position}, BoxCenter: {box.center}, \nSize: {box.size}");
-            
+
+            cols = Physics.OverlapBox(transform.position + (box.center), box.size);
+            //Debug.Log($"SearchCenter: {transform.position + (box.center * -1)}, BoxCenter: {box.center}, \nSize: {box.size}");
+
             foreach (Collider c in cols)
             {
                 Debug.Log(c);
