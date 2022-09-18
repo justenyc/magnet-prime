@@ -2,17 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using StarterAssets;
+using DG.Tweening;
 
 public class Interactable_KeyDoor : Interactable
 {
     public List<Interactable_Collectable> KeysRequired;
     Dictionary<Interactable_Collectable, bool> keysFound;
     public LayerMask Mask;
-    public Animator animator;
 
     private void Start()
     {
         InitializeKeyDict();
+    }
+
+    private void Update()
+    {
+        
     }
 
     public override void Interact()
@@ -30,7 +35,7 @@ public class Interactable_KeyDoor : Interactable
             if (KeysCheck())
             {
                 //GetComponent<MeshRenderer>().enabled = false;
-                animator.SetTrigger("Open");
+                transform.DOMoveZ(transform.position.z + 3, 1);
                 OnDisable();
                 foreach (Collider c in GetComponentsInChildren<Collider>())
                     c.enabled = false;

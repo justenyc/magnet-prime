@@ -111,6 +111,8 @@ namespace StarterAssets
 
         private void Start()
         {
+            if (FindObjectsOfType<FirstPersonController>().Length > 1)
+                Destroy(this.transform.parent.gameObject);
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
 

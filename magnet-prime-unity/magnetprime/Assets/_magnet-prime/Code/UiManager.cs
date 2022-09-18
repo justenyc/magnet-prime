@@ -26,6 +26,12 @@ public class UiManager : MonoBehaviour
 
     public void SetInfoMessage(string newMessage)
     {
+        int tweens = infoMessage.DOKill();
+        Debug.Log($"Killed {tweens} tweens");
+        infoMessage.DOFade(1, 0.25f).onComplete = () =>
+        {
+            infoMessage.DOFade(0, 1f).SetDelay(10f);
+        };
         infoMessage.text = newMessage;
     }
 

@@ -13,7 +13,14 @@ public class Game_Manager : MonoBehaviour
 
     private void Start()
     {
-        instance = instance ?? this;
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     private void Update()
