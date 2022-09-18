@@ -7,6 +7,7 @@ public class Charge_ColorChangeListener : MonoBehaviour
     public Charge chargeToListen;
     public string matColorAddress;
     public Material myMat;
+    public Light myLight;
     
     void Start()
     {
@@ -20,14 +21,17 @@ public class Charge_ColorChangeListener : MonoBehaviour
         if (polarity > 0)
         {
             myMat.SetColor(matColorAddress, Color.red);
+            if (myLight) { myLight.color = Color.red; }
             return;
         }
         else if (polarity < 0)
         {
             myMat.SetColor(matColorAddress, Color.blue);
+            if (myLight) { myLight.color = Color.blue; }
             return;
         }
         myMat.SetColor(matColorAddress, Color.white);
+        if (myLight) { myLight.color = Color.white; }
         return;
     }
 }

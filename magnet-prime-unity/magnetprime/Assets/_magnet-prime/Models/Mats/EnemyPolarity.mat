@@ -21,14 +21,15 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: EnemyPolarity
-  m_Shader: {fileID: -6465566751694194690, guid: d2af3b4ad4fba134681027b08ceb066e, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: d15025a405781834fbe1eae45671645e, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
-  disabledShaderPasses: []
+  disabledShaderPasses:
+  - SHADOWCASTER
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -45,7 +46,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture_Normal:
-        m_Texture: {fileID: 2800000, guid: 3b8c5f0c19684954c9f45159693b9e49, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -105,8 +106,12 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Alpha: 0
     - Power_Fresnel: 1
     - Power_Metallic: 0.5
+    - Vector1_07e2fc72b6fc41c6b5ac8cddc4a567d9: 5
+    - Vector1_2fc611283a044484ac341f1a59fd7fa3: 0.5
+    - Vector1_cb421e0363344c8cbe524f729c5ac6f1: 10
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -116,7 +121,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _DstBlend: 0
+    - _DstBlend: 10
     - _Emission: 0
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
@@ -131,14 +136,14 @@ Material:
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _SrcBlend: 1
-    - _Surface: 0
+    - _SrcBlend: 5
+    - _Surface: 1
     - _WorkflowMode: 1
-    - _ZWrite: 1
+    - _ZWrite: 0
     m_Colors:
     - Color_Emission: {r: 0, g: 0, b: 0, a: 0}
     - Color_Fresnel: {r: 0, g: 0, b: 0, a: 0}
-    - Color_Main: {r: 1, g: 1, b: 1, a: 0}
+    - Color_Main: {r: 1, g: 1, b: 1, a: 1}
     - Vector2_6a18ea6b548b4da69a4d776126b54544: {r: 0, g: 0, b: 0, a: 0}
     - Vector2_a3e7d82afdee426a923f40b94ff8630d: {r: 1, g: 1, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}

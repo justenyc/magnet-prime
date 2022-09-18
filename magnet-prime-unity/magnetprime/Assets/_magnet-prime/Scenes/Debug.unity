@@ -682,7 +682,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1499585230202852516, guid: dca97501201d8844c97b3ecc2d3b5226, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1499585230202852536, guid: dca97501201d8844c97b3ecc2d3b5226, type: 3}
       propertyPath: m_RootOrder
@@ -928,7 +928,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-65588
+  m_Name: pb_Mesh-2432
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1428,7 +1428,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2295908361975536215, guid: 735b1b164917ed141908a6b9e929104b, type: 3}
       propertyPath: magnetismStrength
-      value: 100
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2295908363209372298, guid: 735b1b164917ed141908a6b9e929104b, type: 3}
       propertyPath: m_LocalScale.x
@@ -3029,7 +3029,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh19740
+  m_Name: pb_Mesh-1474
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3194,6 +3194,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1797742449, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 453084650579209855, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1134008287052492205, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
       propertyPath: items.Array.size
       value: 0
@@ -3206,6 +3214,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -27.16001
       objectReference: {fileID: 0}
+    - target: {fileID: 4253012990419024489, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5126527961139664760, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -22.010223
@@ -3213,6 +3225,10 @@ PrefabInstance:
     - target: {fileID: 5126527961139664760, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
       propertyPath: m_LocalPosition.z
       value: -27.16001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242107653240477476, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6556307555316582679, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
       propertyPath: m_RootOrder
