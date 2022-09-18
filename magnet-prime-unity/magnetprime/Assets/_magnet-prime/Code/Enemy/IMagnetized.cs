@@ -19,6 +19,7 @@ public class IMagnetized : IEnemyState
         manager.sightLight.SetActive(false);
         manager.agent.enabled = false;
         stateChangeCounter = manager.magnetizedTransitionTime;
+        manager.GetComponentInChildren<ParticleSystem>().Play();
     }
 
     // Update is called once per frame
@@ -26,6 +27,7 @@ public class IMagnetized : IEnemyState
     {
         if (manager.myMagnetism.beingMagnetized)
         {
+            manager.animator.SetBool("Magnetized", manager.myMagnetism.beingMagnetized);
             stateChangeCounter = manager.magnetizedTransitionTime;
         }
         else
@@ -33,13 +35,19 @@ public class IMagnetized : IEnemyState
             if (stateChangeCounter > 0)
                 stateChangeCounter -= Time.deltaTime;
             else
-                manager.currentState = new IPatrolling(manager);
+                ChangeState(new IPatrolling(manager));
         }
-        Debug.Log($"IMagnetized says: stateChangeCounter = {stateChangeCounter}");
+        //Debug.Log($"IMagnetized says: stateChangeCounter = {stateChangeCounter}");
     }
 
     public void OnTriggerEnter(Collider other)
     {
 
+    }
+
+    public void ChangeState(IEnemyState newState)
+    {
+        manager.GetComponentInChildren<ParticleSystem>().Stop();
+        manager.currentState = newState;
     }
 }

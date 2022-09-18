@@ -14,7 +14,7 @@ public class Magnetism_Enemy : Magnetism_Movable
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.impulse.magnitude);
+        //Debug.Log(collision.impulse.magnitude);
         if (collision.impulse.magnitude > 10f)
         {
             float vol = 0.25f * rigidBody.velocity.magnitude;

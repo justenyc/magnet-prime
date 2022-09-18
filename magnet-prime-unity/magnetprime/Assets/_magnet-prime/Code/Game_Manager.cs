@@ -6,6 +6,7 @@ using StarterAssets;
 public class Game_Manager : MonoBehaviour
 { 
     public static Game_Manager instance;
+    public VfxManager vfxManager;
     public string state;
 
     public bool paused = false;
