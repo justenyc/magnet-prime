@@ -21,11 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: EnemyPolarity
-<<<<<<< HEAD
   m_Shader: {fileID: -6465566751694194690, guid: d15025a405781834fbe1eae45671645e, type: 3}
-=======
-  m_Shader: {fileID: -6465566751694194690, guid: d2af3b4ad4fba134681027b08ceb066e, type: 3}
->>>>>>> 20cde2ea019120a5a46877dfac14ab9dd4db9d54
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
