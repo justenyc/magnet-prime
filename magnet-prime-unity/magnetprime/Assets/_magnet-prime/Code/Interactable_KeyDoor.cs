@@ -108,7 +108,7 @@ public class Interactable_KeyDoor : Interactable
         {
             BoxCollider box = col.GetComponent<BoxCollider>();
             
-            cols = Physics.OverlapBox(transform.position + (box.center * -1), box.size);
+            cols = Physics.OverlapBox(transform.position + (box.center * 1), box.size);
             Debug.Log($"SearchCenter: {transform.position}, BoxCenter: {box.center}, \nSize: {box.size}");
             
             foreach (Collider c in cols)
