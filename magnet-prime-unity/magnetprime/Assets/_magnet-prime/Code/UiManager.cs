@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
 using System.Threading.Tasks;
@@ -10,6 +11,8 @@ public class UiManager : MonoBehaviour
     public static UiManager instance;
     public GameObject interactMessage;
     public RectTransform textBox;
+    public RectTransform crosshair;
+    public Transform pauseCanvas;
 
     public TextMeshProUGUI infoMessage;
     public TextMeshProUGUI textBoxText;
@@ -48,5 +51,15 @@ public class UiManager : MonoBehaviour
     public void UpdateTextBoxText(string newMessage)
     {
         textBoxText.text = newMessage;
+    }
+
+    public void PauseAnimation(string animationName)
+    {
+        pauseCanvas.GetComponent<Animator>().Play(animationName);
+    }
+
+    public Image GetCrosshair()
+    {
+        return crosshair.GetComponent<Image>();
     }
 }

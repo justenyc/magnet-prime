@@ -45,6 +45,11 @@ namespace StarterAssets
 		{
 			SprintInput(value.isPressed);
 		}
+
+		public void OnPause(InputValue value)
+        {
+			PauseInput(Game_Manager.instance.paused);
+        }
 #else
 	// old input sys if we do decide to have it (most likely wont)...
 #endif
@@ -68,6 +73,22 @@ namespace StarterAssets
 		public void SprintInput(bool newSprintState)
 		{
 			sprint = newSprintState;
+		}
+
+		public void PauseInput(bool pauseState)
+        {
+			bool newState = !pauseState;
+			Game_Manager.instance.PauseGame(newState);
+			if (newState)
+            {
+				UiManager.instance.PauseAnimation("Pause_anim");
+				Cursor.lockState = CursorLockMode.None;
+			}
+			else
+            {
+				UiManager.instance.PauseAnimation("Unpause_anim");
+				Cursor.lockState = CursorLockMode.Locked;
+			}
 		}
 
 #if !UNITY_IOS || !UNITY_ANDROID

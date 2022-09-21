@@ -123,7 +123,7 @@ public class Interactable_KeyDoor : Interactable
 
             foreach (Collider c in cols)
             {
-                Debug.Log(c);
+                //Debug.Log(c);
                 OnTriggerExit(c);
             }
         }
