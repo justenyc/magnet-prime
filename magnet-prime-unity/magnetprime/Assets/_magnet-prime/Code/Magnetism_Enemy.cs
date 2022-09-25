@@ -23,4 +23,12 @@ public class Magnetism_Enemy : Magnetism_Movable
             SfxManager.instance.PlayFromSource(aSource, "Box_clang", oneshot: true);
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("BoxForceField") || other.gameObject.layer == LayerMask.NameToLayer("AbsoluteDeath"))
+        {
+            Destroy(this.gameObject);
+        }
+    }
 }

@@ -1123,6 +1123,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactMessage: {fileID: 5317055123158870503}
   textBox: {fileID: 1732376926719658510}
+  crosshair: {fileID: 1732376926223637499}
+  pauseCanvas: {fileID: 0}
   infoMessage: {fileID: 5317055123657678176}
   textBoxText: {fileID: 1732376925517653902}
 --- !u!1 &5317055123930504323

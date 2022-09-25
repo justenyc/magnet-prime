@@ -13,24 +13,37 @@ public class Game_Manager : MonoBehaviour
 
     private void Start()
     {
-        instance = instance ?? this;
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     private void Update()
     {
-        if (paused == true)
+        /*if (paused == true)
             Time.timeScale = 0f;
         else if (paused == false)
-            Time.timeScale = 1;
+            Time.timeScale = 1;*/
     }
 
     public void PauseGame(bool pause)
     {
         paused = pause;
         if (paused == true)
+        {
             Time.timeScale = 0f;
+            UiManager.instance.GetCrosshair().enabled = false;
+        }
         else if (paused == false)
+        {
             Time.timeScale = 1;
+            UiManager.instance.GetCrosshair().enabled = true;
+        }
     }
 
     public void SetState(string s)
