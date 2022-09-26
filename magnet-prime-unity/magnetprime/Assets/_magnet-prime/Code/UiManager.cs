@@ -17,6 +17,8 @@ public class UiManager : MonoBehaviour
     public TextMeshProUGUI infoMessage;
     public TextMeshProUGUI textBoxText;
 
+    public float fadeTextTime = 3.5f;
+
     private void Start()
     {
         instance = this;
@@ -33,9 +35,26 @@ public class UiManager : MonoBehaviour
         Debug.Log($"Killed {tweens} tweens");
         infoMessage.DOFade(1, 0.25f).onComplete = () =>
         {
-            infoMessage.DOFade(0, 1f).SetDelay(10f);
+            infoMessage.DOFade(0, 1f).SetDelay(5f);
         };
         infoMessage.text = newMessage;
+    }
+
+    public void SetInfoMessageText(string newMessage)
+    {
+        infoMessage.text = newMessage;
+    }
+
+    public void FadeInText()
+    {
+        infoMessage.DOKill();
+        infoMessage.DOFade(1, 0.25f);
+    }
+
+    public void FadeOutText()
+    {
+        infoMessage.DOKill();
+        infoMessage.DOFade(0, fadeTextTime);
     }
 
     public void CloseTextBox()
