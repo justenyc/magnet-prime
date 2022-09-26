@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
-using System.Threading.Tasks;
+using UnityEngine.EventSystems;
 
 public class UiManager : MonoBehaviour
 {
@@ -13,6 +13,8 @@ public class UiManager : MonoBehaviour
     public RectTransform textBox;
     public RectTransform crosshair;
     public Transform pauseCanvas;
+    public EventSystem eventSystem;
+    public GameObject resumeButton;
 
     public TextMeshProUGUI infoMessage;
     public TextMeshProUGUI textBoxText;
@@ -20,6 +22,10 @@ public class UiManager : MonoBehaviour
     private void Start()
     {
         instance = this;
+        if (eventSystem == null)
+        {
+            eventSystem = FindObjectOfType<EventSystem>();
+        }
     }
 
     public void EnableInteractMessage(bool enable)
@@ -61,5 +67,24 @@ public class UiManager : MonoBehaviour
     public Image GetCrosshair()
     {
         return crosshair.GetComponent<Image>();
+    }
+
+    public void ShowPauseScreen(bool show)
+    {
+        if (show)
+        {
+            UiManager.instance.PauseAnimation("Pause_anim");
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            UiManager.instance.PauseAnimation("Unpause_anim");
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+    }
+
+    public void SetSelectedObject(GameObject newObject)
+    {
+        eventSystem.SetSelectedGameObject(resumeButton);
     }
 }

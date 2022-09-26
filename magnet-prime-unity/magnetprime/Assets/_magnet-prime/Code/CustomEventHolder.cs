@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using System;
 
 public class CustomEventHolder : MonoBehaviour
 {
     public static CustomEventHolder instance;
     public UnityEvent eventToCall;
+    public Action customAction;
 
     private void Start()
     {
@@ -34,5 +36,13 @@ public class CustomEventHolder : MonoBehaviour
     public void A_DisplayMessage(string message)
     {
         UiManager.instance.SetInfoMessage(message);
+    }
+
+    public void PostCustomAction()
+    {
+        if (customAction != null)
+        {
+            customAction();
+        }
     }
 }
