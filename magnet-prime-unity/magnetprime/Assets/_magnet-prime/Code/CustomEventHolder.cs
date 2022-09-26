@@ -8,6 +8,7 @@ using System;
 public class CustomEventHolder : MonoBehaviour
 {
     public static CustomEventHolder instance;
+    public UnityEvent onExitEvent;
     public UnityEvent eventToCall;
     public Action customAction;
 
@@ -21,7 +22,11 @@ public class CustomEventHolder : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        eventToCall.Invoke();
+        if (other.TryGetComponent<FirstPersonController>(out FirstPersonController fpc))
+        {
+            eventToCall.Invoke();
+            Debug.Log("Yes this is player");
+        }
     }
     public void A_LoadSceneAdditive(string s)
     {
@@ -35,7 +40,22 @@ public class CustomEventHolder : MonoBehaviour
 
     public void A_DisplayMessage(string message)
     {
-        UiManager.instance.SetInfoMessage(message);
+        UiManager.instance.SetInfoMessageText(message);
+        UiManager.instance.FadeInText();
+    }
+
+    public void A_DisplayMessageFadeOut()
+    {
+        UiManager.instance.FadeOutText();
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.TryGetComponent<FirstPersonController>(out FirstPersonController fpc))
+        {
+            onExitEvent.Invoke();
+            Debug.Log("Yes this is player");
+        }
     }
 
     public void PostCustomAction()
