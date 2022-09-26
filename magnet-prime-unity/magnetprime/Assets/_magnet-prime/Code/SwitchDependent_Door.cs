@@ -15,7 +15,7 @@ public class SwitchDependent_Door : SwitchDependent
 
     public override void OnSwitch(bool active)
     {
-        Debug.Log(this.name + " | OnSwitch()");
+        //Debug.Log(this.name + " | OnSwitch()");
         //this.gameObject.SetActive(!active);
         if (active)
         {

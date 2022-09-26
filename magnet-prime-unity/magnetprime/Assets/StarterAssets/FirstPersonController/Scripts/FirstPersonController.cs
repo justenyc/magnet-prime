@@ -433,7 +433,7 @@ namespace StarterAssets
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, polarizeDistance, polarizeMask))
             {
-                Debug.Log(hit.transform.name);
+                //Debug.Log(hit.transform.name);
                 if (InvokePolarize != null)
                     InvokePolarize(this.gameObject, hit.collider.gameObject);
                 //Debug.Log(hit.collider.gameObject);
