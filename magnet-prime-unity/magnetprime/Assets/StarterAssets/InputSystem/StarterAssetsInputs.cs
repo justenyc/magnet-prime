@@ -79,16 +79,7 @@ namespace StarterAssets
         {
 			bool newState = !pauseState;
 			Game_Manager.instance.PauseGame(newState);
-			if (newState)
-            {
-				UiManager.instance.PauseAnimation("Pause_anim");
-				Cursor.lockState = CursorLockMode.None;
-			}
-			else
-            {
-				UiManager.instance.PauseAnimation("Unpause_anim");
-				Cursor.lockState = CursorLockMode.Locked;
-			}
+			UiManager.instance.ShowPauseScreen(newState);
 		}
 
 #if !UNITY_IOS || !UNITY_ANDROID

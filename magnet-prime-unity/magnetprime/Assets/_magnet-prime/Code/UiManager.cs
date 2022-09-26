@@ -78,8 +78,9 @@ public class UiManager : MonoBehaviour
         textBoxText.text = newMessage;
     }
 
-    public void PauseAnimation(string animationName)
+    public void PauseAnimation(string animationName, bool show)
     {
+        eventSystem.enabled = show;
         pauseCanvas.GetComponent<Animator>().Play(animationName);
     }
 
@@ -92,12 +93,12 @@ public class UiManager : MonoBehaviour
     {
         if (show)
         {
-            UiManager.instance.PauseAnimation("Pause_anim");
+            UiManager.instance.PauseAnimation("Pause_anim", show);
             Cursor.lockState = CursorLockMode.None;
         }
         else
         {
-            UiManager.instance.PauseAnimation("Unpause_anim");
+            UiManager.instance.PauseAnimation("Unpause_anim", show);
             Cursor.lockState = CursorLockMode.Locked;
         }
     }

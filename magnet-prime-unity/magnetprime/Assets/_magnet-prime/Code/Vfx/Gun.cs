@@ -23,11 +23,11 @@ public class Gun : MonoBehaviour
         if (fpc.lastShot)
         {
             posParticle.Play();
-            SfxManager.instance.PlayFromSource(aSource, "MagnetGun_Shot1");
+            SfxManager.instance?.PlayFromSource(aSource, "MagnetGun_Shot1");
             return;
         }
         negParticle.Play();
-        SfxManager.instance.PlayFromSource(aSource, "MagnetGun_Shot2");
+        SfxManager.instance?.PlayFromSource(aSource, "MagnetGun_Shot2");
         return;
     }
 }

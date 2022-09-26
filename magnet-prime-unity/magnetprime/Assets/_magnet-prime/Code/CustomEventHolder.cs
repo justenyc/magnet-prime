@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using System;
+using StarterAssets;
 
 public class CustomEventHolder : MonoBehaviour
 {
@@ -25,7 +26,7 @@ public class CustomEventHolder : MonoBehaviour
         if (other.TryGetComponent<FirstPersonController>(out FirstPersonController fpc))
         {
             eventToCall.Invoke();
-            Debug.Log("Yes this is player");
+            //Debug.Log("Yes this is player");
         }
     }
     public void A_LoadSceneAdditive(string s)
@@ -54,7 +55,7 @@ public class CustomEventHolder : MonoBehaviour
         if (other.TryGetComponent<FirstPersonController>(out FirstPersonController fpc))
         {
             onExitEvent.Invoke();
-            Debug.Log("Yes this is player");
+            //Debug.Log("Yes this is player");
         }
     }
 

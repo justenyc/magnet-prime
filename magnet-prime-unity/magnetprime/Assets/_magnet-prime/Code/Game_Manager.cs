@@ -23,28 +23,28 @@ public class Game_Manager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        /*if (paused == true)
-            Time.timeScale = 0f;
-        else if (paused == false)
-            Time.timeScale = 1;*/
-    }
-
     public void PauseGame(bool pause)
     {
         paused = pause;
         if (paused == true)
         {
+            FindObjectOfType<FirstPersonController>().enabled = false;
             Time.timeScale = 0f;
             UiManager.instance.GetCrosshair().enabled = false;
         }
         else if (paused == false)
         {
+            FindObjectOfType<FirstPersonController>().enabled = true;
             Time.timeScale = 1;
             UiManager.instance.GetCrosshair().enabled = true;
         }
     }
+
+    public void ShowPauseScreen(bool show)
+    {
+        UiManager.instance.ShowPauseScreen(show);
+    }
+
 
     public void SetState(string s)
     {
