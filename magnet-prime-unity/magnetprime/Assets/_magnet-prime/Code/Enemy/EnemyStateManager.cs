@@ -61,6 +61,11 @@ public class EnemyStateManager : MonoBehaviour
         currentState.OnTriggerEnter(other);
     }
 
+    public void OnCollisionEnter(Collision collision)
+    {
+        currentState.OnCollisionEnter(collision);
+    }
+
     public void FireProjectile(Transform target)
     {
         Projectile newProj = Instantiate(projectile, transform.position + transform.forward, transform.rotation).GetComponent<Projectile>();

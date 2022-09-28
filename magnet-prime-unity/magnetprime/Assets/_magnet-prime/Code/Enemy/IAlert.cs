@@ -54,6 +54,11 @@ public class IAlert : IEnemyState
 
     }
 
+    public void OnCollisionEnter(Collision collision)
+    {
+
+    }
+
     public void ChangeState(IEnemyState newState)
     {
         manager.animator.SetBool("Alert", false);

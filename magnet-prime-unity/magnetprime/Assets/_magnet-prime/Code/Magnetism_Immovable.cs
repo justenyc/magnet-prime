@@ -10,6 +10,8 @@ public class Magnetism_Immovable : Magnetism
     public Charge myCharge;
     public float magnetismStrength = 1;
     public List<Magnetism_Movable> movableObjectsWithCharge;
+    [SerializeField] ParticleSystem posEffect;
+    [SerializeField] ParticleSystem negEffect;
     public AudioSource audioSource { get; private set; }
 
     public Action<int> polarityChange;
@@ -111,18 +113,24 @@ public class Magnetism_Immovable : Magnetism
 
         if(ii > 0)
         {
+            posEffect?.Play();
+            negEffect?.Stop();
             SfxManager.instance.SetVolume(audioSource, 0.2f);
             SfxManager.instance.RandomizePitch(audioSource, 1f, 1.25f);
             SfxManager.instance.PlayFromSource(audioSource, "Magnet_buzz", loop: true);
         }
         else if(ii < 0)
         {
+            posEffect?.Stop();
+            negEffect?.Play();
             SfxManager.instance.SetVolume(audioSource, 0.25f);
             SfxManager.instance.RandomizePitch(audioSource, 0.5f, 0.75f);
             SfxManager.instance.PlayFromSource(audioSource, "Magnet_buzz", loop: true);
         }
         else
         {
+            posEffect?.Stop();
+            negEffect?.Stop();
             SfxManager.instance.PlayFromSource(audioSource, "Magnet_buzz", play: false);
         }
     }

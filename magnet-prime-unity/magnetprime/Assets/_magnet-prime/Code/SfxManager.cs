@@ -62,6 +62,12 @@ public class SfxManager : MonoBehaviour
         }
     }
 
+    public void ResetSourceSettings(AudioSource aSource)
+    {
+        aSource.pitch = 1;
+        aSource.volume = 1;
+    }
+
     public void RandomizePitch(AudioSource aSource, float min = 0.1f, float max = 2f)
     {
         aSource.pitch = UnityEngine.Random.Range(min, max);

@@ -105,6 +105,11 @@ public class IPatrolling : IEnemyState
         }
     }
 
+    public void OnCollisionEnter(Collision collision)
+    {
+
+    }
+
     public void ChangeState(IEnemyState newState)
     {
         manager.currentState = newState;

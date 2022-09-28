@@ -45,6 +45,25 @@ public class IMagnetized : IEnemyState
 
     }
 
+    public void OnCollisionEnter(Collision collision)
+    {
+        //Debug.Log($"{collision.collider.name}, {collision.impulse.magnitude}");
+        if (collision.impulse.magnitude > 10f)
+        {
+            float vol = 0.25f * manager.rb.velocity.magnitude;
+            SfxManager.instance.SetVolume(manager.aSource, Mathf.Clamp(vol, 0.25f, 1));
+            SfxManager.instance.RandomizePitch(manager.aSource, 0.1f, 0.5f);
+            SfxManager.instance.PlayFromSource(manager.aSource, "Box_clang", oneshot: true);
+        }
+        else if(collision.impulse.magnitude > 5f)
+        {
+            float vol = 0.25f * manager.rb.velocity.magnitude;
+            SfxManager.instance.SetVolume(manager.aSource, Mathf.Clamp(vol, 0.25f, 1));
+            SfxManager.instance.RandomizePitch(manager.aSource, 1f, 1.2f);
+            SfxManager.instance.PlayFromSource(manager.aSource, "Box_clang", oneshot: true);
+        }
+    }
+
     public void ChangeState(IEnemyState newState)
     {
         manager.GetComponentInChildren<ParticleSystem>().Stop();

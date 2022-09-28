@@ -19,6 +19,8 @@ public class Magnetism_Movable : Magnetism
     public bool dragToPlayer = false;
     float polarizeStrength = 1;
     public bool beingMagnetized = false;
+    [SerializeField] ParticleSystem posEffect = null;
+    [SerializeField] ParticleSystem negEffect = null;
 
     public AudioSource aSource { get; private set; }
     Vector3 startingScale;
@@ -42,6 +44,7 @@ public class Magnetism_Movable : Magnetism
 
         FirstPersonController player = FindObjectOfType<FirstPersonController>();
         player.InvokePolarize += OnPlayerPolarize;
+        myCharge.polarityChange += OnPolarityChange;
     }
 
     private void FixedUpdate()
@@ -163,6 +166,24 @@ public class Magnetism_Movable : Magnetism
             SfxManager.instance.RandomizePitch(aSource, 1f, 1.5f);
             SfxManager.instance.PlayFromSource(aSource, "Box Drop", oneshot: true);
         }
+    }
+
+    void OnPolarityChange(int polarity)
+    {
+        if (polarity > 0)
+        {
+            posEffect?.Play();
+            negEffect?.Stop();
+            return;
+        }
+        else if (polarity < 0)
+        {
+            posEffect?.Stop();
+            negEffect?.Play();
+            return;
+        }
+        posEffect?.Stop();
+        negEffect?.Stop();
     }
 
     public struct startTransform
