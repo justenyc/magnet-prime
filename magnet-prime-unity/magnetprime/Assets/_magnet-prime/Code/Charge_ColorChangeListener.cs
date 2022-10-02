@@ -16,7 +16,7 @@ public class Charge_ColorChangeListener : MonoBehaviour
         chargeToListen.polarityChange += ColorChangeListener;
         var renderer = GetComponent<Renderer>();
         myMat = renderer.material;
-
+        myMat.EnableKeyword(matColorAddress);
         PulseColor();
     }
 
