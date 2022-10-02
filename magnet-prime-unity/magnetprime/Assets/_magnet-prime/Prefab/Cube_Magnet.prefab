@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3381064302796854073}
   - component: {fileID: 1499288141284158259}
   - component: {fileID: 290626181656536411}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: NegParticles (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5078,7 +5078,7 @@ GameObject:
   - component: {fileID: 6861022164519962691}
   - component: {fileID: 4251471874994993146}
   - component: {fileID: 5118466113296605245}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PosParticles (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

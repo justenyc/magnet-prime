@@ -15,7 +15,7 @@ public class VisorEmissionController : MonoBehaviour
         FirstPersonController fpc = FindObjectOfType<FirstPersonController>();
         fpc.PolarityChanged += ChangeColor;
         mat = gameObject.GetComponent<MeshRenderer>().material;
-        mat.EnableKeyword("_EmissionColor");
+        mat.EnableKeyword("_BaseColor");
         ChangeColor(fpc.polarity);
     }
 
@@ -23,9 +23,9 @@ public class VisorEmissionController : MonoBehaviour
     {
         if(polarity == 1)
         {
-            mat.SetColor("_EmissionColor", positiveColor);
+            mat.SetColor("_BaseColor", positiveColor);
             return;
         }
-        mat.SetColor("_EmissionColor", negativeColor);
+        mat.SetColor("_BaseColor", negativeColor);
     }
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6395728089471410928}
   - component: {fileID: 6395728089471410929}
   - component: {fileID: 6395728089471410942}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: MultiPurposeTriggerBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
