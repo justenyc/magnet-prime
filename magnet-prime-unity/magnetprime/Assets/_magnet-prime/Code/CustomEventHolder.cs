@@ -27,7 +27,7 @@ public class CustomEventHolder : MonoBehaviour
     }
     public void A_LoadSceneAdditive(string s)
     {
-        SceneManager.LoadScene(s, LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync(s, LoadSceneMode.Additive);
     }
 
     public void A_EnableObject(GameObject go)
