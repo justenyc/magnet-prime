@@ -84,6 +84,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f54e526123297844fb7d547436600e1c, type: 3}
   - {fileID: 8300000, guid: 40ff0643b8e20f54eabe815ee3c1b161, type: 3}
   - {fileID: 8300000, guid: 8744f0d5a4eca464380883fa903b176d, type: 3}
+  - {fileID: 8300000, guid: e6f3f80d6973239469c93e2802231102, type: 3}
   mainSource: {fileID: 0}
   playCd: 0.5
   playCdTimer: 0

@@ -9,6 +9,7 @@ public class Charge_ColorChangeListener : MonoBehaviour
     public string matColorAddress;
     public Material myMat;
     public Light myLight;
+    public bool enableEmission;
     [SerializeField] bool pulse = false;
     
     void Start()
@@ -16,6 +17,7 @@ public class Charge_ColorChangeListener : MonoBehaviour
         chargeToListen.polarityChange += ColorChangeListener;
         var renderer = GetComponent<Renderer>();
         myMat = renderer.material;
+        if(enableEmission) { myMat.EnableKeyword("_EMISSION"); }
         myMat.EnableKeyword(matColorAddress);
         PulseColor();
     }
