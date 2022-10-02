@@ -4,7 +4,6 @@ using UnityEngine;
 
 [RequireComponent(typeof(Charge))]
 [RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(AudioSource))]
 public class Magnetism_Enemy : Magnetism_Movable
 {
     private void OnCollisionEnter(Collision collision)

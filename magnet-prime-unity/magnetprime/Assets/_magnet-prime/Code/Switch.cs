@@ -9,6 +9,11 @@ public class Switch : MonoBehaviour
     public Action SwitchAction;
     public LayerMask layerMask;
 
+    private void OnTriggerStay(Collider other)
+    {
+        switchActive = true;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         switchActive = true;

@@ -180,6 +180,7 @@ public class Magnetism_Movable : Magnetism
         {
             posEffect?.Stop();
             negEffect?.Play();
+            Debug.Log($"{this.name}'s negEffect is playing: {negEffect.isPlaying}");
             return;
         }
         posEffect?.Stop();
