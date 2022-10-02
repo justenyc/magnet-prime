@@ -46,6 +46,12 @@ public class CustomEventHolder : MonoBehaviour
         UiManager.instance.FadeOutText();
     }
 
+    public void A_DisableBox()
+    {
+        this.GetComponent<Collider>().enabled = false;
+        //this.enabled = false;
+    }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.TryGetComponent<FirstPersonController>(out FirstPersonController fpc))
