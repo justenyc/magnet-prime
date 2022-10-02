@@ -8,17 +8,13 @@ using StarterAssets;
 
 public class CustomEventHolder : MonoBehaviour
 {
-    public static CustomEventHolder instance;
     public UnityEvent onExitEvent;
     public UnityEvent eventToCall;
     public Action customAction;
 
     private void Start()
     {
-        if (instance == null)
-            instance = this;
-        else
-            Destroy(this);
+
     }
 
     private void OnTriggerEnter(Collider other)
