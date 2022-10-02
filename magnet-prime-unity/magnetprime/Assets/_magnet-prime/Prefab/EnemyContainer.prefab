@@ -15513,7 +15513,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 5
+  m_Speed: 6
   m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 1000
@@ -15634,7 +15634,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d3dda399d2f1c445b8f0c8be043fca0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myCharge: {fileID: 0}
+  myCharge: {fileID: 1521159854}
   grabbable: 0
   direction: {x: 0, y: 0, z: 0}
   rigidBody: {fileID: 0}
@@ -15665,9 +15665,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 35
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -15700,7 +15700,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

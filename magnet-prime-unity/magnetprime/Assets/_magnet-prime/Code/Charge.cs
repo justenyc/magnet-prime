@@ -46,16 +46,30 @@ public class Charge : MonoBehaviour
         player.InvokeShoot -= ShootListener;
     }
 
+    public void RandomizePolarity()
+    {
+        float randomNum = UnityEngine.Random.Range(-1, 2);
+        Debug.Log(randomNum + " "+ this.name);
+
+        if(randomNum > 0)
+        {
+            chargeStrength *= -1;
+            ChargeHandler();
+        }
+        if(randomNum == 0)
+        {
+            RandomizePolarity();
+        }
+    }
+
     void OverCharge()
     {
         if (chargeStrength > 0)
         {
-            Debug.Log("Positive Over Charge");
             chargeStrength = 1;
         }
         else if (chargeStrength < 0)
         {
-            Debug.Log("Negative Over Charge");
             chargeStrength = -1;
         }
 

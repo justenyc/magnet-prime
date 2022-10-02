@@ -4,8 +4,19 @@ using UnityEngine;
 
 [RequireComponent(typeof(Charge))]
 [RequireComponent(typeof(Rigidbody))]
+
+
 public class Magnetism_Enemy : Magnetism_Movable
 {
+    public bool randomizePolarity = true;
+    private void Start()
+    {
+        
+        if(randomizePolarity == true)
+        {
+            myCharge.RandomizePolarity();
+        }
+    }
     private void OnCollisionEnter(Collision collision)
     {
         GetComponent<EnemyStateManager>().OnCollisionEnter(collision);

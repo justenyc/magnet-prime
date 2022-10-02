@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeTime: 2
   damage: 50
-  moveSpeed: 20
+  moveSpeed: 22
   trackSpeed: 0.5
   target: {fileID: 0}
   track: 1
