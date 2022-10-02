@@ -19,7 +19,7 @@ public class UiManager : MonoBehaviour
     public TextMeshProUGUI infoMessage;
     public TextMeshProUGUI textBoxText;
 
-    public float fadeTextTime = 3.5f;
+    public float fadeTextTime = 2f;
 
     private void Start()
     {
