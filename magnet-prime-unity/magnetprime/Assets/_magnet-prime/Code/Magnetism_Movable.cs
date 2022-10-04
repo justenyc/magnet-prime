@@ -45,6 +45,7 @@ public class Magnetism_Movable : Magnetism
         FirstPersonController player = FindObjectOfType<FirstPersonController>();
         player.InvokePolarize += OnPlayerPolarize;
         myCharge.polarityChange += OnPolarityChange;
+        OnPolarityChange(myCharge.GetPolarity());
     }
 
     private void FixedUpdate()
@@ -152,7 +153,7 @@ public class Magnetism_Movable : Magnetism
 
     private void OnCollisionEnter(Collision collision)
     {
-        //Debug.Log(collision.impulse.magnitude);
+        //Debug.Log(collision.transform.name);
         if (collision.impulse.magnitude > 10f)
         {
             float vol = 0.25f * rigidBody.velocity.magnitude;
@@ -168,8 +169,9 @@ public class Magnetism_Movable : Magnetism
         }
     }
 
-    void OnPolarityChange(int polarity)
+    public void OnPolarityChange(int polarity)
     {
+        Debug.Log($"{this.name}: OnPolarityChange() called");
         if (polarity > 0)
         {
             posEffect?.Play();
@@ -180,7 +182,6 @@ public class Magnetism_Movable : Magnetism
         {
             posEffect?.Stop();
             negEffect?.Play();
-            Debug.Log($"{this.name}'s negEffect is playing: {negEffect.isPlaying}");
             return;
         }
         posEffect?.Stop();

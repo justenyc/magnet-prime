@@ -11,14 +11,21 @@ public class CheckpointManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        instance = instance ?? this;
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
         playerHealth = FindObjectOfType<Health>();
         playerHealth.DieAction += OnPlayerDie;
     }
     
     void OnPlayerDie()
     {
-        playerHealth.gameObject.transform.position = currentCheckpoint.position;
+        playerHealth.gameObject.transform.position = currentCheckpoint != null ? currentCheckpoint.position : defaultCheckpoint.position;
     }
 
     public void SetCheckpoint(Transform checkpoint)

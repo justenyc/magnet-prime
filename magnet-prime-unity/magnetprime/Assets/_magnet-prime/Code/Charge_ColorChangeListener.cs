@@ -52,4 +52,9 @@ public class Charge_ColorChangeListener : MonoBehaviour
             myMat.DOColor(new Color(myMat.color.r * 0.75f, myMat.color.g * 0.75f, myMat.color.b * 0.75f), matColorAddress, 1f).SetLoops(-1, LoopType.Yoyo);
         }
     }
+
+    void OnEnable()
+    {
+        Start();
+    }
 }

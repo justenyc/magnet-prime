@@ -11,12 +11,13 @@ public class Magnetism_Enemy : Magnetism_Movable
     public bool randomizePolarity = true;
     private void Start()
     {
-        
         if(randomizePolarity == true)
         {
             myCharge.RandomizePolarity();
+            //base.OnPolarityChange(myCharge.GetPolarity());
         }
     }
+
     private void OnCollisionEnter(Collision collision)
     {
         GetComponent<EnemyStateManager>().OnCollisionEnter(collision);
@@ -28,5 +29,12 @@ public class Magnetism_Enemy : Magnetism_Movable
         {
             Destroy(this.gameObject);
         }
+    }
+
+
+
+    void OnEnable()
+    {
+        Start();
     }
 }

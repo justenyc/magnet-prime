@@ -37,7 +37,10 @@ public class Magnetism_Immovable : Magnetism
         {
             Magnetism_Movable temp = movableObjectsWithCharge[ii];
             int magnetism = MagnetismAction(temp.GetPolarity());
-
+            if (temp == null)
+            {
+                movableObjectsWithCharge.Remove(temp);
+            }
             if (magnetism != 0)
             {
                 temp.beingMagnetized = true;

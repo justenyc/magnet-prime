@@ -28,15 +28,21 @@ public class IAlert : IEnemyState
     {
         manager.transform.LookAt(player.transform);
 
+        manager.rb.velocity = Vector3.zero;
+        manager.rb.angularVelocity = Vector3.zero;
+
+        if (manager.myMagnetism.beingMagnetized)
+            manager.currentState = new IMagnetized(manager);
+
         TrackPlayer();
     }
 
     void TrackPlayer()
     {
         RaycastHit hit;
+        //Debug.DrawRay(manager.head.position, (player.position - manager.head.position) * 100f, Color.magenta);
         if (Physics.Raycast(manager.head.position, player.position - manager.head.position, out hit, Mathf.Infinity, manager.mask))
         {
-            //Debug.Log(hit.collider.name);
             if (hit.collider.tag == "Player")
             {
                 manager.playerPosition = hit.transform;
@@ -55,6 +61,11 @@ public class IAlert : IEnemyState
     }
 
     public void OnCollisionEnter(Collision collision)
+    {
+
+    }
+
+    public void OnTriggerStay(Collider other)
     {
 
     }

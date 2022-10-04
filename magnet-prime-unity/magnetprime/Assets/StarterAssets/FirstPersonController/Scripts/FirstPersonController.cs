@@ -421,7 +421,7 @@ namespace StarterAssets
             if (held != null)
             {
                 Rigidbody rb = held.GetComponent<Rigidbody>();
-                held.transform.localPosition = Vector3.zero;//Vector3.Lerp(held.transform.position, Camera.main.transform.forward * 3 + Camera.main.transform.position, Time.fixedDeltaTime * MoveSpeed);
+                held.transform.localPosition = Vector3.zero;//Vector3.Lerp(held.transform.position, grabPoint.transform.position, Time.fixedDeltaTime * MoveSpeed);
                 held.transform.localRotation = Quaternion.Euler(Vector3.up + held.transform.localRotation.eulerAngles);
                 rb.velocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;

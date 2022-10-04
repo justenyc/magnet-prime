@@ -32,10 +32,10 @@ public class IMagnetized : IEnemyState
         }
         else
         {
-            if (stateChangeCounter > 0)
+            /*if (stateChangeCounter > 0)
                 stateChangeCounter -= Time.deltaTime;
             else
-                ChangeState(new IPatrolling(manager));
+                ChangeState(new IPatrolling(manager));*/
         }
         //Debug.Log($"IMagnetized says: stateChangeCounter = {stateChangeCounter}");
     }
@@ -62,6 +62,11 @@ public class IMagnetized : IEnemyState
             SfxManager.instance.RandomizePitch(manager.aSource, 1f, 1.2f);
             SfxManager.instance.PlayFromSource(manager.aSource, "Box_clang", oneshot: true);
         }
+    }
+
+    public void OnTriggerStay(Collider other)
+    {
+
     }
 
     public void ChangeState(IEnemyState newState)

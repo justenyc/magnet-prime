@@ -8,5 +8,6 @@ public interface IEnemyState
     public void StateUpdate();
     public void OnTriggerEnter(Collider other);
     public void OnCollisionEnter(Collision collision);
+    public void OnTriggerStay(Collider other);
     public void ChangeState(IEnemyState newState);
 }

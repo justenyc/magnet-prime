@@ -49,17 +49,16 @@ public class Charge : MonoBehaviour
     public void RandomizePolarity()
     {
         float randomNum = UnityEngine.Random.Range(-1, 2);
-        Debug.Log(randomNum + " "+ this.name);
 
         if(randomNum > 0)
         {
             chargeStrength *= -1;
-            ChargeHandler();
         }
         if(randomNum == 0)
         {
             RandomizePolarity();
         }
+        ChargeHandler();
     }
 
     void OverCharge()
@@ -99,6 +98,7 @@ public class Charge : MonoBehaviour
 
     void SetFresnelColor(Color c)
     {
+        mainMaterial = mainMaterial == null ? this.GetComponent<MeshRenderer>().material : mainMaterial;
         mainMaterial.SetColor("Color_Fresnel", c);
     }
 

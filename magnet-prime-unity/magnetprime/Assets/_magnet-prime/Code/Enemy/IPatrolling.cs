@@ -36,12 +36,6 @@ public class IPatrolling : IEnemyState
 
         if (manager.myMagnetism.beingMagnetized)
             manager.currentState = new IMagnetized(manager);
-
-        Sight(-manager.head.forward, manager.sightDistance);
-        Sight(-manager.head.forward + manager.transform.right * manager.sightModifier, manager.sightDistance);
-        Sight(-manager.head.forward + manager.transform.right * -manager.sightModifier, manager.sightDistance);
-        //Debug.DrawRay(manager.head.position, manager.head.forward * manager.sightDistance + manager.transform.right * manager.sightModifier, Color.magenta);
-        //Debug.DrawRay(manager.head.position, (manager.head.forward + manager.transform.right * manager.sightModifier) * manager.sightDistance, Color.magenta);
     }
 
     private void Sight(Vector3 direction, float distance)
@@ -108,6 +102,16 @@ public class IPatrolling : IEnemyState
     public void OnCollisionEnter(Collision collision)
     {
 
+    }
+
+    public void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            Vector3 direction = other.transform.position - manager.head.transform.position;
+            Debug.DrawRay(manager.head.transform.position, direction * 10, Color.magenta);
+            Sight(direction, manager.sightDistance);
+        }
     }
 
     public void ChangeState(IEnemyState newState)
