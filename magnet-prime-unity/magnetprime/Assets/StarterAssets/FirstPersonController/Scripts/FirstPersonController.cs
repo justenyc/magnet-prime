@@ -429,7 +429,7 @@ namespace StarterAssets
                 {
                     if(!hit.collider.TryGetComponent(out Magnetism_Movable mm))
                     {
-                        grabPoint.localPosition = new Vector3(0,0,0.5f);
+                        grabPoint.localPosition = Camera.main.transform.InverseTransformPoint(hit.point);
                     }
                 }
                 rb.velocity = Vector3.zero;
