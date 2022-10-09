@@ -50,9 +50,13 @@ public class SfxManager : MonoBehaviour
             aSource.clip = GetClipByName(sfxName);
 
             if (oneshot)
+            {
                 aSource.PlayOneShot(aSource.clip);
+            }
             else
+            {
                 aSource.Play();
+            }
 
             playCdTimer = playCd;
         }
@@ -83,4 +87,10 @@ public class SfxManager : MonoBehaviour
         aSource.pitch = pitch;
     }
     #endregion
+
+    IEnumerator DelayFunction<T>(float delayTime, System.Action<T> callback, T arg)
+    {
+        yield return new WaitForSeconds(delayTime);
+        callback(arg);
+    }
 }

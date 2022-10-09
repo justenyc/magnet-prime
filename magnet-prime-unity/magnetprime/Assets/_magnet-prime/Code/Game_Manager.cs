@@ -10,6 +10,7 @@ public class Game_Manager : MonoBehaviour
     public string state;
 
     public bool paused = false;
+    public HashSet<Interactable_Collectable> loreLogs = new HashSet<Interactable_Collectable>();
 
     private void Start()
     {
