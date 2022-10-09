@@ -171,7 +171,7 @@ public class Magnetism_Movable : Magnetism
 
     public void OnPolarityChange(int polarity)
     {
-        Debug.Log($"{this.name}: OnPolarityChange() called");
+        //Debug.Log($"{this.name}: OnPolarityChange() called");
         if (polarity > 0)
         {
             posEffect?.Play();

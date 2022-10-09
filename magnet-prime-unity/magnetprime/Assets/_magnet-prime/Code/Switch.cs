@@ -8,25 +8,32 @@ public class Switch : MonoBehaviour
     public bool switchActive;
     public Action SwitchAction;
     public LayerMask layerMask;
-
-    private void OnTriggerStay(Collider other)
-    {
-        switchActive = true;
-    }
+    [SerializeField] HashSet<Collider> colliders = new HashSet<Collider>();
 
     private void OnTriggerEnter(Collider other)
     {
-        switchActive = true;
-        if (SwitchAction != null)
-            SwitchAction();
-        //Debug.Log(switchActive);
+        colliders.Add(other);
+        SwitchActive();
     }
 
     private void OnTriggerExit(Collider other)
     {
-        switchActive = false;
+        colliders.Remove(other);
+        SwitchActive();
+    }
+
+    void SwitchActive()
+    {
+        if (colliders.Count > 0)
+        {
+            switchActive = true;
+        }
+        else
+        {
+            switchActive = false;
+        }
+
         if (SwitchAction != null)
             SwitchAction();
-        //Debug.Log(switchActive);
     }
 }
