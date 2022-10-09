@@ -423,12 +423,13 @@ namespace StarterAssets
                 Rigidbody rb = held.GetComponent<Rigidbody>();
                 held.transform.localPosition = Vector3.zero;//Vector3.Lerp(held.transform.position, grabPoint.transform.position, Time.fixedDeltaTime * MoveSpeed);
                 held.transform.localRotation = Quaternion.Euler(Vector3.up + held.transform.localRotation.eulerAngles);
+
                 RaycastHit hit;
                 if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity))
                 {
                     if(!hit.collider.TryGetComponent(out Magnetism_Movable mm))
                     {
-                        grabPoint.localPosition = Vector3.zero;
+                        grabPoint.localPosition = new Vector3(0,0,0.5f);
                     }
                 }
                 rb.velocity = Vector3.zero;
