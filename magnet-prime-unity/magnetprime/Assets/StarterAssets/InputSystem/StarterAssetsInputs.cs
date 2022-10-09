@@ -80,7 +80,7 @@ namespace StarterAssets
 			bool newState = !pauseState;
 			Game_Manager.instance.PauseGame(newState);
 			UiManager.instance.ShowPauseScreen(newState);
-			UiManager.instance.logText.text = Game_Manager.instance.loreLogs.Count.ToString();
+			UiManager.instance.UpdatePauseDisplayData();
 		}
 
 #if !UNITY_IOS || !UNITY_ANDROID

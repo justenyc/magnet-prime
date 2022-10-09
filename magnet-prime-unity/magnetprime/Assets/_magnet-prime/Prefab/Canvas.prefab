@@ -903,10 +903,10 @@ RectTransform:
   m_Father: {fileID: 5317055123835713139}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -250}
-  m_SizeDelta: {x: 500, y: 50}
+  m_SizeDelta: {x: -100, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5317055123657678191
 CanvasRenderer:
@@ -1121,13 +1121,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de8118cfb34076e44bae5789460c0611, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  infoMessage: {fileID: 5317055123657678176}
+  textBoxText: {fileID: 1732376925517653902}
   interactMessage: {fileID: 5317055123158870503}
   textBox: {fileID: 1732376926719658510}
   crosshair: {fileID: 1732376926223637499}
-  pauseCanvas: {fileID: 6254990618080541574, guid: 0873de1af22722f408b8f1836a00b4e4, type: 3}
+  fadeTextTime: 2
+  pauseCanvas: {fileID: 0}
+  logText: {fileID: 0}
+  keyContainer: {fileID: 0}
+  keyImages: []
   eventSystem: {fileID: 0}
-  infoMessage: {fileID: 5317055123657678176}
-  textBoxText: {fileID: 1732376925517653902}
+  resumeButton: {fileID: 0}
 --- !u!1 &5317055123930504323
 GameObject:
   m_ObjectHideFlags: 0

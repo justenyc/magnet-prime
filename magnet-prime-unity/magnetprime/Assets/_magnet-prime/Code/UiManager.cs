@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
 using UnityEngine.EventSystems;
+using System.Linq;
 
 public class UiManager : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class UiManager : MonoBehaviour
     [Header("Pause Canvas Elements")]
     public Transform pauseCanvas;
     public TextMeshProUGUI logText;
+    public RectTransform keyContainer;
+    public List<Image> keyImages = new List<Image>();
     public EventSystem eventSystem;
     public GameObject resumeButton;
 
@@ -31,6 +34,8 @@ public class UiManager : MonoBehaviour
         {
             eventSystem = FindObjectOfType<EventSystem>();
         }
+
+        keyImages = keyContainer.GetComponentsInChildren<Image>().ToList();
     }
 
     public void EnableInteractMessage(bool enable)
@@ -109,5 +114,23 @@ public class UiManager : MonoBehaviour
     public void SetSelectedObject(GameObject newObject)
     {
         eventSystem.SetSelectedGameObject(resumeButton);
+    }
+
+    public void UpdatePauseDisplayData()
+    {
+        instance.logText.text = Game_Manager.instance.loreLogs.Count.ToString();
+        int keyCount = Inventory.instance.items.Count;
+
+        for (int ii = 0; ii < keyImages.Count; ii++)
+        {
+            if(ii < keyCount)
+            {
+                keyImages[ii].enabled = true;
+            }
+            else
+            {
+                keyImages[ii].enabled = false;
+            }
+        }
     }
 }
