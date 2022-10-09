@@ -153,6 +153,11 @@ public class Magnetism_Movable : Magnetism
 
     private void OnCollisionEnter(Collision collision)
     {
+        if(collision.transform.TryGetComponent<FirstPersonController>(out FirstPersonController fpc))
+        {
+            dragToPlayer = false;
+            collision.rigidbody.AddExplosionForce(1, transform.position, 1);
+        }
         //Debug.Log(collision.transform.name);
         if (collision.impulse.magnitude > 10f)
         {

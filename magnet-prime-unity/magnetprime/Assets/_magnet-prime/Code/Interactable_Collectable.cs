@@ -16,6 +16,7 @@ public class Interactable_Collectable : Interactable
         switch (type)
         {
             case Type.Log:
+                Game_Manager.instance.loreLogs.Add(this);
                 Game_Manager.instance.PauseGame(Game_Manager.instance.paused ? false : true);
                 if (Game_Manager.instance.paused)
                 {

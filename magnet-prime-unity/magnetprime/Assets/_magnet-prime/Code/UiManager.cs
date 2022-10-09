@@ -9,17 +9,20 @@ using UnityEngine.EventSystems;
 public class UiManager : MonoBehaviour
 {
     public static UiManager instance;
+
+    [Header("HUD Elements")]
+    public TextMeshProUGUI infoMessage;
+    public TextMeshProUGUI textBoxText;
     public GameObject interactMessage;
     public RectTransform textBox;
     public RectTransform crosshair;
+    public float fadeTextTime = 2f;
+
+    [Header("Pause Canvas Elements")]
     public Transform pauseCanvas;
+    public TextMeshProUGUI logText;
     public EventSystem eventSystem;
     public GameObject resumeButton;
-
-    public TextMeshProUGUI infoMessage;
-    public TextMeshProUGUI textBoxText;
-
-    public float fadeTextTime = 2f;
 
     private void Start()
     {
