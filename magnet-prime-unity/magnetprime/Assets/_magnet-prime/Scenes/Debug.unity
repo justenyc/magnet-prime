@@ -947,7 +947,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-53646
+  m_Name: pb_Mesh-159600
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3920,7 +3920,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-52192
+  m_Name: pb_Mesh-158126
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4526,10 +4526,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1116511853}
-    - target: {fileID: 7492947976559538792, guid: d39b0968d2049844385d15be759ddab7, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7492947976559538793, guid: d39b0968d2049844385d15be759ddab7, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -4538,10 +4534,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1116511853}
-    - target: {fileID: 7492947976559538795, guid: d39b0968d2049844385d15be759ddab7, type: 3}
-      propertyPath: m_SelectedVertices.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7492947976801128832, guid: d39b0968d2049844385d15be759ddab7, type: 3}
       propertyPath: m_Name
       value: EnemyTest
@@ -4589,10 +4581,6 @@ PrefabInstance:
     - target: {fileID: 7492947976801128833, guid: d39b0968d2049844385d15be759ddab7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7492947976853117869, guid: d39b0968d2049844385d15be759ddab7, type: 3}
-      propertyPath: sightDistance
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d39b0968d2049844385d15be759ddab7, type: 3}
