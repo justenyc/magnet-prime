@@ -78,9 +78,13 @@ namespace StarterAssets
 		public void PauseInput(bool pauseState)
         {
 			bool newState = !pauseState;
-			Game_Manager.instance.PauseGame(newState);
-			UiManager.instance.ShowPauseScreen(newState);
-			UiManager.instance.UpdatePauseDisplayData();
+
+			if (Game_Manager.instance.state == "")
+			{
+				Game_Manager.instance.PauseGame(newState);
+				UiManager.instance.ShowPauseScreen(newState);
+				UiManager.instance.UpdatePauseDisplayData();
+			}
 		}
 
 #if !UNITY_IOS || !UNITY_ANDROID

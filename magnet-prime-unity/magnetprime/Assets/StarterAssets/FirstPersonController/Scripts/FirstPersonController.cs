@@ -37,6 +37,7 @@ namespace StarterAssets
         public Transform grabPoint;
         public LayerMask gunMask;
         public LayerMask polarizeMask;
+        public bool hasGun = true;
 
         [Space(10)]
         [Tooltip("The height the player can jump")]
@@ -290,7 +291,7 @@ namespace StarterAssets
         {
             shootCD = Mathf.Clamp(shootCD - Time.deltaTime, 0, FireRate);
 
-            if (shootPressed && shootCD <= 0)
+            if (shootPressed && shootCD <= 0 && hasGun)
             {
                 shootCD = FireRate;
                 RaycastHit hit;
@@ -360,7 +361,7 @@ namespace StarterAssets
                         if (c.GetType() == typeof(SphereCollider))
                             held.GetComponent<SphereCollider>().radius = 1;
                         else if (c.GetType() == typeof(BoxCollider))
-                            held.GetComponent<BoxCollider>().size = new Vector3(2, 2, 2);
+                            held.GetComponent<BoxCollider>().size = new Vector3(1, 1, 1);
 
                         held.layer = LayerMask.NameToLayer("Moving");
                         held.transform.parent = grabPoint.transform;

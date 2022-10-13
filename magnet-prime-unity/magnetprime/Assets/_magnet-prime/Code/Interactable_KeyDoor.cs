@@ -10,6 +10,8 @@ public class Interactable_KeyDoor : Interactable
     Dictionary<Interactable_Collectable, bool> keysFound;
     public LayerMask Mask;
 
+    [SerializeField] AudioSource audioSource;
+
     private void Start()
     {
         InitializeKeyDict();
@@ -39,7 +41,7 @@ public class Interactable_KeyDoor : Interactable
                 OnDisable();
                 foreach (Collider c in GetComponentsInChildren<Collider>())
                     c.enabled = false;
-                SfxManager.instance.PlayFromSource(SfxManager.instance.mainSource, "Door_Open");
+                SfxManager.instance.PlayFromSource(audioSource, "Door_Open");
                 UiManager.instance.SetInfoMessage("");
             }
             else
@@ -89,25 +91,16 @@ public class Interactable_KeyDoor : Interactable
         return true;
     }
 
-    private void OnTriggerEnter(Collider other)
+    public override void OnTriggerEnter(Collider other)
     {
-        FirstPersonController fpc = other.GetComponentInChildren<FirstPersonController>();
-        if (fpc)
-        {
-            fpc.Interact += Interact;
-            UiManager.instance.EnableInteractMessage(true);
-        }
+        base.customEvent.AddListener(Interact);
+        base.OnTriggerEnter(other);
     }
 
-    private void OnTriggerExit(Collider other)
+    public override void OnTriggerExit(Collider other)
     {
-        FirstPersonController fpc = other.GetComponentInChildren<FirstPersonController>();
-        if (fpc)
-        {
-            fpc.Interact -= Interact;
-            UiManager.instance.EnableInteractMessage(false);
-            UiManager.instance.SetInfoMessage("");
-        }
+        base.customEvent.RemoveListener(Interact);
+        base.OnTriggerExit(other);
     }
 
     private void OnDisable()

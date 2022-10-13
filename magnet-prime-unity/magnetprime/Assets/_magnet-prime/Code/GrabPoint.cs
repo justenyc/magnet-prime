@@ -18,6 +18,6 @@ public class GrabPoint : MonoBehaviour
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         rb.rotation = Quaternion.identity;
-        transform.DOLocalMove(new Vector3(0, 0, 3), 0.5f).SetDelay(0.5f);
+        transform.DOLocalMove(new Vector3(0, 0, 3), 0.5f).SetDelay(0.1f);
     }
 }

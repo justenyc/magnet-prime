@@ -1132,6 +1132,7 @@ MonoBehaviour:
   keyContainer: {fileID: 0}
   keyImages: []
   eventSystem: {fileID: 0}
+  inputUiModule: {fileID: 0}
   resumeButton: {fileID: 0}
 --- !u!1 &5317055123930504323
 GameObject:

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using StarterAssets;
 
 public class Interactable_Collectable : Interactable
@@ -20,6 +21,7 @@ public class Interactable_Collectable : Interactable
                 Game_Manager.instance.PauseGame(Game_Manager.instance.paused ? false : true);
                 if (Game_Manager.instance.paused)
                 {
+                    Game_Manager.instance.state = "LoreLog";
                     UiManager.instance.UpdateTextBoxText(message);
                     UiManager.instance.OpenTextBox(message);
                     UiManager.instance.EnableInteractMessage(false);
@@ -29,13 +31,13 @@ public class Interactable_Collectable : Interactable
                 }
                 else
                 {
+                    Game_Manager.instance.state = "";
                     UiManager.instance.CloseTextBox();
                     UiManager.instance.EnableInteractMessage(true);
                     SfxManager.instance.SetVolume(SfxManager.instance.mainSource, 0.5f);
                     SfxManager.instance.SetPitch(SfxManager.instance.mainSource, 0.5f);
                     SfxManager.instance.PlayFromSource(SfxManager.instance.mainSource, "TextBoxOpen", oneshot: true);
                 }
-
                 return;
 
             case Type.Key:
@@ -55,7 +57,7 @@ public class Interactable_Collectable : Interactable
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    public override void OnTriggerEnter(Collider other)
     {
         fpc = other.GetComponentInChildren<FirstPersonController>();
         if (fpc)
@@ -65,7 +67,7 @@ public class Interactable_Collectable : Interactable
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    public override void OnTriggerExit(Collider other)
     {
         if (fpc)
         {

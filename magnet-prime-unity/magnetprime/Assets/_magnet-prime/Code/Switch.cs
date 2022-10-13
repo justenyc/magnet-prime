@@ -8,6 +8,7 @@ public class Switch : MonoBehaviour
     public bool switchActive;
     public Action SwitchAction;
     public LayerMask layerMask;
+    [SerializeField] List<Collider> collidersDebug = new List<Collider>();
     [SerializeField] HashSet<Collider> colliders = new HashSet<Collider>();
 
     private void OnTriggerEnter(Collider other)

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem.UI;
 using TMPro;
 using DG.Tweening;
 using UnityEngine.EventSystems;
@@ -25,11 +26,17 @@ public class UiManager : MonoBehaviour
     public RectTransform keyContainer;
     public List<Image> keyImages = new List<Image>();
     public EventSystem eventSystem;
+    public InputSystemUIInputModule inputUiModule;
     public GameObject resumeButton;
 
     private void Start()
     {
         instance = this;
+        if (inputUiModule == null)
+        {
+            inputUiModule = FindObjectOfType<InputSystemUIInputModule>();
+        }
+
         if (eventSystem == null)
         {
             eventSystem = FindObjectOfType<EventSystem>();
@@ -88,7 +95,7 @@ public class UiManager : MonoBehaviour
 
     public void PauseAnimation(string animationName, bool show)
     {
-        eventSystem.enabled = show;
+        inputUiModule.enabled = show;
         pauseCanvas.GetComponent<Animator>().Play(animationName);
     }
 
