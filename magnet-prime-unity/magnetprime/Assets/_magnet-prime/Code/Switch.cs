@@ -8,8 +8,15 @@ public class Switch : MonoBehaviour
     public bool switchActive;
     public Action SwitchAction;
     public LayerMask layerMask;
-    [SerializeField] List<Collider> collidersDebug = new List<Collider>();
+    
     [SerializeField] HashSet<Collider> colliders = new HashSet<Collider>();
+    [SerializeField] Material myMat;
+
+    private void Start()
+    {
+        myMat = this.GetComponentsInChildren<MeshRenderer>()[1].material;
+        myMat.EnableKeyword("_EMISSION");
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -28,10 +35,12 @@ public class Switch : MonoBehaviour
         if (colliders.Count > 0)
         {
             switchActive = true;
+            myMat.SetColor("_EmissionColor", Color.green);
         }
         else
         {
             switchActive = false;
+            myMat.SetColor("_EmissionColor", Color.red);
         }
 
         if (SwitchAction != null)
