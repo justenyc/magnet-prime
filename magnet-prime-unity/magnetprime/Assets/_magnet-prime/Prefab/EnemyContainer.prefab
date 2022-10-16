@@ -93,7 +93,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.6
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &509955084
 GameObject:
@@ -125,7 +125,7 @@ Transform:
   m_GameObject: {fileID: 509955084}
   m_LocalRotation: {x: 0.0000007954958, y: 0.7026118, z: 0.7115735, w: -0.0000008084086}
   m_LocalPosition: {x: 0, y: 0.020789124, z: -0.038071007}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.2, z: 1}
   m_Children:
   - {fileID: 1132645659}
   m_Father: {fileID: 4904667575414195}
@@ -5257,8 +5257,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_Intensity: 100
-  m_Range: 15
+  m_Intensity: 150
+  m_Range: 20
   m_SpotAngle: 21.281052
   m_InnerSpotAngle: 9.595552
   m_CookieSize: 10
@@ -15583,7 +15583,7 @@ MonoBehaviour:
   projectile: {fileID: 4222618900926354644, guid: 25dc9f809cb500448add98ab328e4995, type: 3}
   rb: {fileID: 7492947976853117870}
   aSource: {fileID: 0}
-  agentSpeed: 3.5
+  agentSpeed: 4.5
   sightDistance: 10
   sightModifier: 0.2
   mask:

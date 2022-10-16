@@ -95,8 +95,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.66729355, y: 0.28887835, z: 0.72321033}
-  m_Center: {x: 0.012262344, y: -0.35556084, z: 0.0055994987}
+  m_Size: {x: 0.9613037, y: 0.28887832, z: 0.9476261}
+  m_Center: {x: 0.023925781, y: -0.35556084, z: 0.0024118423}
 --- !u!114 &4448010954388888984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,6 +113,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 0
+  collidersDebug: []
 --- !u!64 &5757975909403430025
 MeshCollider:
   m_ObjectHideFlags: 0

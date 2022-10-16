@@ -59,6 +59,7 @@ public class EnemyStateManager : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         currentState.OnTriggerEnter(other);
+        
     }
 
     public void OnCollisionEnter(Collision collision)

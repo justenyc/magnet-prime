@@ -49,8 +49,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeTime: 2
   damage: 50
-  moveSpeed: 22
-  trackSpeed: 0.5
+  moveSpeed: 24
+  trackSpeed: 0.6
   target: {fileID: 0}
   track: 1
 --- !u!33 &4222618900926354641
