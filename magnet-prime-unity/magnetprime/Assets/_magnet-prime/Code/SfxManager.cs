@@ -9,8 +9,8 @@ public class SfxManager : MonoBehaviour
     public static SfxManager instance;
     public AudioClip[] audioClips;
     public AudioSource mainSource;
-    [SerializeField] float playCd = 0.5f;
-    [SerializeField] float playCdTimer;
+    [SerializeField] AudioListener audioListener;
+    [SerializeField] List<AudioSource> currentlyPlaying = new List<AudioSource>();
 
     Dictionary<string, AudioClip> acDict;
 
@@ -22,6 +22,11 @@ public class SfxManager : MonoBehaviour
         InitializeDict();
     }
 
+    private void Start()
+    {
+        audioListener = audioListener ?? Camera.main?.GetComponent<AudioListener>();
+    }
+
     void InitializeDict()
     {
         foreach (AudioClip ac in audioClips)
@@ -29,12 +34,6 @@ public class SfxManager : MonoBehaviour
             acDict.Add(ac.name, ac);
         }
     }
-
-    /*private void FixedUpdate()
-    {
-        if (playCdTimer > 0)
-            playCdTimer -= Time.deltaTime;
-    }*/
 
     public AudioClip GetClipByName(string name)
     {
@@ -44,21 +43,21 @@ public class SfxManager : MonoBehaviour
     #region Public Actions
     public void PlayFromSource(AudioSource aSource, string sfxName, bool oneshot = false, bool loop = false, bool play = true)
     {
-        if (play)
+        if (play && currentlyPlaying.Count < 17)
         {
             aSource.loop = loop;
             aSource.clip = GetClipByName(sfxName);
+            AddCurrentlyPlaying(aSource);
 
             if (oneshot)
             {
+
                 aSource.PlayOneShot(aSource.clip);
             }
             else
             {
                 aSource.Play();
             }
-
-            playCdTimer = playCd;
         }
         else
         {
@@ -88,9 +87,22 @@ public class SfxManager : MonoBehaviour
     }
     #endregion
 
-    IEnumerator DelayFunction<T>(float delayTime, System.Action<T> callback, T arg)
+    void AddCurrentlyPlaying(AudioSource newSource)
+    {
+        currentlyPlaying.Add(newSource);
+        StartCoroutine(DelayAction(() => currentlyPlaying.Remove(newSource), newSource.clip.length));
+        return;
+    }
+
+    IEnumerator DelayAction(Action action, float delayTime)
     {
         yield return new WaitForSeconds(delayTime);
-        callback(arg);
+        action();
+    }
+
+    IEnumerator DelayAction<T>(Action<T[]> action, float delayTime, T[] args = null)
+    {
+        yield return new WaitForSeconds(delayTime);
+        action(args);
     }
 }

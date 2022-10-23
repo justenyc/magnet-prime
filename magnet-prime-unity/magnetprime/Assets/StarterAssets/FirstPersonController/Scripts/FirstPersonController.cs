@@ -27,6 +27,8 @@ namespace StarterAssets
         public float SpeedChangeRate = 10.0f;
         [Tooltip("How fast the player's gun fires")]
         public float FireRate = 0.1f;
+        [Tooltip("How much the gun adjusts a chargable objects charge strength by")]
+        public int chargeChangeStrength = 1;
         public float grabDistance = 5f;
         public float polarizeDistance = 5f;
         public float polarizeStrength = 10f;

@@ -129,7 +129,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-628988
+  m_Name: pb_Mesh-88636
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1270,7 +1270,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-636534
+  m_Name: pb_Mesh-96182
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -19392,7 +19392,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-631164
+  m_Name: pb_Mesh-90812
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -21479,7 +21479,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-624986
+  m_Name: pb_Mesh-84634
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -54219,7 +54219,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-632666
+  m_Name: pb_Mesh-92314
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -59096,7 +59096,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-629478
+  m_Name: pb_Mesh-89126
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -59744,7 +59744,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-639118
+  m_Name: pb_Mesh-98766
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -61522,6 +61522,10 @@ PrefabInstance:
     - target: {fileID: 1521159854, guid: d39b0968d2049844385d15be759ddab7, type: 3}
       propertyPath: polarity
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1521159854, guid: d39b0968d2049844385d15be759ddab7, type: 3}
+      propertyPath: chargeStrength
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 7492947975885624589, guid: d39b0968d2049844385d15be759ddab7, type: 3}
       propertyPath: m_LocalPosition.x

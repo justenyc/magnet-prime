@@ -31,7 +31,20 @@ public class Magnetism_Enemy : Magnetism_Movable
         }
     }
 
-
+    public override void ApplyForce(int magnetism, Vector3 direction)
+    {
+        if (magnetism != 0)
+        {
+            beingMagnetized = true;
+            rigidBody.useGravity = false;
+            rigidBody.AddForce(direction = magnetism > 0 ? direction * 2 : direction, ForceMode.Force);
+        }
+        else
+        {
+            beingMagnetized = false;
+            rigidBody.useGravity = true;
+        }
+    }
 
     void OnEnable()
     {

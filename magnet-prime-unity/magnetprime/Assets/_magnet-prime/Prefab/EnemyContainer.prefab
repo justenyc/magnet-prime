@@ -15732,7 +15732,7 @@ MonoBehaviour:
   myCharge: {fileID: 1521159854}
   grabbable: 0
   direction: {x: 0, y: 0, z: 0}
-  rigidBody: {fileID: 0}
+  rigidBody: {fileID: 7492947976853117870}
   polarizeCD: 5
   polarizeCDTime: 0
   dragToPlayer: 0
