@@ -49,6 +49,7 @@ public class Magnetism_Hookable : Magnetism
                 fpc.transform.DOMove(transform.position, hookSpeed, false);
                 StartCoroutine(fpc.TemporaryDisable(hookSpeed));
                 polarizeCDTime = polarizeCD;
+                SfxManager.instance.PlayFromSource(SfxManager.instance.mainSource, "PolarityNeg");
             }
             else if (fpc.polarity * myCharge.GetPolarity() > 0)
             {

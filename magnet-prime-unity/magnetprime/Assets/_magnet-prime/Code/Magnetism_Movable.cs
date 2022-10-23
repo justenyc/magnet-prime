@@ -95,6 +95,21 @@ public class Magnetism_Movable : Magnetism
         }
     }
 
+    public virtual void ApplyForce(int magnetism, Vector3 direction)
+    {
+        if (magnetism != 0)
+        {
+            beingMagnetized = true;
+            rigidBody.useGravity = false;
+            rigidBody.AddForce(direction, ForceMode.Force);
+        }
+        else
+        {
+            beingMagnetized = false;
+            rigidBody.useGravity = true;
+        }
+    }
+
     public void SetDragToPlayer(bool b)
     {
         dragToPlayer = b;
@@ -156,7 +171,7 @@ public class Magnetism_Movable : Magnetism
         if(collision.transform.TryGetComponent<FirstPersonController>(out FirstPersonController fpc))
         {
             dragToPlayer = false;
-            collision.rigidbody.AddExplosionForce(1, transform.position, 1);
+            collision?.rigidbody?.AddExplosionForce(1, transform.position, 1);
         }
         //Debug.Log(collision.transform.name);
         if (collision.impulse.magnitude > 10f)

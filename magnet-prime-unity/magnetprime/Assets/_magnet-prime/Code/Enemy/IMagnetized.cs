@@ -32,10 +32,10 @@ public class IMagnetized : IEnemyState
         }
         else
         {
-            /*if (stateChangeCounter > 0)
+            if (stateChangeCounter > 0)
                 stateChangeCounter -= Time.deltaTime;
             else
-                ChangeState(new IPatrolling(manager));*/
+                ChangeState(new IPatrolling(manager));
         }
         //Debug.Log($"IMagnetized says: stateChangeCounter = {stateChangeCounter}");
     }
