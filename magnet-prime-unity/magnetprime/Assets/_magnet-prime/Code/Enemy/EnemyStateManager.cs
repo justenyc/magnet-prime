@@ -22,23 +22,24 @@ public class EnemyStateManager : MonoBehaviour
     public Transform patrolPointHolder;
     [Tooltip("How long it takes for the eney to transition from the magnetized state to another state")]
     public float magnetizedTransitionTime = 2f;
-    [HideInInspector] public int patrolPointIndex = 0;
-    [HideInInspector] public bool patrolling = false;
-    [HideInInspector] public List<Transform> points;
+    public int patrolPointIndex { get; set; } = 0;
+    public bool patrolling = false;
+    public List<Transform> points { get; set; } = new List<Transform>();
 
     [Space(10)]
     public float fireRate = 1f;
-    [HideInInspector] public float fireRateCountdown;
+    public float fireRateCountdown { get; set; }
     public IEnemyState currentState;
-    [HideInInspector] public Transform playerPosition;
+    [HideInInspector] public Transform playerPosition { get; set; }
 
-    [HideInInspector] public Magnetism_Movable myMagnetism;
+    public Magnetism_Movable myMagnetism { get; private set; }
     // Start is called before the first frame update
     void Start()
     {
         myMagnetism = this.GetComponent<Magnetism_Movable>();
         fireRateCountdown = fireRate;
         aSource = this.GetComponent<AudioSource>();
+        InitializePatrolPoints();
 
         currentState = new IPatrolling(this);
         currentState.StateStart();
@@ -79,5 +80,22 @@ public class EnemyStateManager : MonoBehaviour
         fireRateCountdown = fireRate;
         SfxManager.instance.RandomizePitch(aSource, 1, 1.5f);
         SfxManager.instance.PlayFromSource(aSource, "Enemy_Projectile");
+    }
+
+    void InitializePatrolPoints()
+    {
+        if (patrolPointHolder != null)
+        {
+            foreach (Transform t in patrolPointHolder)
+            {
+                points.Add(t);
+                continue;
+            }
+        }
+        else
+        {
+            Debug.LogError("PatrolPoints in " + this.name + " were not found. Please check the inspector");
+            Debug.Break();
+        }
     }
 }

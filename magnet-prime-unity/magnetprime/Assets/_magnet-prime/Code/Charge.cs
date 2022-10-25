@@ -82,12 +82,12 @@ public class Charge : MonoBehaviour
         {
             if (player.lastShot)
             {
-                chargeStrength++;
+                chargeStrength += player.chargeChangeStrength;
                 chargeStrength = Mathf.Clamp(chargeStrength, -5, 5);
             }
             else
             {
-                chargeStrength--;
+                chargeStrength -= player.chargeChangeStrength;
                 chargeStrength = Mathf.Clamp(chargeStrength, -5, 5);
             }
 

@@ -14,7 +14,6 @@ public class IPatrolling : IEnemyState
 
     public void StateStart()
     {
-        InitializePatrolPoints();
         manager.sightLight.SetActive(true);
         manager.agent.enabled = true;
         manager.agent.destination = manager.points[manager.patrolPointIndex].position;
@@ -64,22 +63,6 @@ public class IPatrolling : IEnemyState
             {
                 Debug.Log(hit.collider.name);
             }
-        }
-    }
-
-    public void InitializePatrolPoints()
-    {
-        if (manager.patrolPointHolder != null)
-        {
-            foreach (Transform t in manager.patrolPointHolder)
-            {
-                manager.points.Add(t);
-            }
-        }
-        else
-        {
-            Debug.LogError("PatrolPoints in " + manager.name + " were not found. Please check the inspector");
-            Debug.Break();
         }
     }
 
