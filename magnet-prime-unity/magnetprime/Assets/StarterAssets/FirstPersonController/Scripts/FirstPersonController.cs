@@ -103,6 +103,9 @@ namespace StarterAssets
 
         public bool lastShot = false;
 
+        [SerializeField] Highlight currentHighlight = null;
+        [SerializeField] Highlight previousHighlight = null;
+
         private void Awake()
         {
             // get a reference to our main camera
@@ -131,6 +134,7 @@ namespace StarterAssets
             GroundedCheck();
             Move();
             Shoot();
+            Scan();
         }
 
         private void FixedUpdate()
@@ -166,6 +170,26 @@ namespace StarterAssets
 
                 // rotate the player left and right
                 transform.Rotate(Vector3.up * _rotationVelocity);
+            }
+        }
+
+        void Scan()
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity, gunMask))
+            {
+                if (hit.transform.TryGetComponent(out Highlight highlight))
+                {
+                    previousHighlight = currentHighlight ?? null;
+                    currentHighlight = highlight;
+                    highlight.HighLight(true);
+                }
+                else
+                {
+                    previousHighlight = currentHighlight ?? null;
+                    currentHighlight = null;
+                    previousHighlight?.HighLight(false);
+                }
             }
         }
 

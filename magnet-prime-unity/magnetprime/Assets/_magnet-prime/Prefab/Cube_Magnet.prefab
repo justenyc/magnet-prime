@@ -4829,6 +4829,7 @@ GameObject:
   - component: {fileID: 1499585230202852538}
   - component: {fileID: 1499585230202852541}
   - component: {fileID: 9130947986327432422}
+  - component: {fileID: 5120839730268025414}
   m_Layer: 6
   m_Name: Cube_Magnet
   m_TagString: Untagged
@@ -4880,6 +4881,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 2c5864e3f7e0cb84cbe1b97e16068754, type: 2}
+  - {fileID: 2100000, guid: d2ca280835e89af4eafd4f8fb3d9eda7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5067,6 +5069,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5120839730268025414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1499585230202852516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a91812116f897f4498792662cfb547d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _highlightMaterial: {fileID: 0}
+  isAimedAt: 0
 --- !u!1 &4983740081046598181
 GameObject:
   m_ObjectHideFlags: 0
