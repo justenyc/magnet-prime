@@ -146,4 +146,9 @@ public class UiManager : MonoBehaviour
     {
         hand.color = new Color(hand.color.r, hand.color.g, hand.color.b, show ? 1 : 0);
     }
+
+    public void ChangeCrosshairColor(Color newColor)
+    {
+        crosshair.GetComponent<Image>().color = newColor;
+    }
 }

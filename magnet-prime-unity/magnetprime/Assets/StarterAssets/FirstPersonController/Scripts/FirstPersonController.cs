@@ -39,7 +39,7 @@ namespace StarterAssets
         public Transform grabPoint;
         public LayerMask gunMask;
         public LayerMask polarizeMask;
-        public LineRenderer lineRenderer;
+        public LineRendererHelper lineRenderer;
         [HideInInspector] public bool hasGun { get; set; } = true;
 
         [Space(10)]
@@ -104,8 +104,8 @@ namespace StarterAssets
 
         public bool lastShot = false;
 
-        Highlight currentHighlight = null;
-        Highlight previousHighlight = null;
+        [SerializeField] Highlight currentHighlight = null;
+        [SerializeField] Highlight previousHighlight = null;
 
         private void Awake()
         {
@@ -181,52 +181,58 @@ namespace StarterAssets
             {
                 HighlightScanHandler(hit);
                 MagnetismScanHandler(hit);
+                return;
             }
+            ResetHighlights();
+            ResetLineRenderer();
         }
 
         void HighlightScanHandler(RaycastHit hit)
         {
             if (hit.transform.TryGetComponent(out Highlight highlight))
             {
-                if (Vector3.Distance(highlight.transform.position, transform.position) < grabDistance)
-                {
-                    currentHighlight = highlight;
-                    previousHighlight?.HighLight(false);
-
-                    previousHighlight = currentHighlight ?? null;
-                    highlight.HighLight(true);
-                    UiManager.instance.ShowHand(true);
-                }
-                else if (Vector3.Distance(highlight.transform.position, transform.position) < polarizeDistance)
-                {
-                    currentHighlight = highlight;
-                    previousHighlight?.HighLight(false);
-
-                    previousHighlight = currentHighlight ?? null;
-                    highlight.HighLight(true);
-                    UiManager.instance.ShowHand(false);
-                }
-            }
-            else
-            {
-                UiManager.instance.ShowHand(false);
+                currentHighlight = highlight;
+                previousHighlight?.HighLight(false);
 
                 previousHighlight = currentHighlight ?? null;
-                currentHighlight?.HighLight(false);
-                previousHighlight?.HighLight(false);
-                currentHighlight = null;
+                highlight.HighLight(true);
+                return;
             }
+            ResetHighlights();
         }
 
         void MagnetismScanHandler(RaycastHit hit)
         {
-            if (hit.transform.TryGetComponent(out Magnetism magnetism))
+            if (hit.transform.TryGetComponent(out Magnetism magnetism) && !(magnetism.GetType() == typeof(Magnetism_Enemy)))
             {
-                if(!(magnetism.GetType() == typeof(Magnetism_Enemy)))
+                if (Vector3.Distance(magnetism.transform.position, transform.position) < polarizeDistance)
                 {
-                    Debug.Log($"Magnetism: {hit.collider.name}");
+                    Color newColor = polarity > 0 ? Color.red : Color.blue;
+                    UiManager.instance.ChangeCrosshairColor(newColor);
+
+                    lineRenderer.EnableRenderer(true);
+                    lineRenderer.ChangeColor(newColor);
+                    lineRenderer.DrawLine(hit.transform.position, 4, () => lineRenderer.AddNoiseToPositions());
+                    return;
                 }
             }
+            ResetLineRenderer();
+        }
+
+        void ResetHighlights()
+        {
+            UiManager.instance.ShowHand(false);
+
+            previousHighlight = currentHighlight ?? null;
+            currentHighlight?.HighLight(false);
+            previousHighlight?.HighLight(false);
+            currentHighlight = null;
+        }
+
+        void ResetLineRenderer()
+        {
+            UiManager.instance.ChangeCrosshairColor(Color.white);
+            lineRenderer.EnableRenderer(false);
         }
 
         private void Move()
@@ -498,9 +504,9 @@ namespace StarterAssets
                 held.transform.localRotation = Quaternion.Euler(Vector3.up + held.transform.localRotation.eulerAngles);
 
                 RaycastHit hit;
-                if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity))
+                if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity))
                 {
-                    if(!hit.collider.TryGetComponent(out Magnetism_Movable mm))
+                    if (!hit.collider.TryGetComponent(out Magnetism_Movable mm))
                     {
                         grabPoint.localPosition = Camera.main.transform.InverseTransformPoint(hit.point);
                     }
@@ -515,12 +521,12 @@ namespace StarterAssets
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, polarizeDistance, polarizeMask))
             {
-                Charge charge = hit.collider.GetComponent<Charge>();
-                int? magDirection = charge?.GetMagnetismDirection(polarity);
-                if (magDirection > 0) 
+                Magnetism magnetism = hit.collider.GetComponent<Magnetism>();
+                int? magDirection = magnetism?.myCharge?.GetMagnetismDirection(polarity);
+                if (magDirection > 0 && magnetism.GetType() == typeof(Magnetism_Movable))
                 {
                     held = hit.collider.gameObject;
-                    GrabCheck(); 
+                    GrabCheck();
                 }
 
                 //Debug.Log(hit.transform.name);

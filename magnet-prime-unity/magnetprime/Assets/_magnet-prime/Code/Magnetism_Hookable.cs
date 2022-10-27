@@ -8,7 +8,6 @@ using DG.Tweening;
 [RequireComponent(typeof(Charge))]
 public class Magnetism_Hookable : Magnetism
 {
-    public Charge myCharge;
     public Action<int> polarityChange;
     public float hookSpeed = 1;
     public float polarizeCD = 5f;

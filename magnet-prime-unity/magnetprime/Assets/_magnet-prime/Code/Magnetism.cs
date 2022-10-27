@@ -5,6 +5,8 @@ using StarterAssets;
 
 public class Magnetism : MonoBehaviour
 {
+    public Charge myCharge;
+
     private void Start()
     {
 

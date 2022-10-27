@@ -10,7 +10,6 @@ using UnityEngine;
 public class Magnetism_Movable : Magnetism
 {
     public startTransform startingTransform;
-    public Charge myCharge;
     public bool grabbable;
     public Vector3 direction;
     public Rigidbody rigidBody;

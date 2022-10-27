@@ -7,7 +7,6 @@ using UnityEngine;
 [RequireComponent(typeof(Charge))]
 public class Magnetism_Immovable : Magnetism
 {
-    public Charge myCharge;
     public float magnetismStrength = 1;
     public List<Magnetism_Movable> movableObjectsWithCharge;
     [SerializeField] ParticleSystem posEffect;
