@@ -39,7 +39,8 @@ namespace StarterAssets
         public Transform grabPoint;
         public LayerMask gunMask;
         public LayerMask polarizeMask;
-        public bool hasGun = true;
+        public LineRenderer lineRenderer;
+        [HideInInspector] public bool hasGun { get; set; } = true;
 
         [Space(10)]
         [Tooltip("The height the player can jump")]
@@ -103,8 +104,8 @@ namespace StarterAssets
 
         public bool lastShot = false;
 
-        [SerializeField] Highlight currentHighlight = null;
-        [SerializeField] Highlight previousHighlight = null;
+        Highlight currentHighlight = null;
+        Highlight previousHighlight = null;
 
         private void Awake()
         {
@@ -178,17 +179,52 @@ namespace StarterAssets
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity, gunMask))
             {
-                if (hit.transform.TryGetComponent(out Highlight highlight))
+                HighlightScanHandler(hit);
+                MagnetismScanHandler(hit);
+            }
+        }
+
+        void HighlightScanHandler(RaycastHit hit)
+        {
+            if (hit.transform.TryGetComponent(out Highlight highlight))
+            {
+                if (Vector3.Distance(highlight.transform.position, transform.position) < grabDistance)
                 {
-                    previousHighlight = currentHighlight ?? null;
                     currentHighlight = highlight;
-                    highlight.HighLight(true);
-                }
-                else
-                {
-                    previousHighlight = currentHighlight ?? null;
-                    currentHighlight = null;
                     previousHighlight?.HighLight(false);
+
+                    previousHighlight = currentHighlight ?? null;
+                    highlight.HighLight(true);
+                    UiManager.instance.ShowHand(true);
+                }
+                else if (Vector3.Distance(highlight.transform.position, transform.position) < polarizeDistance)
+                {
+                    currentHighlight = highlight;
+                    previousHighlight?.HighLight(false);
+
+                    previousHighlight = currentHighlight ?? null;
+                    highlight.HighLight(true);
+                    UiManager.instance.ShowHand(false);
+                }
+            }
+            else
+            {
+                UiManager.instance.ShowHand(false);
+
+                previousHighlight = currentHighlight ?? null;
+                currentHighlight?.HighLight(false);
+                previousHighlight?.HighLight(false);
+                currentHighlight = null;
+            }
+        }
+
+        void MagnetismScanHandler(RaycastHit hit)
+        {
+            if (hit.transform.TryGetComponent(out Magnetism magnetism))
+            {
+                if(!(magnetism.GetType() == typeof(Magnetism_Enemy)))
+                {
+                    Debug.Log($"Magnetism: {hit.collider.name}");
                 }
             }
         }
@@ -367,6 +403,11 @@ namespace StarterAssets
 
         public void OnGrab(InputValue value)
         {
+            GrabCheck();
+        }
+
+        void GrabCheck()
+        {
             if (held == null)
             {
                 RaycastHit hit;
@@ -399,7 +440,7 @@ namespace StarterAssets
                 }
                 else
                 {
-                    
+
                 }
             }
             else
@@ -409,11 +450,13 @@ namespace StarterAssets
                 grabbed.grabbable = true;
                 held.GetComponent<Rigidbody>().useGravity = true;
                 held.GetComponent<Rigidbody>().mass = 1;
+
                 Collider c = held.GetComponent<Collider>();
                 if (c.GetType() == typeof(SphereCollider))
                     held.GetComponent<SphereCollider>().radius = 0.5f;
                 else if (c.GetType() == typeof(BoxCollider))
                     held.GetComponent<BoxCollider>().size = new Vector3(1, 1, 1);
+
                 held.layer = LayerMask.NameToLayer("Moveable");
                 held.transform.parent = null;
                 grabbed.EnteredBoxField -= GrabEnteredBoxField;
@@ -472,6 +515,14 @@ namespace StarterAssets
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, polarizeDistance, polarizeMask))
             {
+                Charge charge = hit.collider.GetComponent<Charge>();
+                int? magDirection = charge?.GetMagnetismDirection(polarity);
+                if (magDirection > 0) 
+                {
+                    held = hit.collider.gameObject;
+                    GrabCheck(); 
+                }
+
                 //Debug.Log(hit.transform.name);
                 if (InvokePolarize != null)
                     InvokePolarize(this.gameObject, hit.collider.gameObject);

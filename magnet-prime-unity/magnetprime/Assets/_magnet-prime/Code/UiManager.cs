@@ -18,6 +18,7 @@ public class UiManager : MonoBehaviour
     public GameObject interactMessage;
     public RectTransform textBox;
     public RectTransform crosshair;
+    public Image hand;
     public float fadeTextTime = 2f;
 
     [Header("Pause Canvas Elements")]
@@ -139,5 +140,10 @@ public class UiManager : MonoBehaviour
                 keyImages[ii].enabled = false;
             }
         }
+    }
+
+    public void ShowHand(bool show)
+    {
+        hand.color = new Color(hand.color.r, hand.color.g, hand.color.b, show ? 1 : 0);
     }
 }

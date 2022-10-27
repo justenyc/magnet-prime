@@ -128,4 +128,9 @@ public class Charge : MonoBehaviour
                 polarityChange(polarity);
         }
     }
+
+    public int GetMagnetismDirection(int comparePolarity)
+    {
+        return polarity * comparePolarity;
+    }
 }
