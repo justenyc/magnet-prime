@@ -18,6 +18,7 @@ public class Magnetism_Movable : Magnetism
     public bool dragToPlayer = false;
     float polarizeStrength = 1;
     public bool beingMagnetized = false;
+    public GameObject sphereVFX;
     [SerializeField] ParticleSystem posEffect = null;
     [SerializeField] ParticleSystem negEffect = null;
 
@@ -60,7 +61,7 @@ public class Magnetism_Movable : Magnetism
         }
         else
         {
-            dragToPlayer = false;
+            SetDragToPlayer(false);
         }
     }
     public int GetPolarity()
@@ -72,15 +73,18 @@ public class Magnetism_Movable : Magnetism
     {
         FirstPersonController fpc = player.GetComponent<FirstPersonController>();
         int action = fpc.polarity * myCharge.GetPolarity();
+        if (!dragToPlayer)
+        {
+            direction = fpc.transform.position + Vector3.up + fpc.transform.forward * fpc.grabDistance;
+        }
 
         if (objectHit == this.gameObject)
         {
             if (fpc.polarity * myCharge.GetPolarity() < 0 && grabbable == true)
             {
-                dragToPlayer = true;
+                SetDragToPlayer(true);
                 polarizeStrength = fpc.polarizeStrength;
-                direction = fpc.transform.position + Vector3.up + fpc.transform.forward * fpc.grabDistance;
-                polarizeCDTime = polarizeCD;
+                polarizeCDTime = polarizeCDTime > 0 ? polarizeCDTime : polarizeCD;
                 SfxManager.instance.SetVolume(SfxManager.instance.mainSource, 1);
                 SfxManager.instance.PlayFromSource(SfxManager.instance.mainSource, "Polarize_Pull", oneshot: true);
             }
@@ -112,6 +116,7 @@ public class Magnetism_Movable : Magnetism
     public void SetDragToPlayer(bool b)
     {
         dragToPlayer = b;
+        sphereVFX.SetActive(b);
     }
 
     public IEnumerator LerpScale(bool direction)

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4448010954388888678}
   - component: {fileID: 4448010954388888985}
   - component: {fileID: 4448010954388888984}
-  m_Layer: 4
+  m_Layer: 8
   m_Name: Switch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,7 +113,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 0
-  collidersDebug: []
+  myMat: {fileID: 0}
 --- !u!64 &5757975909403430025
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -141,7 +141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3706376693267889271, guid: 9bafd6fc8b20ccb4ca78728b4899dc01, type: 3}
       propertyPath: m_Layer
-      value: 4
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4045465410981897933, guid: 9bafd6fc8b20ccb4ca78728b4899dc01, type: 3}
       propertyPath: m_RootOrder

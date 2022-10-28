@@ -39684,6 +39684,7 @@ MonoBehaviour:
   head: {fileID: 4904667575414195}
   sightLight: {fileID: 509955084}
   projectile: {fileID: 4222618900926354644, guid: 25dc9f809cb500448add98ab328e4995, type: 3}
+  radiusDetector: {fileID: 557741421}
   rb: {fileID: 7492947976853117870}
   aSource: {fileID: 0}
   agentSpeed: 4.5

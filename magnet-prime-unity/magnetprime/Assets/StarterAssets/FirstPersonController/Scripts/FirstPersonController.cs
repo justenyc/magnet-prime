@@ -181,10 +181,12 @@ namespace StarterAssets
             {
                 HighlightScanHandler(hit);
                 MagnetismScanHandler(hit);
+                GrabDistanceScanHandler(hit);
                 return;
             }
             ResetHighlights();
             ResetLineRenderer();
+            UiManager.instance.ShowHand(false);
         }
 
         void HighlightScanHandler(RaycastHit hit)
@@ -217,6 +219,19 @@ namespace StarterAssets
                 }
             }
             ResetLineRenderer();
+        }
+
+        void GrabDistanceScanHandler(RaycastHit hit)
+        {
+            if (hit.transform.TryGetComponent(out Magnetism_Movable magnetism))
+            {
+                if (Vector3.Distance(magnetism.transform.position, transform.position) <= grabDistance)
+                {
+                    UiManager.instance.ShowHand(true);
+                    return;
+                }
+            }
+            UiManager.instance.ShowHand(false);
         }
 
         void ResetHighlights()
@@ -504,7 +519,7 @@ namespace StarterAssets
                 held.transform.localRotation = Quaternion.Euler(Vector3.up + held.transform.localRotation.eulerAngles);
 
                 RaycastHit hit;
-                if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity))
+                if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity, gunMask))
                 {
                     if (!hit.collider.TryGetComponent(out Magnetism_Movable mm))
                     {
