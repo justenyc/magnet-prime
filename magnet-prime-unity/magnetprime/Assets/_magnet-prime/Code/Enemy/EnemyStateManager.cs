@@ -11,6 +11,7 @@ public class EnemyStateManager : MonoBehaviour
     public Transform head;
     public GameObject sightLight;
     public GameObject projectile;
+    public GameObject radiusDetector;
     public Rigidbody rb;
     public AudioSource aSource;
 
@@ -26,17 +27,17 @@ public class EnemyStateManager : MonoBehaviour
     public bool patrolling = false;
     public List<Transform> points { get; set; } = new List<Transform>();
 
-    [Space(10)]
+    [Header("Enemy Properties")]
     public float fireRate = 1f;
     public float fireRateCountdown { get; set; }
     public IEnemyState currentState;
     [HideInInspector] public Transform playerPosition { get; set; }
 
-    public Magnetism_Movable myMagnetism { get; private set; }
+    public Magnetism_Enemy myMagnetism { get; private set; }
     // Start is called before the first frame update
     void Start()
     {
-        myMagnetism = this.GetComponent<Magnetism_Movable>();
+        myMagnetism = this.GetComponent<Magnetism_Enemy>();
         fireRateCountdown = fireRate;
         aSource = this.GetComponent<AudioSource>();
         InitializePatrolPoints();

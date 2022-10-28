@@ -15,6 +15,7 @@ public class IPatrolling : IEnemyState
     public void StateStart()
     {
         manager.sightLight.SetActive(true);
+        manager.radiusDetector.SetActive(true);
         manager.agent.enabled = true;
         manager.agent.destination = manager.points[manager.patrolPointIndex].position;
         manager.animator.SetBool("Magnetized", manager.myMagnetism.beingMagnetized);

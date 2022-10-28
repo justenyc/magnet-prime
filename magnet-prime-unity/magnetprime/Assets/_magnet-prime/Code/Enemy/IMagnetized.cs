@@ -17,6 +17,7 @@ public class IMagnetized : IEnemyState
     public void StateStart()
     {
         manager.sightLight.SetActive(false);
+        manager.radiusDetector.SetActive(false);
         manager.agent.enabled = false;
         stateChangeCounter = manager.magnetizedTransitionTime;
         manager.GetComponentInChildren<ParticleSystem>().Play();
@@ -32,10 +33,13 @@ public class IMagnetized : IEnemyState
         }
         else
         {
-            if (stateChangeCounter > 0)
-                stateChangeCounter -= Time.deltaTime;
-            else
-                ChangeState(new IPatrolling(manager));
+            if (manager.myMagnetism.reboot)
+            {
+                if (stateChangeCounter > 0)
+                    stateChangeCounter -= Time.deltaTime;
+                else
+                    ChangeState(new IPatrolling(manager));
+            }
         }
         //Debug.Log($"IMagnetized says: stateChangeCounter = {stateChangeCounter}");
     }
@@ -55,7 +59,7 @@ public class IMagnetized : IEnemyState
             SfxManager.instance.RandomizePitch(manager.aSource, 0.1f, 0.5f);
             SfxManager.instance.PlayFromSource(manager.aSource, "Box_clang", oneshot: true);
         }
-        else if(collision.impulse.magnitude > 5f)
+        else if (collision.impulse.magnitude > 5f)
         {
             float vol = 0.25f * manager.rb.velocity.magnitude;
             SfxManager.instance.SetVolume(manager.aSource, Mathf.Clamp(vol, 0.25f, 1));

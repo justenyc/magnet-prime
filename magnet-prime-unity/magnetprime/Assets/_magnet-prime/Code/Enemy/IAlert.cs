@@ -50,7 +50,7 @@ public class IAlert : IEnemyState
             else
             {
                 manager.playerPosition = null;
-                ChangeState(new IPatrolling(manager));
+                ChangeState(new IPatrolling(manager));                
             }
         }
     }

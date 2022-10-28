@@ -9,7 +9,7 @@ using UnityEngine;
 public class Magnetism_Enemy : Magnetism_Movable
 {
     public bool randomizePolarity = true;
-    public int magentismDirection { get; private set; } = 0;
+    public bool reboot { get; private set; } = true;
     private void Start()
     {
         if(randomizePolarity == true)
@@ -34,7 +34,7 @@ public class Magnetism_Enemy : Magnetism_Movable
 
     public override void ApplyForce(int magnetism, Vector3 direction)
     {
-        magentismDirection = magnetism;
+        if (reboot && beingMagnetized) { reboot = magnetism >= 0 ? true : false; }
         if (magnetism != 0)
         {
             beingMagnetized = true;
