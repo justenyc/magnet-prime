@@ -9,6 +9,7 @@ public class Interactable : MonoBehaviour
     public GameObject playerGun = null;
     public GameObject pedastalGun = null;
     public UnityEvent customEvent;
+    bool interact = true;
 
     public virtual void Interact()
     {
@@ -22,13 +23,13 @@ public class Interactable : MonoBehaviour
         FindObjectOfType<FirstPersonController>().hasGun = true;
         customEvent.RemoveAllListeners();
         SfxManager.instance.PlayFromSource(SfxManager.instance.mainSource, "KeyPickUp", true);
-        this.enabled = false;
+        interact = false;
     }
 
     public virtual void OnTriggerEnter(Collider other)
     {
         FirstPersonController fpc = other.GetComponentInChildren<FirstPersonController>();
-        if (fpc)
+        if (fpc && interact)
         {
             fpc.Interact += Interact;
             UiManager.instance.EnableInteractMessage(true);

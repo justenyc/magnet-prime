@@ -155,6 +155,7 @@ public class Magnetism_Movable : Magnetism
     {
         try
         {
+            Instantiate(VfxManager.instance.GetEffect("BoxDeath"), transform.position, Quaternion.identity);
             this.transform.position = startingTransform.startPos;
             this.transform.rotation = startingTransform.startRot;
             this.transform.localScale = startingTransform.startScale;

@@ -39,6 +39,7 @@ namespace StarterAssets
         public Transform grabPoint;
         public LayerMask gunMask;
         public LayerMask polarizeMask;
+        public LayerMask grabMask;
         public LineRendererHelper lineRenderer;
         [HideInInspector] public bool hasGun { get; set; } = true;
 
@@ -225,7 +226,8 @@ namespace StarterAssets
         {
             if (hit.transform.TryGetComponent(out Magnetism_Movable magnetism))
             {
-                if (Vector3.Distance(magnetism.transform.position, transform.position) <= grabDistance)
+                //Debug.Log($"Distance: {Vector3.Distance(magnetism.transform.position, Camera.main.transform.position)}, GrabDistance: {grabDistance}");
+                if (Vector3.Distance(magnetism.transform.position, Camera.main.transform.position) <= grabDistance)
                 {
                     UiManager.instance.ShowHand(true);
                     return;
@@ -432,7 +434,7 @@ namespace StarterAssets
             if (held == null)
             {
                 RaycastHit hit;
-                if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, grabDistance))
+                if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, grabDistance, grabMask))
                 {
                     Magnetism_Movable grabbed = hit.collider.GetComponent<Magnetism_Movable>();
                     if (grabbed != null && grabbed.grabbable == true)
@@ -519,7 +521,7 @@ namespace StarterAssets
                 held.transform.localRotation = Quaternion.Euler(Vector3.up + held.transform.localRotation.eulerAngles);
 
                 RaycastHit hit;
-                if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity, gunMask))
+                if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity, grabMask))
                 {
                     if (!hit.collider.TryGetComponent(out Magnetism_Movable mm))
                     {

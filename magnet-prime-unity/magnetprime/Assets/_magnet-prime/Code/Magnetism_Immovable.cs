@@ -39,8 +39,9 @@ public class Magnetism_Immovable : Magnetism
             if (temp == null)
             {
                 movableObjectsWithCharge.Remove(temp);
+                return;
             }
-            temp.ApplyForce(magnetism, targetDirection(temp.transform.position).normalized * magnetismStrength * Mathf.Abs(myCharge.GetChargeStrength()) / 10 * magnetism);
+            temp?.ApplyForce(magnetism, targetDirection(temp.transform.position).normalized * magnetismStrength * Mathf.Abs(myCharge.GetChargeStrength()) / 10 * magnetism);
         }
     }
 
