@@ -18,7 +18,7 @@ public class Magnetism_Movable : Magnetism
     public bool dragToPlayer = false;
     float polarizeStrength = 1;
     public bool beingMagnetized = false;
-    public GameObject sphereVFX;
+    public GameObject sphereVFX = null;
     [SerializeField] ParticleSystem posEffect = null;
     [SerializeField] ParticleSystem negEffect = null;
 

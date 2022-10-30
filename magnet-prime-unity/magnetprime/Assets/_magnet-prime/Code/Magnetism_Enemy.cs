@@ -19,6 +19,11 @@ public class Magnetism_Enemy : Magnetism_Movable
         }
     }
 
+    private void FixedUpdate()
+    {
+        
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         GetComponent<EnemyStateManager>().OnCollisionEnter(collision);
