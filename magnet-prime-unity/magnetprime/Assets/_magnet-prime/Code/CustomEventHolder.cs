@@ -27,7 +27,7 @@ public class CustomEventHolder : MonoBehaviour
     }
     public void A_LoadSceneAdditive(string s)
     {
-        SceneManager.LoadSceneAsync(s, LoadSceneMode.Additive);
+        var newSceneOperation = SceneManager.LoadSceneAsync(s, LoadSceneMode.Additive);
     }
 
     public void A_EnableObject(GameObject go)
@@ -50,6 +50,12 @@ public class CustomEventHolder : MonoBehaviour
     {
         this.GetComponent<Collider>().enabled = false;
         //this.enabled = false;
+    }
+
+    public void A_ChangeActiveScene(string sceneName)
+    {
+        Scene scene = SceneManager.GetSceneByName(sceneName);
+        SceneManager.SetActiveScene(scene);
     }
 
     private void OnTriggerExit(Collider other)

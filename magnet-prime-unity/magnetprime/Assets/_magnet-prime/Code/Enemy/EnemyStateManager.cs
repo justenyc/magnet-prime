@@ -9,6 +9,7 @@ public class EnemyStateManager : MonoBehaviour
     public NavMeshAgent agent;
     public Animator animator;
     public Transform head;
+    public Transform hand;
     public GameObject sightLight;
     public GameObject projectile;
     public GameObject radiusDetector;
@@ -76,7 +77,7 @@ public class EnemyStateManager : MonoBehaviour
 
     public void FireProjectile(Transform target)
     {
-        Projectile newProj = Instantiate(projectile, transform.position + transform.forward, transform.rotation).GetComponent<Projectile>();
+        Projectile newProj = Instantiate(projectile, hand.transform.position, transform.rotation).GetComponent<Projectile>();
         newProj.target = target;
         fireRateCountdown = fireRate;
         SfxManager.instance.RandomizePitch(aSource, 1, 1.5f);

@@ -41,7 +41,7 @@ namespace StarterAssets
         public LayerMask polarizeMask;
         public LayerMask grabMask;
         public LineRendererHelper lineRenderer;
-        [HideInInspector] public bool hasGun { get; set; } = true;
+        public bool hasGun = true;
 
         [Space(10)]
         [Tooltip("The height the player can jump")]
