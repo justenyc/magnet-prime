@@ -8,6 +8,7 @@ public class Interactable_KeyDoor : Interactable
 {
     public List<Interactable_Collectable> KeysRequired;
     Dictionary<Interactable_Collectable, bool> keysFound;
+    public int numKeysRequired = 1;
     public LayerMask Mask;
 
     [SerializeField] AudioSource audioSource;
@@ -41,19 +42,21 @@ public class Interactable_KeyDoor : Interactable
                 OnDisable();
                 foreach (Collider c in GetComponentsInChildren<Collider>())
                     c.enabled = false;
+                foreach (Interactable_Collectable key in KeysRequired)
+                    Inventory.instance.items.Remove(key);
                 SfxManager.instance.PlayFromSource(audioSource, "Door_Open");
                 UiManager.instance.SetInfoMessage("");
             }
             else
             {
                 SfxManager.instance.PlayFromSource(SfxManager.instance.mainSource, "KeyNotFound");
-                UiManager.instance.SetInfoMessage("Required Keys Not Found");
+                UiManager.instance.SetInfoMessage($"{numKeysRequired} keys required");
             }
         }
         else
         {
             SfxManager.instance.PlayFromSource(SfxManager.instance.mainSource, "KeyNotFound");
-            UiManager.instance.SetInfoMessage("Required Keys Not Found");
+            UiManager.instance.SetInfoMessage($"{numKeysRequired} keys required");
         }
     }
 
