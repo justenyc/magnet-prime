@@ -2008,10 +2008,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 323863994015957856, guid: dca97501201d8844c97b3ecc2d3b5226, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 3d807c59dfb3332449fa4d0f1c726185, type: 2}
     - target: {fileID: 1499585230202852516, guid: dca97501201d8844c97b3ecc2d3b5226, type: 3}
       propertyPath: m_Name
       value: Cube_Magnet (2)
@@ -2060,12 +2056,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8306785664818077816, guid: dca97501201d8844c97b3ecc2d3b5226, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7397601033071353475, guid: dca97501201d8844c97b3ecc2d3b5226, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dca97501201d8844c97b3ecc2d3b5226, type: 3}
 --- !u!1 &1210523810
 GameObject:
@@ -2470,7 +2461,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7492947976801128832, guid: d39b0968d2049844385d15be759ddab7, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7492947976801128833, guid: d39b0968d2049844385d15be759ddab7, type: 3}
       propertyPath: m_RootOrder
@@ -2833,7 +2824,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1856
+  m_Name: pb_Mesh19756
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4288,7 +4279,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-154782
+  m_Name: pb_Mesh-1884
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
