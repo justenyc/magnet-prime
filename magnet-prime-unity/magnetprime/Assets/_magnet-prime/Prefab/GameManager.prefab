@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2168144645156794228}
   - component: {fileID: 2168144645156794231}
   - component: {fileID: 1164207163}
+  - component: {fileID: -8068907298714044729}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -86,8 +87,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8744f0d5a4eca464380883fa903b176d, type: 3}
   - {fileID: 8300000, guid: e6f3f80d6973239469c93e2802231102, type: 3}
   mainSource: {fileID: 0}
-  playCd: 0.5
-  playCdTimer: 0
+  audioListener: {fileID: 0}
+  currentlyPlaying: []
 --- !u!114 &1164207163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103,3 +104,18 @@ MonoBehaviour:
   defaultCheckpoint: {fileID: 0}
   currentCheckpoint: {fileID: 0}
   playerHealth: {fileID: 0}
+--- !u!114 &-8068907298714044729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2168144645156794226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b665445775363964296bc9b5ec16158c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vfxObjects:
+  - {fileID: 8597083015080419748, guid: 9399ceb4c0752394e97e6cacaca7719e, type: 3}
+  - {fileID: 4027191762789923562, guid: 49d3c327947e9a548bf6ee6728909b3a, type: 3}

@@ -33,7 +33,7 @@ public class Magnetism_Enemy : Magnetism_Movable
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("BoxForceField") || other.gameObject.layer == LayerMask.NameToLayer("AbsoluteDeath"))
         {
-            Destroy(this.gameObject);
+            Death();
         }
     }
 
@@ -56,5 +56,14 @@ public class Magnetism_Enemy : Magnetism_Movable
     void OnEnable()
     {
         Start();
+    }
+
+    void Death()
+    {
+        GameObject effect = Instantiate(VfxManager.instance.GetEffect("RoboDeath"), transform.position, Quaternion.identity);
+        AudioSource aSource = effect.GetComponent<AudioSource>();
+        SfxManager.instance.RandomizePitch(aSource, 0.25f, 0.5f);
+        SfxManager.instance.PlayFromSource(aSource, "BoxRespawn");
+        Destroy(this.gameObject);
     }
 }

@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "VfxManager", menuName = "ScriptableObjects/VfxManager", order = 1)]
-public class VfxManager : ScriptableObject
+public class VfxManager : MonoBehaviour
 {
     public static VfxManager instance;
     public GameObject[] vfxObjects;
-    public Dictionary<string, GameObject> vfxDict;
+    public Dictionary<string, GameObject> vfxDict = new Dictionary<string, GameObject>();
 
-    public void Initialize()
+    void Start()
     {
+        instance = instance ?? this;
         PopDict();
     }
 
