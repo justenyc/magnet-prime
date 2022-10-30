@@ -39836,6 +39836,7 @@ MonoBehaviour:
   polarizeCDTime: 0
   dragToPlayer: 0
   beingMagnetized: 0
+  sphereVFX: {fileID: 0}
   posEffect: {fileID: 5919976663118103520}
   negEffect: {fileID: 2032772615391089880}
   randomizePolarity: 1
