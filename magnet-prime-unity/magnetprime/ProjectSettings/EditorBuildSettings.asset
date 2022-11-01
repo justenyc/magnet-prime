@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/_magnet-prime/Scenes/Title.unity
+    guid: 2d941cc757245ea41b40ffe32eb57712
+  - enabled: 1
     path: Assets/_magnet-prime/Scenes/Area 1.unity
     guid: 9b8196e98799cde49ae8feda9a6a12fe
   - enabled: 1
