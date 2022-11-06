@@ -34249,6 +34249,7 @@ MonoBehaviour:
   regenRate: 20
   maxHealth: 100
   currHealth: 100
+  camShake: {fileID: 9057707103331243142}
 --- !u!114 &1134008287052492205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39342,6 +39343,18 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2862278905927073192}
   m_Enabled: 1
+--- !u!114 &9057707103331243142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2862278905927073192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 989556f7820962c4486d5e754a3d3708, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &418337412
 MonoBehaviour:
   m_ObjectHideFlags: 0

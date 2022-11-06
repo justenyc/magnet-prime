@@ -34,6 +34,7 @@ public class RadialDetector : MonoBehaviour
                 temp.GetComponent<Rigidbody>().useGravity = true;
                 temp.beingMagnetized = false;
                 root.movableObjectsWithCharge.Remove(temp);
+                root.RemoveLine();
             }
             catch
             {

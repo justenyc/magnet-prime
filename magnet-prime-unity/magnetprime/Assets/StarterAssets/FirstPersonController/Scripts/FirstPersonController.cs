@@ -220,8 +220,8 @@ namespace StarterAssets
                     UiManager.instance.ChangeCrosshairColor(newColor);
 
                     lineRenderer.EnableRenderer(true);
-                    lineRenderer.ChangeColor(newColor);
-                    lineRenderer.DrawLine(hit.transform.position, 4, () => lineRenderer.AddNoiseToPositions());
+                    lineRenderer.ChangeColor(newColor, 0.5f);
+                    lineRenderer.DrawLine(hit.transform.position, 4, Camera.main.transform , () => lineRenderer.AddNoiseToPositions());
                     return;
                 }
             }

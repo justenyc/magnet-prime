@@ -11,6 +11,11 @@ public class Magnetism_Immovable : Magnetism
     public List<Magnetism_Movable> movableObjectsWithCharge;
     [SerializeField] ParticleSystem posEffect;
     [SerializeField] ParticleSystem negEffect;
+    [SerializeField] Transform lines;
+    [SerializeField] GameObject lineRendererPrefab;
+    [SerializeField] List<GameObject> lineRenderers;
+    [SerializeField] float lineNoiseStrength = 0.1f;
+
     public AudioSource audioSource { get; private set; }
 
     public Action<int> polarityChange;
@@ -26,22 +31,44 @@ public class Magnetism_Immovable : Magnetism
 
         audioSource = this.GetComponent<AudioSource>();
         myCharge.polarityChange += myPolarityChange;
+        if(movableObjectsWithCharge.Count != lineRenderers.Count)
+        {
+            lineRenderers.Clear();
+            foreach(Transform t in lines)
+            {
+                Destroy(t.gameObject);
+            }
+
+            for (int ii = 0; ii < movableObjectsWithCharge.Count; ii++)
+            {
+                GameObject go = Instantiate(lineRendererPrefab, lines.transform);
+                lineRenderers.Add(go);
+            }
+        }
         //movableObjectsWithCharge = new List<Magnetism_Movable>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        for (int ii = 0; ii < movableObjectsWithCharge.Count; ii++)
+        if (movableObjectsWithCharge.Count > 0)
         {
-            Magnetism_Movable temp = movableObjectsWithCharge[ii];
-            int magnetism = MagnetismAction(temp.GetPolarity());
-            if (temp == null)
+            for (int ii = 0; ii < movableObjectsWithCharge.Count; ii++)
             {
-                movableObjectsWithCharge.Remove(temp);
-                return;
+                Magnetism_Movable temp = movableObjectsWithCharge[ii];
+                int magnetism = MagnetismAction(temp.GetPolarity());
+                if (temp == null)
+                {
+                    movableObjectsWithCharge.Remove(temp);
+                    lineRenderers.RemoveAt(0);
+                    return;
+                }
+                temp?.ApplyForce(magnetism, targetDirection(temp.transform.position).normalized * magnetismStrength * Mathf.Abs(myCharge.GetChargeStrength()) / 10 * magnetism);
+                LineRendererHelper lrh = lineRenderers[ii].GetComponent<LineRendererHelper>();
+                lrh.noiseStrength = lineNoiseStrength;
+                lrh.DrawLine(temp.transform.position, 4, this.transform, lrh.AddNoiseToPositions);
+                lrh.ChangeColor(myCharge.GetPolarity() > 0 ? Color.red : myCharge.GetPolarity() < 0 ? Color.blue : new Color(1,1,1), myCharge.GetPolarity() == 0 ? 0 : 1);
             }
-            temp?.ApplyForce(magnetism, targetDirection(temp.transform.position).normalized * magnetismStrength * Mathf.Abs(myCharge.GetChargeStrength()) / 10 * magnetism);
         }
     }
 
@@ -51,11 +78,23 @@ public class Magnetism_Immovable : Magnetism
         {
             movableObjectsWithCharge.Remove(movable);
             movableObjectsWithCharge.Add(movable);
+
+            GameObject go = Instantiate(lineRendererPrefab, lines.transform);
+            lineRenderers.Add(go);
         }
         catch
         {
             movableObjectsWithCharge.Add(movable);
+
+            GameObject go = Instantiate(lineRendererPrefab, lines.transform);
+            lineRenderers.Add(go);
         }
+    }
+
+    public void RemoveLine()
+    {
+        Destroy(lineRenderers[0]);
+        lineRenderers.RemoveAt(0);
     }
 
     Vector3 targetDirection(Vector3 target)
