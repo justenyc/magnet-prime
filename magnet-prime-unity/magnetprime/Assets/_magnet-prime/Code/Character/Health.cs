@@ -43,7 +43,7 @@ public class Health : MonoBehaviour
     {
         timeUntilRegenCD = timeUntilRegen;
         currHealth -= amount;
-        camerashaker.ShakeCamera(2.5f, .2f);
+        camShake.ShakeCamera(2.5f, .2f);
 
         if (currHealth < 0)
         {
