@@ -15,6 +15,8 @@ public class Health : MonoBehaviour
     public Action DieAction;
     public Action TakeDamageAction;
 
+    public camerashaker camShake;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +42,8 @@ public class Health : MonoBehaviour
         currHealth -= amount;
 
         SfxManager.instance.PlayFromSource(SfxManager.instance.mainSource, "PlayerDamage");
+        camShake.ShakeCamera(2.5f, .2f);
+        
 
         if (TakeDamageAction != null)
             TakeDamageAction();
