@@ -9,16 +9,15 @@ public class LineRendererHelper : MonoBehaviour
     public Transform target;
     public float noiseStrength = 0.1f;
     public float numberOfDivisions = 4;
-    public float colorAlpha = 1;
 
     public void EnableRenderer(bool enable)
     {
         lr.enabled = enable;
     }
 
-    public void DrawLine(Vector3 endPosition, float numberOfDivisions, System.Action modifier)
+    public void DrawLine(Vector3 endPosition, float numberOfDivisions, Transform t, System.Action modifier = null)
     {
-        endPosition = Camera.main.transform.InverseTransformPoint(endPosition);
+        endPosition = t.InverseTransformPoint(endPosition);
 
         positions = new Vector3[(int)numberOfDivisions + 1];
 
@@ -41,9 +40,9 @@ public class LineRendererHelper : MonoBehaviour
         }
     }
 
-    public void ChangeColor(Color newColor)
+    public void ChangeColor(Color newColor, float alpha = 1)
     {
-        lr.startColor = new Color(newColor.r, newColor.g, newColor.b, colorAlpha);
-        lr.endColor = new Color(newColor.r, newColor.g, newColor.b, colorAlpha);
+        lr.startColor = new Color(newColor.r, newColor.g, newColor.b, alpha);
+        lr.endColor = new Color(newColor.r, newColor.g, newColor.b, alpha);
     }
 }
