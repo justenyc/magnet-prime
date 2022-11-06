@@ -13,7 +13,7 @@ public class Health : MonoBehaviour
     public float currHealth = 100f;
 
     public Action DieAction;
-    public Action TakeDamageAction;
+    public Action<float> TakeDamageAction;
 
     // Start is called before the first frame update
     void Start()
@@ -25,13 +25,16 @@ public class Health : MonoBehaviour
     void FixedUpdate()
     {
         if (timeUntilRegenCD > 0)
-            timeUntilRegenCD -= Time.deltaTime;
+            timeUntilRegenCD -= Time.fixedDeltaTime;
         else
         {
-            currHealth += regenRate * Time.deltaTime;
+            currHealth += regenRate * Time.fixedDeltaTime;
             currHealth = Mathf.Clamp(currHealth, 0, maxHealth);
         }
         timeUntilRegenCD = Mathf.Clamp(timeUntilRegenCD, 0, timeUntilRegen);
+
+        if (TakeDamageAction != null)
+            TakeDamageAction(currHealth / maxHealth);
     }
 
     public void TakeDamage(float amount)
@@ -39,23 +42,21 @@ public class Health : MonoBehaviour
         timeUntilRegenCD = timeUntilRegen;
         currHealth -= amount;
 
-        SfxManager.instance.PlayFromSource(SfxManager.instance.mainSource, "PlayerDamage");
-
-        if (TakeDamageAction != null)
-            TakeDamageAction();
-
         if (currHealth < 0)
+        {
             Die();
+            return;
+        }
+
+        SfxManager.instance.RandomizePitch(SfxManager.instance.mainSource, 0.9f, 1.2f);
+        SfxManager.instance.PlayFromSource(SfxManager.instance.mainSource, "PlayerDamage");
     }
 
     public void Die()
     {
-        GetComponent<CharacterController>().enabled = false;
-        GetComponent<FirstPersonController>().enabled = false;
+        SfxManager.instance.PlayFromSource(SfxManager.instance.mainSource, "PlayerDie");
+
         if (DieAction != null)
             DieAction();
-        currHealth = maxHealth;
-        GetComponent<CharacterController>().enabled = true;
-        GetComponent<FirstPersonController>().enabled = true;
     }
 }
