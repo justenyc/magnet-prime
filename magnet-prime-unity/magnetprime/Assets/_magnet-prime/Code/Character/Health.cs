@@ -13,6 +13,7 @@ public class Health : MonoBehaviour
     public float currHealth = 100f;
 
     public Action DieAction;
+    public Action TakeDamageAction;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +22,7 @@ public class Health : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (timeUntilRegenCD > 0)
             timeUntilRegenCD -= Time.deltaTime;
@@ -38,6 +39,11 @@ public class Health : MonoBehaviour
         timeUntilRegenCD = timeUntilRegen;
         currHealth -= amount;
 
+        SfxManager.instance.PlayFromSource(SfxManager.instance.mainSource, "PlayerDamage");
+
+        if (TakeDamageAction != null)
+            TakeDamageAction();
+
         if (currHealth < 0)
             Die();
     }
@@ -48,6 +54,7 @@ public class Health : MonoBehaviour
         GetComponent<FirstPersonController>().enabled = false;
         if (DieAction != null)
             DieAction();
+        currHealth = maxHealth;
         GetComponent<CharacterController>().enabled = true;
         GetComponent<FirstPersonController>().enabled = true;
     }

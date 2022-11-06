@@ -13,6 +13,7 @@ public class UiManager : MonoBehaviour
     public static UiManager instance;
 
     [Header("HUD Elements")]
+    public Image fullScreenImage;
     public TextMeshProUGUI infoMessage;
     public TextMeshProUGUI textBoxText;
     public GameObject interactMessage;
@@ -44,6 +45,18 @@ public class UiManager : MonoBehaviour
         }
 
         keyImages = keyContainer.GetComponentsInChildren<Image>().ToList();
+        FadeFullScreenImage(false);
+    }
+
+    public void FadeFullScreenImage(bool colorIn, Color newColor, float fadeDuration = 0.5f)
+    {
+        fullScreenImage.color = newColor;
+        FadeFullScreenImage(colorIn, fadeDuration);
+    }
+
+    public void FadeFullScreenImage(bool colorIn, float fadeDuration = 0.5f)
+    {
+        fullScreenImage.DOFade(colorIn ? 1 : 0, fadeDuration);
     }
 
     public void EnableInteractMessage(bool enable)

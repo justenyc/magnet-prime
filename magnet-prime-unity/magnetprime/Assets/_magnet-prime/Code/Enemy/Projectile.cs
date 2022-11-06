@@ -56,7 +56,7 @@ public class Projectile : MonoBehaviour
         if(other.TryGetComponent<Health>(out Health health))
         {
             health.TakeDamage(damage);
-            Debug.Log(health.gameObject.name);
+            //Debug.Log(health.gameObject.name);
         }
     }
 }
