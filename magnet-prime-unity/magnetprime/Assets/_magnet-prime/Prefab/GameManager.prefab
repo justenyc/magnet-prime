@@ -87,6 +87,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8744f0d5a4eca464380883fa903b176d, type: 3}
   - {fileID: 8300000, guid: e6f3f80d6973239469c93e2802231102, type: 3}
   - {fileID: 8300000, guid: c715084aaa2f9014fb646fff135558e9, type: 3}
+  - {fileID: 8300000, guid: 226d8255c5317004f827e6d91b6b44fc, type: 3}
   mainSource: {fileID: 0}
   audioListener: {fileID: 0}
   currentlyPlaying: []

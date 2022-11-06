@@ -318,7 +318,7 @@
                 {
                     "name": "",
                     "id": "67b2dfc5-45e9-4b80-b458-91c20a59bdb3",
-                    "path": "<Keyboard>/#(G)",
+                    "path": "<Keyboard>/f",
                     "interactions": "Press",
                     "processors": "",
                     "groups": "KeyboardMouse",

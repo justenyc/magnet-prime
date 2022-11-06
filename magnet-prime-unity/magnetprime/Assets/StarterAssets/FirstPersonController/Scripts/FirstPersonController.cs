@@ -604,7 +604,7 @@ namespace StarterAssets
 
         void OnDie()
         {
-            myHealth.currHealth = myHealth.maxHealth;
+            
             EnableController(false);
             Vector3 cameraRot = Camera.main.transform.rotation.eulerAngles;
             Camera.main.transform.DORotate(new Vector3(-90f, cameraRot.y, cameraRot.z), 0.5f);
@@ -615,6 +615,7 @@ namespace StarterAssets
                 UiManager.instance.FadeFullScreenImage(false);
                 Camera.main.transform.DORotate(new Vector3(0f, cameraRot.y, cameraRot.z), 0.5f);
                 EnableController(true);
+                myHealth.currHealth = myHealth.maxHealth;
             });
         }
     }

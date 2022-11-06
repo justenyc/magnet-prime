@@ -51,12 +51,14 @@ public class Health : MonoBehaviour
             return;
         }
 
-        SfxManager.instance.RandomizePitch(SfxManager.instance.mainSource, 0.9f, 1.2f);
+        SfxManager.instance.RandomizePitch(SfxManager.instance.mainSource, 0.9f, 1.05f);
         SfxManager.instance.PlayFromSource(SfxManager.instance.mainSource, "PlayerDamage");
     }
 
     public void Die()
     {
+        currHealth = 0;
+        SfxManager.instance.RandomizePitch(SfxManager.instance.mainSource, .8f, .9f);
         SfxManager.instance.PlayFromSource(SfxManager.instance.mainSource, "PlayerDie");
 
         if (DieAction != null)
