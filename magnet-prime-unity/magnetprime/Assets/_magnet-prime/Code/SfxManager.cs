@@ -37,7 +37,9 @@ public class SfxManager : MonoBehaviour
 
     public AudioClip GetClipByName(string name)
     {
-        return acDict[name] ? acDict[name] : null;
+        AudioClip clip = acDict[name] ?? null;
+        if(clip == null) { Debug.LogError($"No clip found with name: {name}"); }
+        return clip;
     }
 
     #region Public Actions

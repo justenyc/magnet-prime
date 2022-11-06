@@ -15,6 +15,8 @@ public class Health : MonoBehaviour
     public Action DieAction;
     public Action<float> TakeDamageAction;
 
+    public camerashaker camShake;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +43,7 @@ public class Health : MonoBehaviour
     {
         timeUntilRegenCD = timeUntilRegen;
         currHealth -= amount;
+        camerashaker.ShakeCamera(2.5f, .2f);
 
         if (currHealth < 0)
         {

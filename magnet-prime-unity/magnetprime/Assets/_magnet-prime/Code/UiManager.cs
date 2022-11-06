@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem.UI;
 using TMPro;
 using DG.Tweening;
+using DG.Tweening.Core;
 using UnityEngine.EventSystems;
 using System.Linq;
 
@@ -48,15 +49,16 @@ public class UiManager : MonoBehaviour
         FadeFullScreenImage(false);
     }
 
-    public void FadeFullScreenImage(bool colorIn, Color newColor, float fadeDuration = 0.5f)
+    public void FadeFullScreenImage(bool colorIn, float fadeDuration = 0.5f, TweenCallback callback = null)
     {
-        fullScreenImage.color = newColor;
-        FadeFullScreenImage(colorIn, fadeDuration);
+        Tween tween = fullScreenImage.DOFade(colorIn ? 1 : 0, fadeDuration);
+        tween.OnComplete(callback);
     }
 
-    public void FadeFullScreenImage(bool colorIn, float fadeDuration = 0.5f)
+    public void FadeFullScreenImage(bool colorIn, Color newColor, float fadeDuration = 0.5f, TweenCallback callback = null)
     {
-        fullScreenImage.DOFade(colorIn ? 1 : 0, fadeDuration);
+        fullScreenImage.color = newColor;
+        FadeFullScreenImage(colorIn, fadeDuration, callback);
     }
 
     public void EnableInteractMessage(bool enable)

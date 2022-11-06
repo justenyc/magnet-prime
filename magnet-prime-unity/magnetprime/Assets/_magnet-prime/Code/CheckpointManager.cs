@@ -20,10 +20,9 @@ public class CheckpointManager : MonoBehaviour
             Destroy(this.gameObject);
         }
         playerHealth = FindObjectOfType<Health>();
-        playerHealth.DieAction += OnPlayerDie;
     }
     
-    void OnPlayerDie()
+    public void SendPlayerToCheckPoint()
     {
         playerHealth.gameObject.transform.position = currentCheckpoint != null ? currentCheckpoint.position : defaultCheckpoint.position;
     }

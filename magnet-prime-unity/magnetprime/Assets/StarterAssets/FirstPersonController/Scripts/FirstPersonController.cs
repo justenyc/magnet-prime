@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections;
+using DG.Tweening;
+using Cinemachine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
 #endif
@@ -105,6 +107,8 @@ namespace StarterAssets
 
         public bool lastShot = false;
 
+        Health myHealth;
+
         [SerializeField] Highlight currentHighlight = null;
         [SerializeField] Highlight previousHighlight = null;
 
@@ -119,6 +123,8 @@ namespace StarterAssets
 
         private void Start()
         {
+            myHealth = GetComponent<Health>();
+            myHealth.DieAction += OnDie;
             if (FindObjectsOfType<FirstPersonController>().Length > 1)
                 Destroy(this.transform.parent.gameObject);
             _controller = GetComponent<CharacterController>();
@@ -587,6 +593,29 @@ namespace StarterAssets
             {
                 GetComponent<Health>().Die();
             }
+        }
+
+        public void EnableController(bool enable)
+        {
+            this.GetComponent<CharacterController>().enabled = enable;
+            Camera.main.GetComponent<CinemachineBrain>().enabled = enable;
+            this.enabled = enable;
+        }
+
+        void OnDie()
+        {
+            myHealth.currHealth = myHealth.maxHealth;
+            EnableController(false);
+            Vector3 cameraRot = Camera.main.transform.rotation.eulerAngles;
+            Camera.main.transform.DORotate(new Vector3(-90f, cameraRot.y, cameraRot.z), 0.5f);
+
+            UiManager.instance.FadeFullScreenImage(true, 1.5f, callback: () => 
+            {
+                CheckpointManager.instance.SendPlayerToCheckPoint();
+                UiManager.instance.FadeFullScreenImage(false);
+                Camera.main.transform.DORotate(new Vector3(0f, cameraRot.y, cameraRot.z), 0.5f);
+                EnableController(true);
+            });
         }
     }
 }
