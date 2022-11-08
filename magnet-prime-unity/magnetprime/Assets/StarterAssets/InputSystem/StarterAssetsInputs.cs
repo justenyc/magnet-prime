@@ -7,6 +7,7 @@ namespace StarterAssets
 {
 	public class StarterAssetsInputs : MonoBehaviour
 	{
+		public PlayerInput playerInput;
 		[Header("Character Input Values")]
 		public Vector2 move;
 		public Vector2 look;
@@ -23,6 +24,11 @@ namespace StarterAssets
 #endif
 
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
+		public void OnControlsChanged()
+        {
+			Debug.Log($"{playerInput.currentControlScheme}");
+        }
+
 		public void OnMove(InputValue value)
 		{
 			MoveInput(value.Get<Vector2>());

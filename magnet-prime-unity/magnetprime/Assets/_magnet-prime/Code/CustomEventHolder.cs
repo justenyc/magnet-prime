@@ -37,7 +37,7 @@ public class CustomEventHolder : MonoBehaviour
 
     public void A_DisplayMessage(string message)
     {
-        UiManager.instance.SetInfoMessageText(message);
+        UiManager.instance.TutorialMessageTable(message);
         UiManager.instance.FadeInText();
     }
 

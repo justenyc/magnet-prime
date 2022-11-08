@@ -134,6 +134,10 @@ namespace StarterAssets
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
             shootCD = FireRate;
+
+            EnableController(false);
+            Camera.main.transform.rotation = Quaternion.Euler(Vector3.zero);
+            EnableController(true);
         }
 
         private void Update()

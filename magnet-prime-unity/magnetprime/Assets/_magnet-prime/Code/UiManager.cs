@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem.UI;
+using UnityEngine.InputSystem;
 using TMPro;
 using DG.Tweening;
 using DG.Tweening.Core;
@@ -31,6 +32,9 @@ public class UiManager : MonoBehaviour
     public EventSystem eventSystem;
     public InputSystemUIInputModule inputUiModule;
     public GameObject resumeButton;
+
+    [Header("References")]
+    public PlayerInput playerInput;
 
     private void Start()
     {
@@ -63,13 +67,17 @@ public class UiManager : MonoBehaviour
 
     public void EnableInteractMessage(bool enable)
     {
+        string interactMesssageText = playerInput.currentControlScheme == "Gamepad" ?
+                    "Press Triangle to interact" :
+                    "Press E to interact";
+
+        interactMessage.GetComponent<TextMeshProUGUI>().text = interactMesssageText;
         interactMessage.SetActive(enable);
     }
 
     public void SetInfoMessage(string newMessage)
     {
         int tweens = infoMessage.DOKill();
-        //Debug.Log($"Killed {tweens} tweens");
         infoMessage.DOFade(1, 0.25f).onComplete = () =>
         {
             infoMessage.DOFade(0, 1f).SetDelay(5f);
@@ -80,6 +88,40 @@ public class UiManager : MonoBehaviour
     public void SetInfoMessageText(string newMessage)
     {
         infoMessage.text = newMessage;
+    }
+
+    public void TutorialMessageTable(string key)
+    {
+        switch(key)
+        {
+            case ("tut1"):
+                SetInfoMessageText(playerInput.currentControlScheme == "Gamepad" ? 
+                    "Press Square to pick up or drop objects" : 
+                    "Press G to pick up or drop objects");
+                break;
+
+            case ("tut2"):
+                SetInfoMessageText(playerInput.currentControlScheme == "Gamepad" ?
+                    "L1 or R1 to apply positive or negative charges to metallic objects" : 
+                    "Left or right click to apply positive or negative charges to metallic objects");
+                break;
+
+            case ("tut3"):
+                SetInfoMessageText("Energy cells create magnetic fields that will push or pull objects based on their polarity");
+                break;
+
+            case ("tut4"):
+                SetInfoMessageText(playerInput.currentControlScheme == "Gamepad" ?
+                    "L2 changes your own polarity, R2 will push or pull yourself or objects based off of your current polarity" : 
+                    "CTRL changes your own polarity, Shift will push or pull yourself or objects based off of your current polarity");
+                break;
+
+            case ("tut5"):
+                SetInfoMessageText(playerInput.currentControlScheme == "Gamepad" ?
+                    "Press Options to pause and check your current inventory" :
+                    "Press Tab to pause and check your current inventory");
+                break;
+        }
     }
 
     public void FadeInText()
