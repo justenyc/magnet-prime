@@ -52,6 +52,10 @@ public class Interactable_Collectable : Interactable
                 //Destroy(this.gameObject, 1f);
                 return;
 
+            case Type.Core:
+                CutSceneManager.instance.PlayEndingCutscene();
+                return;
+
             default:
                 return;
         }
@@ -93,5 +97,6 @@ public class Interactable_Collectable : Interactable
 public enum Type
 {
     Log,
-    Key
+    Key,
+    Core
 };

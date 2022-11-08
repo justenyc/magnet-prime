@@ -97,7 +97,7 @@ public class UiManager : MonoBehaviour
             case ("tut1"):
                 SetInfoMessageText(playerInput.currentControlScheme == "Gamepad" ? 
                     "Press Square to pick up or drop objects" : 
-                    "Press G to pick up or drop objects");
+                    "Press F to pick up or drop objects");
                 break;
 
             case ("tut2"):
