@@ -143,6 +143,7 @@ public class UiManager : MonoBehaviour
 
     public void OpenTextBox(string message)
     {
+        textBox.GetComponentInChildren<TextMeshProUGUI>().text = playerInput.currentControlScheme == "Gamepad" ? "\"Triangle\" Close" : "\"E\" Close";
         textBox.DOScaleX(1, 0.5f).SetUpdate(true);
     }
 

@@ -603,12 +603,12 @@ namespace StarterAssets
         {
             this.GetComponent<CharacterController>().enabled = enable;
             Camera.main.GetComponent<CinemachineBrain>().enabled = enable;
+            this.GetComponent<PlayerInput>().enabled = enable;
             this.enabled = enable;
         }
 
         void OnDie()
         {
-            
             EnableController(false);
             Vector3 cameraRot = Camera.main.transform.rotation.eulerAngles;
             Camera.main.transform.DORotate(new Vector3(-90f, cameraRot.y, cameraRot.z), 0.5f);

@@ -90,7 +90,7 @@ public class IPatrolling : IEnemyState
         Magnetism_Movable mm = collision.collider.GetComponent<Magnetism_Movable>();
         if(collision.collider.TryGetComponent(out Rigidbody rb) && mm)
         {
-            Debug.Log(rb.velocity.magnitude);
+            //Debug.Log(rb.velocity.magnitude);
             if (rb.velocity.magnitude < 10)
                 rb.velocity = (Vector3.up + new Vector3(Random.Range(-1, 2), 0, Random.Range(-1, 2)) * 10);
             else

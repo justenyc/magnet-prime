@@ -29309,7 +29309,6 @@ MonoBehaviour:
   target: {fileID: 0}
   noiseStrength: 0.1
   numberOfDivisions: 4
-  colorAlpha: 0.25
 --- !u!120 &1797742451
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -44719,6 +44718,22 @@ PrefabInstance:
     - target: {fileID: 2983945703507123321, guid: 0873de1af22722f408b8f1836a00b4e4, type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4164039218
+      objectReference: {fileID: 0}
+    - target: {fileID: 4215954639923595597, guid: 0873de1af22722f408b8f1836a00b4e4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2168144645156794228, guid: 4ed83dcbcc354e747a02ccbda4f73abd, type: 3}
+    - target: {fileID: 4215954639923595597, guid: 0873de1af22722f408b8f1836a00b4e4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ReturnToTitle
+      objectReference: {fileID: 0}
+    - target: {fileID: 4215954639923595597, guid: 0873de1af22722f408b8f1836a00b4e4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Game_Manager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4215954639923595597, guid: 0873de1af22722f408b8f1836a00b4e4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4304277595439078845, guid: 0873de1af22722f408b8f1836a00b4e4, type: 3}
       propertyPath: m_fontColor32.rgba

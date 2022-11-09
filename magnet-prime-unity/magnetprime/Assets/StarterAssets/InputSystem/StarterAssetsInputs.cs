@@ -26,7 +26,7 @@ namespace StarterAssets
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 		public void OnControlsChanged()
         {
-			Debug.Log($"{playerInput.currentControlScheme}");
+			//Debug.Log($"{playerInput.currentControlScheme}");
         }
 
 		public void OnMove(InputValue value)

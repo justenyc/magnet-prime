@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using StarterAssets;
+using UnityEngine.SceneManagement;
 
 public class Game_Manager : MonoBehaviour
 { 
@@ -22,6 +23,8 @@ public class Game_Manager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = false;
     }
 
     public void PauseGame(bool pause)
@@ -32,13 +35,20 @@ public class Game_Manager : MonoBehaviour
             FindObjectOfType<FirstPersonController>().enabled = false;
             Time.timeScale = 0f;
             UiManager.instance.GetCrosshair().enabled = false;
+            Cursor.visible = true;
         }
         else if (paused == false)
         {
             FindObjectOfType<FirstPersonController>().enabled = true;
             Time.timeScale = 1;
             UiManager.instance.GetCrosshair().enabled = true;
+            Cursor.visible = false;
         }
+    }
+
+    public void ReturnToTitle()
+    {
+        SceneManager.LoadScene("Title");
     }
 
     public void ShowPauseScreen(bool show)

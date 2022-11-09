@@ -5,6 +5,7 @@ using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using System;
 using StarterAssets;
+using Cinemachine;
 
 public class CustomEventHolder : MonoBehaviour
 {
@@ -27,7 +28,15 @@ public class CustomEventHolder : MonoBehaviour
     }
     public void A_LoadSceneAdditive(string s)
     {
+        FirstPersonController fpc = FindObjectOfType<FirstPersonController>();
+        CinemachineBrain cmb = FindObjectOfType<CinemachineBrain>();
+        fpc.enabled = false;
+        cmb.enabled = false;
         var newSceneOperation = SceneManager.LoadSceneAsync(s, LoadSceneMode.Additive);
+        newSceneOperation.completed += (newSceneOperation) => { 
+            fpc.enabled = true;
+            cmb.enabled = true;
+        };    
     }
 
     public void A_EnableObject(GameObject go)
