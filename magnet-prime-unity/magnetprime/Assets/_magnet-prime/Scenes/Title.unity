@@ -10964,7 +10964,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1714028fb39de5042ba29187f9fc158e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bgAnim: {fileID: 7281766777425640160}
+  overlay: {fileID: 7281766777425640159}
 --- !u!1 &7281766777366703440
 GameObject:
   m_ObjectHideFlags: 0
@@ -11099,7 +11099,6 @@ GameObject:
   - component: {fileID: 7281766777425640156}
   - component: {fileID: 7281766777425640158}
   - component: {fileID: 7281766777425640159}
-  - component: {fileID: 7281766777425640160}
   m_Layer: 5
   m_Name: Overlay
   m_TagString: Untagged
@@ -11128,7 +11127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -11145,25 +11144,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!95 &7281766777425640160
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7281766777425640157}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e19198f6e23ba264f97924daa3a3c8c7, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7281766777447810282
 GameObject:
   m_ObjectHideFlags: 0

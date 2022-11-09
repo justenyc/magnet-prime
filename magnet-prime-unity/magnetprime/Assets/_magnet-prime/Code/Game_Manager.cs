@@ -27,6 +27,11 @@ public class Game_Manager : MonoBehaviour
         Cursor.visible = false;
     }
 
+    private void Update()
+    {
+        
+    }
+
     public void PauseGame(bool pause)
     {
         paused = pause;

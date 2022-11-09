@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using DG.Tweening;
 
 public class mainmenu : MonoBehaviour
 {
-    public Animator bgAnim;
+    public Image overlay;
 
     private void Start()
     {
@@ -15,8 +17,12 @@ public class mainmenu : MonoBehaviour
 
     public void PlayGame()
     {
-        bgAnim.SetTrigger("FadeOut");
-        Invoke("LoadGame", 1f);
+        Time.timeScale = 1;
+        overlay.DOKill();
+        overlay.DOFade(1, 1f).onComplete += () =>
+        {
+            LoadGame();
+        };
     }
 
     public void QuitGame()
