@@ -13,6 +13,7 @@ namespace StarterAssets
 		public Vector2 look;
 		public bool jump;
 		public bool sprint;
+		public System.Action click;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -24,9 +25,10 @@ namespace StarterAssets
 #endif
 
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
-		public void OnControlsChanged()
+		public void OnClick(InputValue value)
         {
-			//Debug.Log($"{playerInput.currentControlScheme}");
+			if (click != null)
+				click();
         }
 
 		public void OnMove(InputValue value)
