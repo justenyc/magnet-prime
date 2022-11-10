@@ -18,8 +18,17 @@ public class Interactable_Collectable : Interactable
         {
             case Type.Log:
                 Game_Manager.instance.loreLogs.Add(this);
-                Game_Manager.instance.PauseGame(Game_Manager.instance.paused ? false : true);
                 if (Game_Manager.instance.paused)
+                {
+                    Game_Manager.instance.state = "";
+                    UiManager.instance.CloseTextBox();
+                    UiManager.instance.EnableInteractMessage(true);
+                    SfxManager.instance.SetVolume(SfxManager.instance.mainSource, 0.5f);
+                    SfxManager.instance.SetPitch(SfxManager.instance.mainSource, 0.5f);
+                    SfxManager.instance.PlayFromSource(SfxManager.instance.mainSource, "TextBoxOpen", oneshot: true);
+                    Game_Manager.instance.PauseGame(false);
+                }
+                else
                 {
                     Game_Manager.instance.state = "LoreLog";
                     UiManager.instance.UpdateTextBoxText(message);
@@ -28,15 +37,7 @@ public class Interactable_Collectable : Interactable
                     SfxManager.instance.SetVolume(SfxManager.instance.mainSource, 0.5f);
                     SfxManager.instance.SetPitch(SfxManager.instance.mainSource, 1);
                     SfxManager.instance.PlayFromSource(SfxManager.instance.mainSource, "TextBoxOpen", oneshot: true);
-                }
-                else
-                {
-                    Game_Manager.instance.state = "";
-                    UiManager.instance.CloseTextBox();
-                    UiManager.instance.EnableInteractMessage(true);
-                    SfxManager.instance.SetVolume(SfxManager.instance.mainSource, 0.5f);
-                    SfxManager.instance.SetPitch(SfxManager.instance.mainSource, 0.5f);
-                    SfxManager.instance.PlayFromSource(SfxManager.instance.mainSource, "TextBoxOpen", oneshot: true);
+                    Game_Manager.instance.PauseGame(true);
                 }
                 return;
 

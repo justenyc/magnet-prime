@@ -10,7 +10,7 @@ public class Game_Manager : MonoBehaviour
     public VfxManager vfxManager;
     public string state;
 
-    public bool paused = false;
+    public bool paused { get; set; } = false;
     public HashSet<Interactable_Collectable> loreLogs = new HashSet<Interactable_Collectable>();
 
     private void Start()
@@ -29,7 +29,7 @@ public class Game_Manager : MonoBehaviour
 
     private void Update()
     {
-        
+
     }
 
     public void PauseGame(bool pause)
@@ -49,6 +49,15 @@ public class Game_Manager : MonoBehaviour
             UiManager.instance.GetCrosshair().enabled = true;
             Cursor.visible = false;
         }
+    }
+
+    public void ResumeGame()
+    {
+        FindObjectOfType<FirstPersonController>().enabled = true;
+        Time.timeScale = 1;
+        UiManager.instance.GetCrosshair().enabled = true;
+        Cursor.visible = false;
+        paused = false;
     }
 
     public void ReturnToTitle()

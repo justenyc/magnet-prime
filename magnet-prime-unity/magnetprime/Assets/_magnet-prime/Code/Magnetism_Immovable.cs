@@ -15,12 +15,13 @@ public class Magnetism_Immovable : Magnetism
     [SerializeField] GameObject lineRendererPrefab;
     [SerializeField] List<GameObject> lineRenderers;
     [SerializeField] float lineNoiseStrength = 0.1f;
+    [SerializeField] RadialDetector radialDetector;
 
     public AudioSource audioSource { get; private set; }
 
     public Action<int> polarityChange;
 
-    private void Start()
+    public override void Initialize()
     {
         if (myCharge == null)
         {
@@ -28,9 +29,7 @@ public class Magnetism_Immovable : Magnetism
             myCharge = this.GetComponent<Charge>();
             Debug.Log("myCharge is now " + myCharge);
         }
-
         audioSource = this.GetComponent<AudioSource>();
-        myCharge.polarityChange += myPolarityChange;
         if(movableObjectsWithCharge.Count != lineRenderers.Count)
         {
             lineRenderers.Clear();
@@ -46,6 +45,8 @@ public class Magnetism_Immovable : Magnetism
             }
         }
         //movableObjectsWithCharge = new List<Magnetism_Movable>();
+        myCharge.polarityChange += myPolarityChange;
+        myPolarityChange(myCharge.GetPolarity());
     }
 
     // Update is called once per frame
@@ -135,11 +136,7 @@ public class Magnetism_Immovable : Magnetism
     void myPolarityChange(int ii)
     {
         //Debug.Log(this.name + " Called myPolarityChange");
-
-        if (this.polarityChange != null)
-        {
-            polarityChange(ii);
-        }
+        radialDetector.PolarityChangeListener(ii);
 
         if(ii > 0)
         {

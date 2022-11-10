@@ -9800,6 +9800,7 @@ MonoBehaviour:
   lineRendererPrefab: {fileID: 1710249069745141881, guid: 8ba3873649557f24290c87fd0c1ca026, type: 3}
   lineRenderers: []
   lineNoiseStrength: 0.3
+  radialDetector: {fileID: 2295908363209372303}
 --- !u!82 &4936870559818441653
 AudioSource:
   m_ObjectHideFlags: 0

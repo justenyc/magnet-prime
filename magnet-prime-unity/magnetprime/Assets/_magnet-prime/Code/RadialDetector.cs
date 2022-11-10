@@ -13,7 +13,6 @@ public class RadialDetector : MonoBehaviour
     private void Start()
     {
         mat = this.GetComponent<MeshRenderer>().material;
-        root.polarityChange += PolarityChangeListener;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -43,8 +42,11 @@ public class RadialDetector : MonoBehaviour
         }
     }
 
-    void PolarityChangeListener(int ii)
+    public void PolarityChangeListener(int ii)
     {
+        if (mat == null)
+            Start();
+
         //Debug.Log("RadialDetector.RadialChangeListener Called");
         if (ii > 0)
         {

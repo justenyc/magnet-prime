@@ -7,7 +7,7 @@ public class Magnetism : MonoBehaviour
 {
     public Charge myCharge;
 
-    private void Start()
+    public virtual void Initialize()
     {
 
     }

@@ -24,6 +24,11 @@ public class Charge : MonoBehaviour
         player = player == null ? FindObjectOfType<FirstPersonController>() : player;
         player.InvokeShoot += ShootListener;
 
+        if (this.TryGetComponent(out Magnetism m))
+        {
+            m.Initialize();
+        }
+
         if (polarityChange != null)
         {
             //Debug.Log("Post of polarityChange by " + this.name);

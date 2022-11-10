@@ -65,5 +65,6 @@ public class UITest : MonoBehaviour
     void ClickListener()
     {
         EventSystem.current.currentSelectedGameObject?.GetComponent<Button>()?.onClick.Invoke();
+        EventSystem.current.SetSelectedGameObject(null);
     }
 }

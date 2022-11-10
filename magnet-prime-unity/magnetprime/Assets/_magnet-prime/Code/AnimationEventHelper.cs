@@ -9,5 +9,10 @@ public class AnimationEventHelper : MonoBehaviour
     public void SetResume()
     {
         UiManager.instance.SetSelectedObject(resumeButton);
-    }   
+    }
+    
+    public void SetPausedToFalse()
+    {
+        Game_Manager.instance.paused = false;
+    }
 }
