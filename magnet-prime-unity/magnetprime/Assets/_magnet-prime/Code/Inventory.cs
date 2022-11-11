@@ -29,4 +29,17 @@ public class Inventory : MonoBehaviour
         }
         return false;
     }
+
+    public int KeyCount()
+    {
+        int count = 0;
+        foreach(Interactable_Collectable inter in items)
+        {
+            if (inter.type == Type.Key)
+            {
+                count++;
+            }
+        }
+        return count;
+    }
 }

@@ -493,6 +493,12 @@ namespace StarterAssets
                 held.layer = LayerMask.NameToLayer("Moveable");
                 held.transform.parent = null;
                 grabbed.EnteredBoxField -= GrabEnteredBoxField;
+
+                RaycastHit hit;
+                if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, grabDistance, grabMask))
+                {
+                    held.transform.position = hit.point;
+                }
                 held = null;
 
                 SfxManager.instance.RandomizePitch(grabbed.aSource, 0.5f, 0.6f);

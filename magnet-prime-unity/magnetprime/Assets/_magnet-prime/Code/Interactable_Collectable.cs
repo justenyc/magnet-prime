@@ -65,7 +65,7 @@ public class Interactable_Collectable : Interactable
     public override void OnTriggerEnter(Collider other)
     {
         fpc = other.GetComponentInChildren<FirstPersonController>();
-        if (fpc)
+        if (fpc && fpc.Interact == null)
         {
             fpc.Interact += Interact;
             UiManager.instance.EnableInteractMessage(true);
